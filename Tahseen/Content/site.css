@@ -1,0 +1,2221 @@
+﻿:root {
+    --main-color: #00CD8D;
+    --secondary-color: #696969;
+}
+
+html {
+    font-size: 17px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Droid Arabic Kufi', sans-serif
+}
+
+main {
+    background-color: #D9F5D9;
+    padding-bottom: 70px !important;
+}
+
+.container {
+    width: 95%;
+    margin: 0 auto;
+    padding-inline: 10px;
+}
+
+@media screen and (min-width: 576px) {
+    .container {
+        width: 95%;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .container {
+        width: 95%;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .container {
+        width: 970px;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .container {
+        width: 1124px;
+    }
+}
+
+@media screen and (min-width: 1400px) {
+    .container {
+        width: 1320px;
+    }
+}
+
+header {
+    height: 100px;
+    padding-bottom: 5px;
+}
+
+
+nav .logo {
+    width: 70px;
+    height: 70px;
+}
+
+    nav .logo img {
+        width: 100%;
+        height: 100%;
+    }
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(100% - 200px);
+    gap: 7%;
+    padding: 0;
+}
+
+    nav ul li a {
+        text-decoration: none;
+        color: var(--secondary-color);
+        font-size: 18px;
+    }
+
+        nav ul li a:hover {
+            text-shadow: 0 0 5px #2b9983;
+            color: #2d8064;
+            text-decoration: none;
+        }
+
+
+.navbar .container {
+    position: relative;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    top: 10px;
+    padding: 0;
+}
+
+
+.navbar .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+    column-gap: 40px;
+    font-size: 0.9rem;
+    color: #fff;
+    width: 100%;
+    margin-right: -15px;
+}
+
+    .navbar .nav li:hover {
+        color: #f95353;
+    }
+
+.navbar .nav-link {
+    width: calc(100% - 200px)
+}
+
+.navbar .nav ul {
+    width: 100%;
+    justify-content: flex-start
+}
+
+@media (max-width: 768px) {
+    .navbar .nav {
+        position: absolute;
+        top: -1000px;
+        left: 2%;
+        right: 2%;
+        margin: 0 auto;
+        flex-direction: column;
+        background-color: #ebf4fa;
+        border-radius: 10px;
+        z-index: 79;
+        height: 400px;
+        transition: all 1s;
+        border-bottom: 1px solid #f95353;
+    }
+
+        .navbar .nav ul {
+            flex-direction: column;
+            gap: 10px;
+        }
+
+    .navbar .bars {
+        z-index: 80;
+        background-color: var(--main-color);
+        padding: 3px;
+        border-radius: 5px;
+        height: 30px;
+        width: 35px;
+        left: 0;
+        position: absolute;
+    }
+
+        .navbar .bars span {
+            height: 3.7px;
+            width: 100%;
+            margin: 3px 0;
+            background: #ebf4fa;
+            display: block;
+            transition: 0.5s;
+        }
+
+    nav .logo {
+        right: 0;
+        position: absolute;
+    }
+
+    nav ul li a {
+        font-weight: bold;
+    }
+}
+
+.navbar .fix-top {
+    top: 70px;
+    gap: 30px;
+}
+
+
+
+nav .logoptions {
+    gap: 3%;
+}
+
+    nav .logoptions li a {
+        display: inline-block;
+        font-family: 'Droid Arabic Kufi', sans-serif;
+        width: 135px;
+    }
+
+    nav .logoptions #signup {
+        border-radius: 10px;
+        display: inline;
+        border: 1.5px solid #0000;
+    }
+
+
+.nav .logoptions li:nth-child(2) {
+    color: var(--secondary-color);
+}
+/*
+nav .logoptions #signup:hover {
+    background-color: white;
+    box-shadow: 0 0 5px #2b9983;
+}
+
+        nav .logoptions #signup:hover a {
+            color: var(--secondary-color) !important;
+        }
+    */
+nav .logoptions li {
+    display: inline;
+    font-size: 18px;
+    text-align: center;
+    font-family: 'Droid Arabic Kufi', sans-serif;
+}
+
+main .text {
+    text-align: center;
+    padding: 10px;
+}
+
+    main .text h1 {
+        font-size: 2rem;
+        margin: 10px 0;
+    }
+
+    main .text p {
+        font-size: 1.2rem;
+        margin-right: 15px;
+        color: var(--secondary-color);
+        margin: 5px;
+    }
+
+main .more-info,
+.medical section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+    main .more-info figure,
+    .medical section figure {
+        width: 200px;
+        border-radius: 10px;
+        padding: 10px;
+        height: 160px;
+        text-align: center;
+        background-color: #fff;
+    }
+
+
+
+
+figure figcaption {
+    color: var(--secondary-color);
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+
+.footer {
+    text-align: center;
+    font-size: x-small;
+    background-color: white;
+    font-family: 'Droid Arabic Kufi', sans-serif;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border: none !important;
+}
+
+    .footer.uset {
+        position: unset !important;
+    }
+/*الشروط والأحكام، دليل الاستخدام*/
+#footerpotions ul li {
+    display: inline;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 15px;
+}
+
+#footerpotions ul a {
+    text-decoration: none;
+    color: black;
+}
+
+    #footerpotions ul a:hover {
+        text-shadow: 0 0 3px black;
+    }
+
+/*
+    صفحة الارشادات
+
+
+*/
+
+.instruction ol {
+    padding: 0 80px;
+}
+
+.title_h3 {
+    /*background: #00CD8D;*/
+    width: fit-content;
+    padding: 0 30px;
+    border-radius: 3em;
+    text-align: center;
+    color: #000;
+    margin: 10px auto 15px;
+    height: 45px;
+    line-height: 45px;
+    font-weight: bold;
+}
+
+.myBtn {
+    width: 160px;
+    background: #00CD8D;
+    border: 1px solid #00CD8D;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 10px auto 0;
+    display: block;
+    height: 40px;
+}
+
+.instruction ol li {
+    font-size: 1.044rem;
+    margin-bottom: 5px;
+}
+
+
+/*
+    صفحة تسجيل التطعيم
+
+
+*/
+.form {
+    padding: 20px 20px 0;
+}
+
+    .myAppo div,
+    .form div {
+        width: 80%;
+        margin: 10px auto;
+    }
+
+.myAppo div {
+    border-bottom: 1px solid #777;
+}
+
+    .myAppo div label,
+    .form div label {
+        width: 155px;
+        font-size: 1.1rem;
+        color: var(--secondary-color);
+    }
+
+    .myAppo div input {
+        background: transparent;
+    }
+
+.form div select {
+    font-size: 1.2rem;
+}
+
+.form div select,
+.form div input,
+.doctor_id input {
+    width: calc(100% - 200px);
+    border: 1.8px solid #00CD8D;
+    padding: 5px;
+    border-radius: 13px;
+    outline: none;
+}
+
+.form .button {
+    display: flex;
+    gap: 5px;
+}
+
+    .form .button button {
+        width: 120px;
+    }
+
+        .form .button button:last-of-type {
+            background: #038ECA;
+        }
+
+@media screen and (max-width: 490px) {
+    .form div label {
+        display: block;
+    }
+
+    .form div select,
+    .form div input {
+        width: 100%;
+    }
+
+    section figure {
+        min-width: 100% !important;
+        height: 230px;
+        padding: 0;
+    }
+}
+/*
+   صفحة الكادر الطبي
+*/
+.medical section {
+    margin: 20px;
+    padding: 20px 0;
+}
+
+    .medical section figure {
+        width: 200px;
+        height: 160px;
+        padding: 0;
+        line-height: 160px;
+    }
+
+    .medical section img {
+        width: 140px;
+        height: 70%;
+    }
+
+section a {
+    text-decoration: none;
+}
+
+    section a:hover {
+        text-decoration: none;
+    }
+/**
+        صفحة عن تحصين
+    */
+.about-us section {
+    width: 84%;
+    margin: 0 auto;
+}
+
+.about-us h2 {
+    font-weight: bolder;
+    font-size: 2rem;
+}
+
+.about-us section {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px 20px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    gap: 20px;
+}
+
+    .about-us section div p {
+        width: 400px;
+        font-size: 18px;
+    }
+
+.about-us ul {
+    line-height: 1.6;
+    font-size: 18px;
+}
+
+/**
+    صفحة عرض معلومات اﻷطباء
+*/
+
+.doctor-details {
+    margin-bottom: 50px;
+}
+
+    .doctor-details .doctor_id {
+        padding: 20px 0;
+    }
+
+    .doctor-details input,
+    .myAppo input {
+        width: 190px;
+        font-size: 17px;
+        border: none;
+    }
+
+        .doctor-details input:focus,
+        .myAppo input:focus {
+            outline: none;
+        }
+
+    .doctor-details .info {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        background-color: #fff;
+    }
+
+    .doctor-details section {
+        min-height: 350px;
+        width: 67%;
+    }
+
+        .doctor-details section:first-of-type {
+            width: 30%;
+            border-left: 3px solid #ddD;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+@media screen and (max-width: 768px) {
+    .doctor-details section {
+        width: 100% !important;
+    }
+}
+
+.doctor-details section:first-of-type input {
+    text-align: end;
+    width: 100px;
+}
+
+    .doctor-details section:first-of-type input:nth-child(2) {
+        text-align: start;
+    }
+
+    .doctor-details section:first-of-type input:last-of-type {
+        width: 150px;
+    }
+
+
+.doctor-details .details {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    padding: 20px 0;
+}
+
+    .doctor-details .details div {
+        width: 200px;
+        height: 60px;
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+        margin: 10px;
+    }
+
+
+/* Duaa */
+/**/
+
+
+/*تنسيق صفحة خدمات عيادة الطفل*/
+/*تنسيق السيكشن اللي فيها مربعات الخدمات*/
+.serv {
+    width: 100%;
+    height: 500px;
+    text-align: center;
+    background-color: #D9F5D9;
+}
+    /*تنسيق جملة خدمات عيادة الطفل*/
+    .serv h1 {
+        font-family: 'Droid Arabic Kufi', sans-serif;
+        font-size: 40px;
+        color: #696969;
+    }
+    /*تنسيق الخط داخل مربعات الخدمات*/
+    .serv h2 {
+        font-family: 'Droid Arabic Kufi', sans-serif;
+        color: #696969;
+    }
+/*تنسيق مربعات الخدمات*/
+.div1 {
+    background: white;
+    width: 200px;
+    height: 200px;
+    float: left;
+    margin-left: 80px;
+    margin-right: 40px;
+    border-radius: 25px;
+}
+
+.div2 {
+    background: white;
+    width: 200px;
+    height: 200px;
+    margin-right: 40px;
+    float: left;
+    border-radius: 25px;
+}
+
+.div3 {
+    background: white;
+    width: 200px;
+    height: 200px;
+    margin-right: 40px;
+    float: left;
+    border-radius: 25px;
+}
+
+.div4 {
+    background: white;
+    width: 200px;
+    height: 200px;
+    margin-right: 40px;
+    float: left;
+    border-radius: 25px;
+}
+
+.div5 {
+    background: white;
+    width: 200px;
+    height: 200px;
+    margin-right: 40px;
+    float: left;
+    border-radius: 25px;
+}
+/*تنسيق الروابط*/
+.serv div:hover {
+    transform: scale(1.1);
+}
+
+div a:link {
+    text-decoration: none;
+}
+
+div a:visited {
+    text-decoration: none;
+}
+
+/*******************************************************************************************************************************/
+
+/*تنسيق صفحة التطعيمات الأساسية*/
+
+
+/*تنسيق كامل المحتوى*/
+#basic-vaccinations-div {
+    padding-bottom: 10%;
+    padding-top: 5%;
+}
+
+    #basic-vaccinations-div div h1 {
+        text-align: center;
+        font-family: 'Droid Arabic Kufi', sans-serif;
+    }
+
+    #basic-vaccinations-div article {
+        text-align: right;
+        padding-left: 10%;
+        padding-right: 10%;
+        padding-top: 20px;
+        padding-bottom: 40px;
+        font-size: 18px;
+        font-family: 'Droid Arabic Kufi', sans-serif;
+        font-weight: bold;
+    }
+
+/*تنسيق الجدول*/
+#basic-vaccinations-table {
+    border-collapse: collapse;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: right;
+    font-family: 'Droid Arabic Kufi', sans-serif;
+}
+
+    #basic-vaccinations-table td, #basic-vaccinations-table th {
+        border: 1px solid #ddd;
+        padding: 8px;
+        font-weight: bold;
+    }
+
+    #basic-vaccinations-table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    #basic-vaccinations-table tr:hover {
+        background-color: #ddd;
+    }
+
+    #basic-vaccinations-table th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        background-color: #04AA6D;
+        color: white;
+    }
+
+/*************************************************************************************************************************************/
+
+/*تنسيق صفحة الخدمات للمركز الصحي وصفحة الاحصائيات*/
+
+/*تنسيق المحتوى كاملا*/
+.hspserv {
+    width: 100%;
+    background-color: #D9F5D9;
+    text-align: center;
+    padding-top: 5%;
+    padding-bottom: 8%;
+}
+
+    /*تنسيق العنوان*/
+    .hspserv h1 {
+        font-family: 'Droid Arabic Kufi', sans-serif;
+        font-size: 25px;
+    }
+
+
+    /*تنسيق الروابط داخل مربعات الخدمات*/
+    .hspserv a {
+        text-decoration: none;
+        color: black;
+    }
+
+    /*تنسيق مربعات الخدمات*/
+    .hspserv #div1, #div2 {
+        display: inline-block;
+        background: white;
+        width: 200px;
+        height: 200px;
+        border-radius: 25px;
+        font-family: 'Droid Arabic Kufi', sans-serif;
+        font-size: 12px;
+        margin: 40px;
+        transition: 1s;
+    }
+
+        .hspserv #div1 div, #div2 div {
+            padding-top: 40px;
+        }
+
+        .hspserv #div1:hover, #div2:hover {
+            transform: scale(1.2);
+            transition: 0.5s;
+            box-shadow: 0 0 3px #000000;
+        }
+
+/************************************************************************************************************************************/
+
+.mail-env .mail-sidebar-row {
+    margin: -3px 1px 1px 15px;
+    padding-top: 14;
+    padding: 0px 0px 0px 8px;
+    position: initia;
+    color: #4aa991;
+    font-size: 29px;
+    text-align: center;
+    background: #109853d1;
+    border: 1px solid #125b1b;
+}
+
+hr + .mail-env {
+    margin-top: -11px;
+    border-top: 1px solid #ebebeb;
+    margin-left: -20px;
+    margin-right: -20px;
+}
+
+
+.mail-env + hr {
+    margin-top: 0px;
+    position: relative;
+    margin-left: -20px;
+    margin-right: -20px;
+}
+
+.mail-env .mail-sidebar,
+.mail-env .mail-body {
+    float: left;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+    .mail-env .mail-sidebar:before,
+    .mail-env .mail-body:before,
+    .mail-env .mail-sidebar:after,
+    .mail-env .mail-body:after {
+        content: " ";
+        /* 1 */
+        display: table;
+        /* 2 */
+    }
+
+    .mail-env .mail-sidebar:after,
+    .mail-env .mail-body:after {
+        clear: both;
+    }
+
+.mail-env .mail-sidebar-row {
+    padding: 68px;
+}
+
+.mail-env > .mail-sidebar-row.visible-xs {
+    padding-bottom: 0;
+}
+
+.mail-env .mail-sidebar {
+    width: 22%;
+    background: #f9f9f9;
+    border-right: 1px solid #ebebeb;
+    position: relative;
+}
+
+    .mail-env .mail-sidebar > h4 {
+        padding: 20px;
+    }
+
+    .mail-env .mail-sidebar .mail-menu {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        border-top: 1px solid #ebebeb;
+    }
+
+        .mail-env .mail-sidebar .mail-menu > li {
+            margin: 0;
+            padding: 0;
+            border-bottom: 1px solid #ebebeb;
+        }
+
+            .mail-env .mail-sidebar .mail-menu > li a {
+                display: block;
+                padding: 20px;
+                -moz-transition: all 300ms ease-in-out;
+                -o-transition: all 300ms ease-in-out;
+                -webkit-transition: all 300ms ease-in-out;
+                transition: all 300ms ease-in-out;
+            }
+
+                .mail-env .mail-sidebar .mail-menu > li a .badge {
+                    font-size: 13px;
+                }
+
+                .mail-env .mail-sidebar .mail-menu > li a .badge-gray {
+                    background: transparent;
+                    border: 1px solid #ebebeb;
+                }
+
+                .mail-env .mail-sidebar .mail-menu > li a .badge-roundless {
+                    display: inline-block;
+                    width: 14px;
+                    height: 14px;
+                    -webkit-border-radius: 2px;
+                    -webkit-background-clip: padding-box;
+                    -moz-border-radius: 2px;
+                    -moz-background-clip: padding;
+                    border-radius: 2px;
+                    background-clip: padding-box;
+                }
+
+            .mail-env .mail-sidebar .mail-menu > li:hover a {
+                background: rgba(255, 255, 255, 0.8);
+            }
+
+            .mail-env .mail-sidebar .mail-menu > li.active a {
+                background: #fff;
+                font-weight: bold;
+            }
+
+    .mail-env .mail-sidebar .mail-distancer {
+        height: 40px;
+    }
+
+.mail-env .mail-body {
+    width: 78%;
+    float: right;
+    overflow: hidden;
+}
+
+    .mail-env .mail-body .mail-header {
+        padding: 20px;
+        border-bottom: 1px solid #ebebeb;
+    }
+
+        .mail-env .mail-body .mail-header:before,
+        .mail-env .mail-body .mail-header:after {
+            content: " ";
+            /* 1 */
+            display: table;
+            /* 2 */
+        }
+
+        .mail-env .mail-body .mail-header:after {
+            clear: both;
+        }
+
+        .mail-env .mail-body .mail-header .mail-title {
+            margin: 0;
+            padding: 0px 0px 0px 256px;
+            font-size: 21px;
+            text-align: right;
+            float: left;
+            width: 75%;
+            padding-right: -1px;
+            color: #303641;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+}
+
+.mail-env .mail-body .mail-header .mail-title span.count {
+    font-weight: normal;
+    -webkit-opacity: 0.3;
+    -moz-opacity: 0.3;
+    opacity: 0.3;
+    filter: alpha(opacity=30);
+}
+
+.mail-env .mail-body .mail-header .mail-title .label {
+    font-size: 9px;
+    position: relative;
+    top: -4px;
+}
+
+.mail-env .mail-body .mail-header .mail-search,
+.mail-env .mail-body .mail-header .mail-links {
+    float: left;
+    text-align: right;
+    width: 25%;
+}
+
+    .mail-env .mail-body .mail-header .mail-search.mail-links > .btn,
+    .mail-env .mail-body .mail-header .mail-links.mail-links > .btn {
+        margin-left: 5px;
+        font-size: 11px;
+    }
+
+        .mail-env .mail-body .mail-header .mail-search.mail-links > .btn:first-child,
+        .mail-env .mail-body .mail-header .mail-links.mail-links > .btn:first-child {
+            margin-left: 0;
+        }
+
+    .mail-env .mail-body .mail-header .mail-search .form-control[type="text"],
+    .mail-env .mail-body .mail-header .mail-links .form-control[type="text"] {
+        height: 29px;
+    }
+
+.mail-env .mail-body .mail-info {
+    background: #f3f4f4;
+    display: table;
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+    border-bottom: 1px solid #ebebeb;
+}
+
+    .mail-env .mail-body .mail-info:before,
+    .mail-env .mail-body .mail-info:after {
+        content: " ";
+        /* 1 */
+        display: table;
+        /* 2 */
+    }
+
+    .mail-env .mail-body .mail-info:after {
+        clear: both;
+    }
+
+    .mail-env .mail-body .mail-info .mail-sender,
+    .mail-env .mail-body .mail-info .mail-date {
+        display: table-cell;
+        width: 50%;
+        color: #a6a6a6;
+        padding: 20px;
+    }
+
+        .mail-env .mail-body .mail-info .mail-sender.mail-sender span,
+        .mail-env .mail-body .mail-info .mail-date.mail-sender span {
+            font-weight: bold;
+            color: #ec5956;
+        }
+
+        .mail-env .mail-body .mail-info .mail-sender.mail-sender img,
+        .mail-env .mail-body .mail-info .mail-date.mail-sender img {
+            margin-right: 5px;
+            border: 2px solid #ebebeb;
+        }
+
+        .mail-env .mail-body .mail-info .mail-sender.mail-sender .dropdown-menu:after,
+        .mail-env .mail-body .mail-info .mail-date.mail-sender .dropdown-menu:after {
+            position: absolute;
+            content: '';
+            display: block;
+            top: -5px;
+            left: 17%;
+            width: 0px;
+            height: 0px;
+            border-style: solid;
+            border-width: 0 3px 4px 3px;
+            border-color: transparent transparent #cc2424 transparent;
+        }
+
+        .mail-env .mail-body .mail-info .mail-sender.mail-date,
+        .mail-env .mail-body .mail-info .mail-date.mail-date {
+            text-align: right;
+        }
+
+.mail-env .mail-body .mail-text {
+    border-bottom: 1px solid #ebebeb;
+    padding: 20px;
+}
+
+.mail-env .mail-body .mail-attachments {
+    padding: 20px;
+    border-bottom: 1px solid #ebebeb;
+}
+
+    .mail-env .mail-body .mail-attachments h4 {
+        margin-bottom: 30px;
+        line-height: 1;
+    }
+
+        .mail-env .mail-body .mail-attachments h4 span {
+            -webkit-opacity: 0.4;
+            -moz-opacity: 0.4;
+            opacity: 0.4;
+            filter: alpha(opacity=40);
+        }
+
+    .mail-env .mail-body .mail-attachments ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+        .mail-env .mail-body .mail-attachments ul:before,
+        .mail-env .mail-body .mail-attachments ul:after {
+            content: " ";
+            /* 1 */
+            display: table;
+            /* 2 */
+        }
+
+        .mail-env .mail-body .mail-attachments ul:after {
+            clear: both;
+        }
+
+        .mail-env .mail-body .mail-attachments ul li {
+            float: left;
+            margin: 0;
+            padding: 0;
+            margin-right: 30px;
+            margin-bottom: 20px;
+        }
+
+            .mail-env .mail-body .mail-attachments ul li > a {
+                display: block;
+            }
+
+                .mail-env .mail-body .mail-attachments ul li > a img {
+                    position: relative;
+                    display: block;
+                    line-height: 1;
+                    margin-bottom: 10px;
+                }
+
+                .mail-env .mail-body .mail-attachments ul li > a.thumb {
+                    position: relative;
+                }
+
+                    .mail-env .mail-body .mail-attachments ul li > a.thumb:after {
+                        font-family: 'Entypo';
+                        content: '\e826';
+                        display: block;
+                        position: absolute;
+                        left: 50%;
+                        top: 50%;
+                        background: #fff;
+                        width: 40px;
+                        height: 40px;
+                        margin-left: -20px;
+                        margin-top: -20px;
+                        font-size: 28px;
+                        text-align: center;
+                        line-height: 40px;
+                        vertical-align: text-top;
+                        color: #fff;
+                        background: rgba(0, 0, 0, 0.25);
+                        -webkit-border-radius: 4px;
+                        -webkit-background-clip: padding-box;
+                        -moz-border-radius: 4px;
+                        -moz-background-clip: padding;
+                        border-radius: 4px;
+                        background-clip: padding-box;
+                        -webkit-opacity: 0;
+                        -moz-opacity: 0;
+                        opacity: 0;
+                        filter: alpha(opacity=0);
+                        -moz-transition: all 300ms ease-in-out;
+                        -o-transition: all 300ms ease-in-out;
+                        -webkit-transition: all 300ms ease-in-out;
+                        transition: all 300ms ease-in-out;
+                    }
+
+                    .mail-env .mail-body .mail-attachments ul li > a.thumb:hover:after {
+                        -webkit-opacity: 1;
+                        -moz-opacity: 1;
+                        opacity: 1;
+                        filter: alpha(opacity=100);
+                    }
+
+                    .mail-env .mail-body .mail-attachments ul li > a.thumb.download:after {
+                        content: '\e82d';
+                    }
+
+                .mail-env .mail-body .mail-attachments ul li > a.name span {
+                    color: #666666;
+                    float: right;
+                }
+
+            .mail-env .mail-body .mail-attachments ul li .links {
+                display: block;
+                font-size: 11px;
+                color: #666666;
+                margin-top: 6px;
+            }
+
+                .mail-env .mail-body .mail-attachments ul li .links a {
+                    color: #666666;
+                }
+
+.mail-env .mail-body .mail-reply {
+    border-bottom: 1px solid #ebebeb;
+    padding: 20px;
+}
+
+    .mail-env .mail-body .mail-reply .fake-form {
+        padding: 20px;
+        border: 2px solid #ebebeb;
+        min-height: 100px;
+        -webkit-border-radius: 4px;
+        -webkit-background-clip: padding-box;
+        -moz-border-radius: 4px;
+        -moz-background-clip: padding;
+        border-radius: 4px;
+        background-clip: padding-box;
+    }
+
+        .mail-env .mail-body .mail-reply .fake-form > div a {
+            font-weight: bold;
+            color: #ec5956;
+        }
+
+.mail-env .mail-body .mail-compose {
+    padding: 20px;
+}
+
+    .mail-env .mail-body .mail-compose .form-group {
+        position: relative;
+        border-bottom: 1px solid #ebebeb;
+        padding-bottom: 15px;
+    }
+
+        .mail-env .mail-body .mail-compose .form-group label {
+            position: absolute;
+            left: 10px;
+            top: 7px;
+            z-index: 10;
+        }
+
+        .mail-env .mail-body .mail-compose .form-group input {
+            border-color: transparent;
+            position: relative;
+            z-index: 5;
+            padding-left: 100px;
+            -moz-transition: all 300ms ease-in-out;
+            -o-transition: all 300ms ease-in-out;
+            -webkit-transition: all 300ms ease-in-out;
+            transition: all 300ms ease-in-out;
+        }
+
+            .mail-env .mail-body .mail-compose .form-group input:focus {
+                background: #f9f9f9;
+                border-color: #f4f4f4;
+            }
+
+        .mail-env .mail-body .mail-compose .form-group .field-options {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            z-index: 12;
+        }
+
+            .mail-env .mail-body .mail-compose .form-group .field-options a {
+                display: inline-block;
+                background: #f3f4f4;
+                color: #7e8186;
+                padding: 2px 6px;
+                margin-left: 4px;
+                text-align: center;
+                -webkit-border-radius: 3px;
+                -webkit-background-clip: padding-box;
+                -moz-border-radius: 3px;
+                -moz-background-clip: padding;
+                border-radius: 3px;
+                background-clip: padding-box;
+            }
+
+    .mail-env .mail-body .mail-compose .compose-message-editor {
+        padding-top: 5px;
+    }
+
+        .mail-env .mail-body .mail-compose .compose-message-editor textarea {
+            height: 400px;
+        }
+
+.mail-env .mail-body > div:last-child {
+    border-bottom: 0;
+}
+
+.mail-env .mail-body .mail-table {
+    margin-bottom: 0;
+}
+
+    .mail-env .mail-body .mail-table thead tr th,
+    .mail-env .mail-body .mail-table tfoot tr th {
+        background: #ebebeb;
+        border: 0;
+        color: #666666;
+        vertical-align: middle;
+        border-bottom: 0;
+    }
+
+        .mail-env .mail-body .mail-table thead tr th a,
+        .mail-env .mail-body .mail-table tfoot tr th a {
+            color: #666666;
+        }
+
+        .mail-env .mail-body .mail-table thead tr th .mail-select-options,
+        .mail-env .mail-body .mail-table tfoot tr th .mail-select-options {
+            float: left;
+            padding-top: 5px;
+        }
+
+        .mail-env .mail-body .mail-table thead tr th .mail-pagination,
+        .mail-env .mail-body .mail-table tfoot tr th .mail-pagination {
+            float: right;
+        }
+
+            .mail-env .mail-body .mail-table thead tr th .mail-pagination span,
+            .mail-env .mail-body .mail-table tfoot tr th .mail-pagination span {
+                color: rgba(102, 102, 102, 0.5);
+            }
+
+            .mail-env .mail-body .mail-table thead tr th .mail-pagination .btn-group,
+            .mail-env .mail-body .mail-table tfoot tr th .mail-pagination .btn-group {
+                margin-left: 5px;
+            }
+
+                .mail-env .mail-body .mail-table thead tr th .mail-pagination .btn-group .btn-sm,
+                .mail-env .mail-body .mail-table tfoot tr th .mail-pagination .btn-group .btn-sm {
+                    padding-left: 7px;
+                    padding-right: 7px;
+                }
+
+    .mail-env .mail-body .mail-table tbody tr td {
+        border-top: 0;
+        border-bottom: 1px solid #ebebeb;
+        height: 50px;
+        vertical-align: middle;
+        background: #f9f9f9;
+    }
+
+        .mail-env .mail-body .mail-table tbody tr td.col-name,
+        .mail-env .mail-body .mail-table tbody tr td.col-subject {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+            .mail-env .mail-body .mail-table tbody tr td.col-name.col-subject a,
+            .mail-env .mail-body .mail-table tbody tr td.col-subject.col-subject a {
+                color: #8c8c8c;
+            }
+
+                .mail-env .mail-body .mail-table tbody tr td.col-name.col-subject a.label,
+                .mail-env .mail-body .mail-table tbody tr td.col-subject.col-subject a.label {
+                    color: #fff;
+                }
+
+        .mail-env .mail-body .mail-table tbody tr td.col-name {
+            width: 25%;
+        }
+
+        .mail-env .mail-body .mail-table tbody tr td.col-subject a {
+            display: inline-block;
+            max-width: 400px;
+            height: 20px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .mail-env .mail-body .mail-table tbody tr td.col-options {
+            text-align: right;
+        }
+
+            .mail-env .mail-body .mail-table tbody tr td.col-options a {
+                color: #999999;
+            }
+
+        .mail-env .mail-body .mail-table tbody tr td.col-time {
+            width: 12%;
+            text-align: right;
+            color: rgba(102, 102, 102, 0.5);
+        }
+
+        .mail-env .mail-body .mail-table tbody tr td .star {
+            display: inline-block;
+            color: #dddddd;
+            margin-right: 5px;
+            font-size: 14px;
+            -moz-transition: all 300ms ease-in-out;
+            -o-transition: all 300ms ease-in-out;
+            -webkit-transition: all 300ms ease-in-out;
+            transition: all 300ms ease-in-out;
+        }
+
+            .mail-env .mail-body .mail-table tbody tr td .star.stared,
+            .mail-env .mail-body .mail-table tbody tr td .star.starred {
+                color: #ff9600;
+            }
+
+        .mail-env .mail-body .mail-table tbody tr td > .label:first-child {
+            margin-left: 0;
+        }
+
+    .mail-env .mail-body .mail-table tbody tr.unread > td {
+        background-color: #fff !important;
+    }
+
+        .mail-env .mail-body .mail-table tbody tr.unread > td.col-name a {
+            font-weight: bold;
+        }
+
+    .mail-env .mail-body .mail-table tbody tr.highlight > td {
+        background-color: #ffffcc !important;
+    }
+
+    .mail-env .mail-body .mail-table > thead > tr > td:first-child,
+    .mail-env .mail-body .mail-table > tbody > tr > td:first-child,
+    .mail-env .mail-body .mail-table > tfoot > tr > td:first-child,
+    .mail-env .mail-body .mail-table > thead > tr > th:first-child,
+    .mail-env .mail-body .mail-table > tbody > tr > th:first-child,
+    .mail-env .mail-body .mail-table > tfoot > tr > th:first-child {
+        padding-left: 20px;
+    }
+
+    .mail-env .mail-body .mail-table > thead > tr > td:last-child,
+    .mail-env .mail-body .mail-table > tbody > tr > td:last-child,
+    .mail-env .mail-body .mail-table > tfoot > tr > td:last-child,
+    .mail-env .mail-body .mail-table > thead > tr > th:last-child,
+    .mail-env .mail-body .mail-table > tbody > tr > th:last-child,
+    .mail-env .mail-body .mail-table > tfoot > tr > th:last-child {
+        padding-right: 20px;
+    }
+
+    .mail-env .mail-body .mail-table > thead > tr > thX:first-child,
+    .mail-env .mail-body .mail-table > tbody > tr > thX:first-child,
+    .mail-env .mail-body .mail-table > tfoot > tr > thX:first-child {
+        position: relative;
+    }
+
+        .mail-env .mail-body .mail-table > thead > tr > thX:first-child:before,
+        .mail-env .mail-body .mail-table > tbody > tr > thX:first-child:before,
+        .mail-env .mail-body .mail-table > tfoot > tr > thX:first-child:before {
+            position: absolute;
+            content: '';
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 20px;
+            background: #FFF;
+        }
+
+    .mail-env .mail-body .mail-table > thead > tr > thX:last-child,
+    .mail-env .mail-body .mail-table > tbody > tr > thX:last-child,
+    .mail-env .mail-body .mail-table > tfoot > tr > thX:last-child {
+        position: relative;
+    }
+
+        .mail-env .mail-body .mail-table > thead > tr > thX:last-child:before,
+        .mail-env .mail-body .mail-table > tbody > tr > thX:last-child:before,
+        .mail-env .mail-body .mail-table > tfoot > tr > thX:last-child:before {
+            position: absolute;
+            content: '';
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 20px;
+            background: #FFF;
+        }
+
+    .mail-env .mail-body .mail-table > tbody > tr:nth-child(odd) > td {
+        background: #fbfbfb;
+    }
+
+    .mail-env .mail-body .mail-table .neon-cb-replacement {
+        top: 2px;
+    }
+
+        .mail-env .mail-body .mail-table .neon-cb-replacement .cb-wrapper {
+            background: #fff;
+            border-color: #dfdfdf;
+        }
+
+            .mail-env .mail-body .mail-table .neon-cb-replacement .cb-wrapper .checked {
+                background: #dfdfdf;
+            }
+
+.mail-env.right-sidebar .mail-sidebar {
+    border-left: 1px solid #ebebeb;
+    border-right: 0;
+}
+
+.mail-env.right-sidebar .mail-body {
+    float: left;
+}
+
+@media (max-width: 999px) {
+    .mail-env .mail-body .mail-table tbody tr td.col-subject a {
+        max-width: 280px;
+    }
+}
+
+@media (max-width: 959px) {
+    .mail-env .mail-body .mail-header div.mail-title {
+        width: 100%;
+        white-space: normal;
+    }
+
+    .mail-env .mail-body .mail-header .mail-links {
+        float: none;
+        width: 100%;
+        text-align: left;
+        clear: left;
+        padding-top: 10px;
+    }
+
+    .mail-env .mail-body .mail-info {
+        display: block;
+    }
+
+        .mail-env .mail-body .mail-info .mail-sender,
+        .mail-env .mail-body .mail-info .mail-date {
+            display: block;
+            width: 100%;
+        }
+
+            .mail-env .mail-body .mail-info .mail-sender.mail-sender,
+            .mail-env .mail-body .mail-info .mail-date.mail-sender {
+                padding-top: 10px;
+                padding-bottom: 10px;
+                border-bottom: 1px solid #ebebeb;
+            }
+
+            .mail-env .mail-body .mail-info .mail-sender.mail-date,
+            .mail-env .mail-body .mail-info .mail-date.mail-date {
+                text-align: left;
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+
+    .mail-env .mail-body .mail-compose .compose-message-editor textarea {
+        height: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    .mail-env .mail-sidebar {
+        width: 30.8%;
+    }
+
+    .mail-env .mail-body {
+        width: 69.2%;
+    }
+
+        .mail-env .mail-body .mail-table tbody tr td.col-options {
+            display: none;
+        }
+
+        .mail-env .mail-body .mail-table tbody tr td.col-subject a {
+            max-width: 160px;
+        }
+
+        .mail-env .mail-body .mail-compose .compose-message-editor textarea {
+            height: 240px;
+        }
+
+
+    /* Duaa Parents */
+
+    .sec1 {
+        width: 100%;
+        height: 500px;
+        background-color: lightblue;
+        text-align: center;
+        background-color: #D9F5D9;
+    }
+
+    /*تنسيق صفحة اضافة تابع */
+
+    .box-Container {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        padding: 5% 0 5% 0;
+        background-color: #D9F5D9;
+    }
+
+    .box-content {
+        max-width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        background-color: white;
+        border: solid 1px;
+    }
+
+
+    .left {
+        padding: 0 40px 40px 70px;
+    }
+
+
+    .right {
+        height: 100%;
+        background: no-repeat center;
+        background-size: cover;
+    }
+
+    .field {
+        width: 100%;
+        outline: none;
+        border: 2px solid rgba(0,0,0,0);
+        background-color: rgba(230,230,230, 0.6);
+        font-size: 1.1rem;
+        margin-bottom: 22px;
+        transition: .3s;
+    }
+
+
+
+    .left h1 {
+        font-size: 40px;
+        color: #04AA6D;
+        padding-top: 20px;
+        margin: 0;
+    }
+
+    .right img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .field:hover {
+        background-color: rgba(0,0,0,0.1);
+    }
+
+    .field:focus {
+        background-color: #fff;
+        border: 2px solid rgba(30,85,250,0.47);
+    }
+
+    Label {
+        width: 100%;
+        text-align: right;
+        display: block;
+    }
+
+    .myBtn {
+        width: 50%;
+        padding: 0.5rem 1rem;
+        font-size: 1.1rem;
+        background-color: #04AA6D;
+        cursor: pointer;
+        outline: none;
+        border: none;
+        transition: .3s;
+        color: white;
+    }
+
+        .myBtn:hover {
+            background-color: white;
+            color: #04AA6D;
+        }
+
+
+    /*تنسيق صفحة سجلات الاطفال  */
+
+
+
+    .cert {
+        width: 100%;
+        height: auto;
+        text-align: center;
+        background-color: #D9F5D9;
+    }
+
+
+        .cert h1 {
+            font-size: 30px;
+            color: #696969;
+        }
+
+
+
+    .container4 {
+        position: relative;
+        bottom: 0px;
+        width: 60%;
+        margin: 0;
+    }
+
+
+    #certificate button[type="submit"] {
+        font: 400 12px/16px "Droid Arabic Kufi", sans-serif;
+        border-radius: 25px;
+    }
+
+    #certificate {
+        background: #F9F9F9;
+        width: 140%;
+        padding: 0;
+        margin: 20% 10% 20% 50%;
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+        position: relative;
+        bottom: 100px;
+        height: auto;
+        border-radius: 25px;
+    }
+
+
+        #certificate fieldset {
+            position: relative;
+            border: medium none !important;
+            margin: 0 0 10px;
+            min-width: 100%;
+            padding: 0;
+            width: 100%;
+        }
+
+        #certificate input:focus {
+            outline: 0;
+            border: 1px solid #aaa;
+        }
+
+        #certificate label {
+            font-size: 18px;
+            float: right;
+            margin: 0 5% 0 0;
+        }
+
+        #certificate a {
+            font-size: 15px;
+        }
+
+            #certificate a:link {
+                text-decoration: none;
+            }
+
+            #certificate a:visited {
+                text-decoration: none;
+            }
+
+    .info {
+        width: 300px;
+        height: 50px;
+        background-color: #5B9969;
+        border-radius: 25px;
+        margin: 0 auto;
+    }
+
+        .info p {
+            font-size: 25px;
+            color: white;
+            position: relative;
+            top: 6px;
+        }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 0;
+    }
+
+    tbody {
+        width: 100%;
+        margin: 0 20% 0 0;
+    }
+
+    /* Maryam */
+
+    /* add new child page */
+    /*تنسيق سيكشن صفحة تسجيل طفل جديد*/
+    .new {
+        width: 100%;
+        height: 800px;
+        background-color: lightblue;
+        text-align: center;
+        background-color: #D9F5D9;
+    }
+
+        /*تنسيق جملةتسجيل طفل جديد */
+        .new h1 {
+            font-family: 'Noto Kufi Arabic', sans-serif;
+            font-size: 35;
+            color: #696969;
+        }
+        /*تنسيق الخط داخل الفورم*/
+        .new h2 {
+            font-family: 'Noto Kufi Arabic', sans-serif;
+            color: #696969;
+        }
+
+    /*صفحة تسجيل طفل جديد*/
+
+    .container1 {
+        position: relative;
+        bottom: 0px;
+        max-width: 600px;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    #child input[type="text"],
+    #child input[type="email"],
+    #child input[type="tel"],
+    #child input[type=""],
+    #child textarea,
+    #child button[type="submit"] {
+        font: 400 12px/16px "Noto Kufi Arabic", sans-serif;
+    }
+
+    #child {
+        background: #F9F9F9;
+        padding: 25px;
+        margin: 150px 0;
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+        position: relative;
+        bottom: 100px;
+        border-radius: 25px;
+    }
+
+
+        #child fieldset {
+            position: relative;
+            border: medium none !important;
+            margin: 0 0 10px;
+            min-width: 100%;
+            padding: 0;
+            width: 100%;
+        }
+
+
+        #child input[type="date"],
+        #child textarea,
+        #child input[type="tel"] {
+            width: 300px;
+            border: 1px solid #ccc;
+            background: #FFF;
+            margin: 0 0 5px;
+            padding: 10px;
+            border-radius: 25px;
+        }
+
+        #child #gen {
+            width: 300px;
+            border: 1px solid #ccc;
+            background: #FFF;
+            margin: 0 0 5px;
+            padding: 10px;
+            border-radius: 25px;
+        }
+
+        #child input[type="text"]:hover,
+        #child input[type="number"]:hover,
+        #child input[type="date"]:hover,
+        #child input[type="tel"]:hover {
+            -webkit-transition: border-color 0.3s ease-in-out;
+            -moz-transition: border-color 0.3s ease-in-out;
+            transition: border-color 0.3s ease-in-out;
+            border: 1px solid #aaa;
+        }
+
+
+        #child button[type="submit"] {
+            cursor: pointer;
+            width: 200px;
+            border: none;
+            background: #5B9969;
+            color: #FFF;
+            margin: 0 0 5px;
+            padding: 10px;
+            font-size: 15px;
+            border-radius: 25px;
+        }
+
+            #child button[type="submit"]:hover {
+                background: #43A047;
+                -webkit-transition: background 0.3s ease-in-out;
+                -moz-transition: background 0.3s ease-in-out;
+            }
+
+
+
+            #child button[type="submit"]:active {
+                box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+            }
+
+
+
+
+
+        #child input:focus {
+            outline: 0;
+            border: 1px solid #aaa;
+        }
+
+        #child label {
+            float: right;
+            font: 400 16px/16px "Noto Kufi Arabic", sans-serif;
+        }
+
+
+    #date {
+        position: relative;
+        right: 20px;
+    }
+
+    #gen {
+        position: relative;
+        right: 37px;
+    }
+
+    #mPhone, #fPhone {
+        position: relative;
+        right: 10px;
+    }
+
+    #child textarea {
+        position: relative;
+        right: 34px;
+    }
+
+    #childname {
+        width: 50px;
+        border: 1px solid #ccc;
+        background: #FFF;
+        margin: 0 0 5px;
+        padding: 10px;
+        border-radius: 25px;
+    }
+
+    #fathername {
+        width: 50px;
+        border: 1px solid #ccc;
+        background: #FFF;
+        margin: 0 0 5px;
+        padding: 10px;
+        border-radius: 25px;
+    }
+
+    #lastname {
+        width: 50px;
+        border: 1px solid #ccc;
+        background: #FFF;
+        margin: 0 0 5px;
+        padding: 10px;
+        border-radius: 25px;
+        display: inline;
+    }
+
+    #numId {
+        width: 300px;
+        border: 1px solid #ccc;
+        background: #FFF;
+        margin: 0 0 5px;
+        padding: 10px;
+        border-radius: 25px;
+    }
+
+    #clinicId {
+        position: relative;
+        right: 20px;
+        width: 300px;
+        border: 1px solid #ccc;
+        background: #FFF;
+        margin: 0 0 5px;
+        padding: 10px;
+        border-radius: 25px;
+    }
+
+    #child table {
+        border-style: none;
+    }
+
+    /************************************************************/
+    /*تنسيق صفحة خدمات عيادة الطفل (التنسيق الجديد)*/
+
+    /*تنسيق المحتوى كاملا*/
+    .hspserv {
+        width: 100%;
+        background-color: #D9F5D9;
+        text-align: center;
+        padding-top: 5%;
+        padding-bottom: 8%;
+    }
+
+        /*تنسيق العنوان*/
+        .hspserv h1 {
+            font-family: 'Noto Kufi Arabic', sans-serif;
+            font-size: 40px;
+            color: #696969;
+        }
+
+    h2 {
+        font-size: 25px;
+    }
+
+    /*تنسيق الروابط داخل مربعات الخدمات*/
+    .hspserv a {
+        text-decoration: none;
+        color: black;
+    }
+
+    /*تنسيق مربعات الخدمات*/
+    .hspserv #div1, #div2, #div3, #div4 {
+        display: inline-block;
+        background: white;
+        width: 200px;
+        height: 200px;
+        border-radius: 25px;
+        font-family: 'Noto Kufi Arabic', sans-serif;
+        color: #696969;
+        margin: 10px;
+        transition: 1s;
+    }
+
+        .hspserv #div1 div, #div2 div, #div3 div, #div4 div {
+            padding-top: 40px;
+        }
+
+        .hspserv #div1:hover, #div2:hover, #div3:hover, #div4:hover {
+            transform: scale(1.2);
+            transition: 0.5s;
+            box-shadow: 0 0 3px #000000;
+        }
+
+    /*********************************************************************************/
+    /*تنسيق صفحة خدمات عيادة الطفل (التنسيق القديم(*/
+    /*تنسيق السيكشن اللي فيها مربعات الخدمات*/
+    .serv {
+        width: 100%;
+        height: 500px;
+        background-color: lightblue;
+        text-align: center;
+        background-color: #D9F5D9;
+    }
+        /*تنسيق جملة خدمات عيادة الطفل*/
+        .serv h1 {
+            font-family: 'Noto Kufi Arabic', sans-serif;
+            font-size: 40px;
+            color: #696969;
+        }
+        /*تنسيق الخط داخل مربعات الخدمات*/
+        .serv h2 {
+            font-family: 'Noto Kufi Arabic', sans-serif;
+            color: #696969;
+        }
+    /*تنسيق مربعات الخدمات*/
+    .div1 {
+        background: white;
+        width: 200px;
+        height: 200px;
+        border-radius: 25px;
+        display: inline-block;
+    }
+
+    .div3 {
+        background: white;
+        width: 200px;
+        height: 200px;
+        border-radius: 25px;
+        display: inline-block;
+    }
+
+    .div4 {
+        background: white;
+        width: 200px;
+        height: 200px;
+        border-radius: 25px;
+        display: inline-block;
+    }
+
+    .div5 {
+        background: white;
+        width: 200px;
+        height: 200px;
+        border-radius: 25px;
+        display: inline-block;
+    }
+    /*تنسيق الروابط*/
+    .serv div:hover {
+        transform: scale(1.2);
+    }
+
+    div a:link {
+        text-decoration: none;
+    }
+
+    div a:visited {
+        text-decoration: none;
+    }
+
+    /************************************************************/
+
+    /*شهادة الميلاد وبيانات الطفل*/
+
+    .cert {
+        width: 100%;
+        height: 2000px;
+        text-align: center;
+        background-color: #D9F5D9;
+    }
+
+
+        .cert h1 {
+            font-family: 'Noto Kufi Arabic', sans-serif;
+            font-size: 30px;
+            color: #696969;
+        }
+
+
+
+    .container4 {
+        position: relative;
+        bottom: 0px;
+        width: 500px;
+        margin: 0 auto;
+        position: relative;
+    }
+
+
+    #certificate3 button[type="submit"] {
+        font: 400 12px/16px "Noto Kufi Arabic", sans-serif;
+        border-radius: 25px;
+    }
+
+    #certificate1 {
+        background: #F9F9F9;
+        width: 500px;
+        padding: 25px;
+        margin-top: 150px;
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+        position: relative;
+        bottom: 100px;
+        height: 350px;
+        border-radius: 25px;
+    }
+
+    #certificate2 {
+        background: #F9F9F9;
+        width: 500px;
+        padding: 25px;
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+        position: relative;
+        bottom: 100px;
+        height: 270px;
+        border-radius: 25px;
+    }
+
+    #certificate3 {
+        background: #F9F9F9;
+        width: 500px;
+        padding: 25px;
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+        position: relative;
+        bottom: 100px;
+        height: 950px;
+        border-radius: 25px;
+    }
+
+    #certificate1 fieldset {
+        position: relative;
+        border: medium none !important;
+        margin: 0 0 10px;
+        min-width: 100%;
+        padding: 0;
+        width: 100%;
+    }
+
+    #certificate2 fieldset {
+        position: relative;
+        border: medium none !important;
+        margin: 0 0 10px;
+        min-width: 100%;
+        padding: 0;
+        width: 100%;
+    }
+
+    #certificate3 fieldset {
+        position: relative;
+        border: medium none !important;
+        margin: 0 0 10px;
+        min-width: 100%;
+        padding: 0;
+        width: 100%;
+    }
+
+
+
+    #certificate3 button[type="submit"] {
+        cursor: pointer;
+        width: 150px;
+        height: 50px;
+        border: none;
+        background: #5B9969;
+        color: #FFF;
+        margin: 0 0 5px;
+        padding: 10px;
+        font-size: 15px;
+    }
+
+        #certificate3 button[type="submit"]:hover {
+            background: #43A047;
+            -webkit-transition: background 0.3s ease-in-out;
+            -moz-transition: background 0.3s ease-in-out;
+        }
+
+
+
+        #certificate3 button[type="submit"]:active {
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+
+
+
+
+    #certificate1 input:focus {
+        outline: 0;
+        border: 1px solid #aaa;
+    }
+
+    #certificate2 input:focus {
+        outline: 0;
+        border: 1px solid #aaa;
+    }
+
+    #certificate3 input:focus {
+        outline: 0;
+        border: 1px solid #aaa;
+    }
+
+    #certificate1 label {
+        font-size: 18px;
+        font-family: 'Noto Kufi Arabic', sans-serif;
+        float: right;
+    }
+
+    #certificate2 label {
+        font-size: 18px;
+        font-family: 'Noto Kufi Arabic', sans-serif;
+        float: right;
+    }
+
+    #certificate3 label {
+        font-size: 18px;
+        font-family: 'Noto Kufi Arabic', sans-serif;
+        float: right;
+    }
+
+    .info {
+        width: 300px;
+        height: 40px;
+        background-color: #5B9969;
+        border-radius: 25px;
+        margin: 0 auto;
+    }
+
+        .info p {
+            font-size: 25px;
+            color: white;
+            position: relative;
+            top: 6px;
+        }
+
+    /************************************************************/
+
+
+
