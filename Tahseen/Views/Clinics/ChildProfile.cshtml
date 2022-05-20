@@ -1,0 +1,69 @@
+﻿@model Tahseen.Models.Child
+@using Tahseen.Models.Enums
+@using Tahseen.Helpers
+@{
+    ViewBag.Title = "الملف الشخصي";
+    int counter = 0;
+    var vaccines = ViewBag.Vaccines as IEnumerable<Tahseen.Models.Vaccine>;
+}
+
+
+<div id="hsp-childprofile-div" dir="rtl" lang="ar">
+    <div>
+        <h1>@Html.DisplayFor(x => x.FullName)</h1>
+    </div>
+    <p id="underline">_____________________________________________</p>
+    <div>
+        <div id="personalinfo"><h2>المعلومات الشخصية</h2></div>
+        <div id="hsp-childprofile-div-content">
+            <div><div id="info"><h3>رقم الهوية: </h3></div><div id="info"><h4>@Html.DisplayFor(x => x.ChildID)</h4></div></div>
+            <div><div id="info"><h3>العيادة: </h3></div><div id="info"><h4>@Html.DisplayFor(x => x.Clinic.Name)</h4></div></div>
+            <div><div id="info"><h3>الجنس: </h3></div><div id="info"><h4>@Model.Gender.GetDisplayName()</h4></div></div>
+            <div><div id="info"><h3>العمر: </h3></div><div id="info"><h5>@AgeCalculator.Calculate(Model.DOB)</h5></div></div>
+            <div><div id="info"><h3>تاريخ الميلاد: </h3></div><div id="info"><h4>@Model.DOB.ToString("yyyy-MM-dd")</h4></div></div>
+            <div><div id="info"><h3>العنوان: </h3></div><div id="info"><h4>@Html.DisplayFor(x => x.Address)</h4></div></div>
+        </div>
+    </div>
+    <br />
+    <div>
+        <div id="personalinfo"><h2>العلامات الحيوية</h2></div>
+        <div id="hsp-childprofile-div-content">
+            <div><div id="info"><h3>الطول: </h3></div><div id="info"><h4>@Html.DisplayFor(x => x.Height)</h4></div></div>
+            <div><div id="info"><h3>الوزن: </h3></div><div id="info"><h4>@Html.DisplayFor(x => x.Weight)</h4></div></div>
+            <div><div id="info"><h3>محيط الرأس: </h3></div><div id="info"><h4>@Html.DisplayFor(x => x.HeadCirumference)</h4></div></div>
+            <div><div id="info"><h3>درجة الحرارة: </h3></div><div id="info"><h4>@Html.DisplayFor(x => x.Temperature)</h4></div></div>
+        </div>
+    </div>
+    <br />
+    <div>
+        <div id="personalinfo"><h2>شهادة التطعيم</h2></div>
+        <div id="hsp-childprofile-div-content">
+            <table class="table table-bordered table-hover text-center">
+                <tr>
+                    @*<th class="text-center">م</th>*@
+                    <th class="text-center">الزيارة</th>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(m => Model.Immunizations.First().VaccineId)
+                    </th>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(m => Model.Immunizations.First().VaccinationDate)
+                    </th>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(m => Model.Immunizations.First().DateOfNextDose)
+                    </th>
+                </tr>
+                @foreach (var item in Model.Immunizations)
+                {
+                    var vaccine = vaccines.First(v => v.Id == item.VaccineId);
+                    <tr>
+                        @*<td>@{counter++;} @counter</td>*@
+                        <td>@vaccine.Age.GetDisplayName()</td>
+                        <td>@vaccine.Name</td>
+                        <td>@item.VaccinationDate.ToString("yyyy-MM-dd")</td>
+                        <td>@item.DateOfNextDose.ToString("yyyy-MM-dd")</td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>

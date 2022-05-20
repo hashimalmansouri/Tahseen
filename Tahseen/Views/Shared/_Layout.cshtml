@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html dir="rtl" lang="ar-ye">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - تحصين</title>
+    <!-- ملف به تنسيقات  css لجميع الصفحات-->
+    @Styles.Render("~/Content/css")
+    <link href="~/Content/myStyle.css" rel="stylesheet" />
+    <!--مكتبة لاضافة ايقون-->
+    @Styles.Render("~/Content/boxicons/css/boxicons.css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body dir="rtl">
+    <header class="">
+        <div class="container">
+            <!--القائمة-->
+            <nav class="navbar">
+                <div class="container">
+                    <a href="@Url.Action("Index", "Home", new { Area = "" })" class="logo"><img src="~/Content/images/logo.png" alt="logo" /></a>
+                    <div class="bars">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <ul class="nav">
+                        <li class="nav-link">
+                            <ul>
+                                <li><a href="">الرئيسية</a></li>
+                                <li><a href="">تحصين</a></li>
+                                <li><a href="">الخدمات</a></li>
+                                <li><a href="">مركز المساعدة</a></li>
+                            </ul>
+                        </li>
+                        <!--خيارات الدخول-->
+                        <li class="nav-account">
+                            <ul class="logoptions">
+                                @Html.Partial("_LoginPartial")
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <!--المحتوي الرئسي-->
+    <div class="body-content">
+        @RenderBody()
+
+        <footer class="footer" colspan="2" style="border-top: 1px solid #ddd; padding-top:20px">
+            <div id="footerpotions">
+                <ul>
+                    <li><a href="~/Home/TermsandConditions" target="_blank">الشروط والأحكام</a></li>
+                    <li> | </li>
+                    <li><a href="#">دليل الإستخدام</a></li>
+                </ul>
+            </div>
+            <h3>الحقوق محفوظة لمنصة تحصين &copy; @DateTime.Now.Year</h3>
+        </footer>
+    </div>
+
+    <!--ملف جافا سكريبت لجعل القائمة متوافقة مع كل الشاشات-->
+    <script src="~/Scripts/site.js"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

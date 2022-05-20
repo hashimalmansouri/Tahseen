@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "الخدمات";
+}
+
+<div class="hspserv" dir="rtl" lang="ar">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+    <div>
+        <div id="div1">
+            <a href="@Url.Action("Medical", "Clinics")">
+                <div>
+                    <img src="~/Content/images/worker.png" width="80" height="70" />
+                    <h2>الكادر الصحي</h2>
+                </div>
+            </a>
+        </div>
+        <div id="div2">
+            <a href="@Url.Action("Children", "Clinics")">
+                <div>
+                    <img src="~/Content/images/record.png" width="70" height="70" />
+                    <h2>سجلات الأطفال</h2>
+                </div>
+            </a>
+        </div>
+        <br />
+        <div id="div1">
+            <a href="@Url.Action("Appointments", "Clinics")">
+                <div>
+                    <img src="~/Content/images/date.png" width="70" height="70" />
+                    <h2>إدارة المواعيد</h2>
+                </div>
+            </a>
+        </div>
+        <div id="div2">
+            <a href="@Url.Action("NewChild", "Clinics")">
+                <div>
+                    <img src="~/Content/images/new.png" width="70" height="70" />
+                    <h2>طفل جديد</h2>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

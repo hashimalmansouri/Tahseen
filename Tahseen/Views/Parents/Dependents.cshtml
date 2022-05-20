@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Tahseen.Models.Child>
+
+@{
+    ViewBag.Title = "التابعين ";
+    int counter = 0;
+}
+
+<style>
+    tbody > tr > td,
+    thead > tr > th {
+        background-color: #ffffff;
+        color: #000
+    }
+     .depend {
+        color: #000;
+        text-decoration: none;
+    }
+</style>
+
+<main style="padding:30px 20px">
+    <h2>@ViewBag.Title</h2>
+    <hr />
+    <div class="row text-center" style="margin:0">
+        <div class="col-md-4">
+            <img src="~/Content/images/AddD.png" height="300" />
+        </div>
+        <div class="col-md-8">
+            <table class="table table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th class="text-center">م</th>
+                        <th class="text-center">اسم التابع</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@{counter++;} @counter</td>
+                            <td>
+                                <a href="@Url.Action("ChildRecords", "Parents", new { id = item.ChildID })" class="depend">
+                                    @item.FullName
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>

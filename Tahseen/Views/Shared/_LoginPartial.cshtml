@@ -1,0 +1,23 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    <li id="login">
+        @Html.ActionLink("الملف الشخصي", "Manage", routeValues: null, htmlAttributes: new { title = "الملف الشخصي" })
+    </li>
+    <li> | </li>
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+    {
+        @Html.AntiForgeryToken()
+        <li id="signup"><a href="javascript:document.getElementById('logoutForm').submit()">تسجيل الخروج</a></li>
+    }
+}
+else
+{
+    <li id="login">
+        @Html.ActionLink("تسجيل الدخول", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+    </li>
+    <li> | </li>
+    <li id="signup">
+        @Html.ActionLink("تسجيل جديد", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
+    </li>
+}

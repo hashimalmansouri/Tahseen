@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "الكادر الصحي";
+}
+
+<main class="medical">
+    <h3 class="title_h3">@ViewBag.Title </h3>
+    <section>
+        <figure>
+            <a href="@Url.Action("PractitionerDetails", "Home", new { title = "عرض بيانات الأطباء" })" title="عرض بيانات الأطباء">
+                <img src="~/Content/images/doctor.png" alt="" />
+            </a>
+        </figure>
+
+        <figure>
+            <a href="@Url.Action("PractitionerDetails", "Home", new { title = "عرض بيانات الممرضين" })" title="عرض بيانات الممرضين">
+                <img src="~/Content/images/hospital-bed.png" alt="" />
+            </a>
+        </figure>
+
+    </section>
+    <div class="text-center">
+        @Html.ActionLink("اضافة ممارس صحي", "RegisterPractitioner", "Account", null, new { @class = "btn btn-success", @style = "width:210px"  })
+    </div>
+</main>

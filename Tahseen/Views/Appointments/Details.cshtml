@@ -1,0 +1,38 @@
+﻿@model Tahseen.Models.Appointment
+@using Tahseen.Models.Enums
+
+@{ ViewBag.Title = "تفاصيل حجز الموعد"; }
+
+<style>
+    .myAppo div label{
+        width: 300px;
+    }
+</style>
+
+<main class="" style="padding: 20px">
+    <h3 class="title_h3">@ViewBag.Title</h3>
+    <section class="myAppo">
+        <div>
+            <label>الاسم</label>
+            <label>@Model.Child.FName @Model.Child.LName</label>
+        </div>
+        <div>
+            @Html.LabelFor(model => model.ChildId)
+            <label>@Model.ChildId</label>
+        </div>
+        <div>
+            @Html.LabelFor(model => model.ClinicAppointmentId)
+            <label>
+                @Model.ClinicAppointment.Date.ToString("dddd", new System.Globalization.CultureInfo("ar-YE")) - @Model.ClinicAppointment.Date.ToString("yyyy-MM-dd") - @Model.ClinicAppointment.Time.ToString("hh:mm tt")
+            </label>
+        </div>
+        <div>
+            @Html.LabelFor(model => model.VaccineId)
+            <label>@Model.Vaccine.Name</label>
+        </div>
+        <div>
+            @Html.LabelFor(model => model.Place)
+            <label>@Model.Place.GetDisplayName()</label>
+        </div>
+    </section>
+</main>

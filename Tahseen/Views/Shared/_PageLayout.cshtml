@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!--جعل الصفحة ملائمة لأجهزة الجوال-->
+    <meta name="viewport" content="width=device-width, initial scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>@ViewBag.Title</title>
+    @*<link href="~/Content/Layout.css" rel="stylesheet" />*@
+    @*<link href="~/Content/Home.css" rel="stylesheet" />*@
+    <link href="~/Content/HSP.css" rel="stylesheet" />
+    <link href="~/Content/site.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/6f6e6998c6.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+    <!--ايقونة مصغرة للصفحات-->
+    <link rel="icon" type="image/png" sizes="50x20" href="~/imgs/tahseen.ico">
+
+    <!--خط عربي-->
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@700&family=Cairo:wght@200;300&family=IBM+Plex+Sans+Arabic&family=Noto+Kufi+Arabic:wght@200&family=Tajawal:wght@300&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <table style="width:100%; border-collapse: collapse;">
+
+        <!--الهيدر-->
+        <tr>
+            <td class="header" colspan="2">
+
+                <!--الشعار-->
+                <a href="~/Home/Index">
+                    <img src="~/imgs/Logo.png" Height="82" Width="48" />
+                </a>
+
+                <!--القائمة-->
+                <div class="topmenu">
+                    <ul>
+                        <li><a href="~/Home/Index">الرئيسية</a></li>
+                        <li><a href="#">عن تحصين</a></li>
+                    </ul>
+                </div>
+
+                <!--خيارات الدخول-->
+                <div class="logoptions">
+                    <ul>
+                        <li id="loginoption"><a href="~/Home/Login">تسجيل الدخول</a></li>
+                        <li> | </li>
+                        <li id="signup"><div><a href="~/Home/signup">حساب جديد</a></div></li>
+                    </ul>
+                </div>
+
+                <!--
+
+            <span class="menu" style="font-size:30px;cursor:pointer" onclick="openNav()"><img src="~/imgs/menu2.png" Height="45px" Width="45px" /></span>
+
+
+            <div id="mySidenav" class="sidenav">
+
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+                <div class="usericon">
+                    <img src="~/imgs/user2.png" Height="82px" Width="85px" />
+                </div>
+
+                <div class="user"><b><a href="#">الملف الشخصي</a></b></div>
+
+
+                <div class="options">
+                    <div><a href="#">الإعدادات</a></div><img src="~/imgs/settings.png" Height="25px" Width="25px" />
+                </div>
+                <div class="options">
+                    <div><a href="#">مركز المساعدة</a></div><img src="~/imgs/telephone.png" Height="25px" Width="25px" />
+                </div>
+                <div class="options">
+                    <div><a href="#">الاسئلة الشائعة</a></div><img src="~/imgs/questionmark.png" Height="25px" Width="25px" />
+                </div>
+                <div class="options">
+                    <div><a href="#">عن تحصين</a></div><img src="~/imgs/info.png" Height="25px" Width="25px" />
+                </div>
+
+                <div class="exit">
+                    <div><b><a href="#">تسجيل الخروج</a></b></div><img src="~/imgs/exit.png" Height="25px" Width="25px" />
+                </div>
+
+            </div>
+
+                -->
+
+            </td>
+        </tr>
+
+        <!--محتوى الصفحة-->
+        <tr>
+            <td class="content" style=" width:100%; margin:0; padding:0;">
+                @RenderBody()
+            </td>
+        </tr>
+
+
+        <!--الفوتر-->
+        <tr>
+            <td class="footer" colspan="2" style="border-top: 1px solid #ddd;">
+
+                <div id="footerpotions">
+                    <ul>
+                        <li><a href="~/Home/TermsandConditions" target="_blank">الشروط والأحكام</a></li>
+                        <li> | </li>
+                        <li><a href="#">دليل الإستخدام</a></li>
+                    </ul>
+                </div>
+
+                <h3>الحقوق محفوظة لمنصة تحصين &copy; 2022</h3>
+
+            </td>
+        </tr>
+
+    </table>
+
+
+    <!--
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "350px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
+    -->
+
+</body>
+</html>

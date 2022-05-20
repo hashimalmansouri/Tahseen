@@ -1,0 +1,68 @@
+﻿@model Tahseen.Models.Appointment
+@using Tahseen.Models.Enums
+@{
+    ViewBag.Title = "حجز موعد جديد";
+}
+
+@{
+    if (ViewBag.Success != null)
+    {
+        <div class="alert alert-success">
+            <h5><strong>@ViewBag.Success</strong></h5>
+        </div>
+    }
+    if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">
+            <h5><strong>@ViewBag.Error</strong></h5>
+        </div>
+    }
+}
+
+<main class="vaccination form">
+    <h3 class="title_h3">@ViewBag.Title</h3>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            @Html.LabelFor(model => model.ChildId)<br />
+            @Html.DropDownList("ChildId", null, null, null)<br />
+            @Html.ValidationMessageFor(model => model.ChildId, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.VaccineId)<br />
+            <select name="VaccineId">
+                @foreach (var vaccine in (IEnumerable<Tahseen.Models.Vaccine>)ViewBag.VaccineId)
+                {
+                    <option value="@vaccine.Id">@vaccine.Age.GetDisplayName() - @vaccine.Name</option>
+                }
+            </select><br />
+            @Html.ValidationMessageFor(model => model.VaccineId, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Place)<br />
+            @Html.EnumDropDownListFor(model => model.Place)<br />
+            @Html.ValidationMessageFor(model => model.Place, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ClinicAppointmentId)<br />
+            <select name="ClinicAppointmentId">
+                @foreach (var appointment in (IEnumerable<Tahseen.Models.ClinicAppointment>)ViewBag.ClinicAppointmentId)
+                {
+                    <option value="@appointment.Id">
+                        @appointment.Date.ToString("dddd", new System.Globalization.CultureInfo("ar-YE"))
+                        - @appointment.Date.ToString("yyyy-MM-dd") - @appointment.Time.ToString("hh:mm tt")
+                    </option>
+                }
+            </select><br />
+            @Html.ValidationMessageFor(model => model.ClinicAppointmentId, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-lg btn-success" style="margin:0">حجـــــــــــــــــــــز</button>
+        </div>
+    }
+</main>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

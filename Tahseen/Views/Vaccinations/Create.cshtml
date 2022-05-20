@@ -1,0 +1,75 @@
+﻿@model Tahseen.Models.Immunization
+@using Tahseen.Models.Enums
+
+@{
+    ViewBag.Title = "تسجيل التطعيم";
+}
+
+
+@{
+    if (ViewBag.Success != null)
+    {
+        <div class="alert alert-success">
+            <h5><strong>@ViewBag.Success</strong></h5>
+        </div>
+    }
+    if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">
+            <h5><strong>@ViewBag.Error</strong></h5>
+        </div>
+    }
+}
+<main class="vaccination form">
+    <h3 class="title_h3">@ViewBag.Title</h3>
+    <hr />
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NationalID, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.NationalID, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.NationalID, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.VaccineId, htmlAttributes: new { @class = "control-label" })
+            <select name="VaccineId" class="form-control" style="height:auto">
+                @foreach (var vaccine in (IEnumerable<Tahseen.Models.Vaccine>)ViewBag.VaccineId)
+                {
+                    <option value="@vaccine.Id" selected="@vaccine.Id.Equals(Model.VaccineId)">@vaccine.Age.GetDisplayName() - @vaccine.Name</option>
+                }
+            </select><br />
+            @Html.ValidationMessageFor(model => model.VaccineId, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.VaccinationDate, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.VaccinationDate, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.VaccinationDate, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DoseNo, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.DoseNo, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.DoseNo, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateOfNextDose, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.DateOfNextDose, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.DateOfNextDose, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="myBtn" style="margin:0">تسجيل الان</button>
+        </div>
+    }
+</main>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

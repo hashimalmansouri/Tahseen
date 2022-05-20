@@ -1,0 +1,171 @@
+﻿@model Tahseen.Models.Child
+
+@{
+    ViewBag.Title = "تسجيل طفل جديد";
+}
+
+@{
+    if (ViewBag.Success != null)
+    {
+        <div class="alert alert-success">
+            <h5><strong>@ViewBag.Success</strong></h5>
+        </div>
+    }
+    if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">
+            <h5><strong>@ViewBag.Error</strong></h5>
+        </div>
+    }
+}
+
+<section class="log" dir="rtl" lang="ar">
+    <br />
+    <div class="container2">
+        @using (Html.BeginForm("NewChild", "Clinics", FormMethod.Post, new { @id = "login", @class = "form-newChild" }))
+        {
+            @Html.AntiForgeryToken()
+                <h1>@ViewBag.Title</h1>
+                <br />
+                <table>
+                    <tr>
+                        <td>
+                            <fieldset>
+                                <label>@Html.DisplayNameFor(model => model.FName)</label>
+                                <br />
+                                <br />
+                                <div id="pass">
+                                    @Html.EditorFor(model => model.FName, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                                <div id="message">
+                                    @Html.ValidationMessageFor(model => model.FName, "", new { @class = "text-danger" })
+                                </div>
+                            </fieldset>
+                            <br />
+                            <br />
+                        </td>
+                        <td>
+                            <fieldset>
+                                <label>@Html.DisplayNameFor(model => model.MName)</label>
+                                <br />
+                                <br />
+                                <div id="passconfirm">
+                                    @Html.EditorFor(model => model.MName, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                                <div id="message">
+                                    @Html.ValidationMessageFor(model => model.MName, "", new { @class = "text-danger" })
+                                </div>
+                            </fieldset>
+                            <br />
+                            <br />
+                        </td>
+                        <td>
+                            <fieldset>
+                                <label>@Html.DisplayNameFor(model => model.LName)</label>
+                                <br />
+                                <br />
+                                <div id="pass">
+                                    @Html.EditorFor(model => model.LName, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                                <div id="message">
+                                    @Html.ValidationMessageFor(model => model.LName, "", new { @class = "text-danger" })
+                                </div>
+                            </fieldset>
+                            <br />
+                            <br />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <fieldset>
+                                <label>
+                                    @Html.DisplayNameFor(model => model.ChildID)
+                                </label>
+                                <br />
+                                <br />
+                                <div id="username">
+                                    @Html.EditorFor(model => model.ChildID, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                                <div id="message">
+                                    @Html.ValidationMessageFor(model => model.ChildID, "", new { @class = "text-danger" })
+                                </div>
+                            </fieldset>
+                            <br />
+                            <br />
+                        </td>
+                        <td>
+                            <fieldset>
+                                <label>@Html.DisplayNameFor(model => model.DOB)</label>
+                                <br />
+                                <br />
+                                <div id="pass">
+                                    @*<input class="form-control text-box single-line input-validation-error" data-val="true" data-val-date="The field تاريخ الميلاد must be a date." data-val-required="*هذا الحقل مطلوب" id="date_of_birth" name="date_of_birth" type="date" min="2015-01-01" max="2022-12-31" value="">*@
+                                    @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                                <div id="message">
+                                    @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
+                                </div>
+                            </fieldset>
+                            <br />
+                            <br />
+                        </td>
+                        <td>
+                            <fieldset>
+                                <label>@Html.DisplayNameFor(model => model.Gender)</label>
+                                <br />
+                                <br />
+                                @Html.EnumDropDownListFor(model => model.Gender, "اختر الجنس", new { @id = "gender" })
+                                <div id="message">
+                                    @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                                </div>
+                            </fieldset>
+                            <br />
+                            <br />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <fieldset>
+                                <label>@Html.DisplayNameFor(model => model.ParentNationalId)</label>
+                                <br />
+                                <br />
+                                <div id="pass">
+                                    @Html.EditorFor(model => model.ParentNationalId, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                                <div id="message">
+                                    @Html.ValidationMessageFor(model => model.ParentNationalId, "", new { @class = "text-danger" })
+                                </div>
+                            </fieldset>
+                            <br />
+                            <br />
+                        </td>
+                        <td>
+                            <fieldset>
+                                <label>@Html.DisplayNameFor(model => model.Address)</label>
+                                <br />
+                                <br />
+                                <div id="pass">
+                                    @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                                <div id="message">
+                                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                                </div>
+                            </fieldset>
+                            <br />
+                            <br />
+                        </td>
+                    </tr>
+                </table>
+                <fieldset>
+                    <button name="submit" type="submit" id="submit">تسجيل</button>
+                </fieldset>
+                <br />
+                <br />
+                <br />
+        }
+    </div>
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

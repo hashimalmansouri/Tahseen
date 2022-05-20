@@ -1,0 +1,105 @@
+﻿@model Tahseen.Models.Parent
+
+@{
+    ViewBag.Title = "الملف الشخصي";
+    Layout = "~/Views/Shared/_PageLayout.cshtml";
+}
+
+<!--......Created by: Abeer......-->
+<!--صفحة الملف الشخصي-->
+
+<style>
+    * {
+        font-family: 'Noto Kufi Arabic', sans-serif;
+    }
+
+    #parent-profile-div {
+        padding-bottom: 10%;
+        padding-top: 5%;
+        box-sizing: border-box;
+        background-color: #D9F5D9;
+    }
+
+        #parent-profile-div div h1 {
+            text-align: center;
+            padding-bottom: 0px;
+            font-size: 25px;
+        }
+
+        #parent-profile-div h2 {
+            text-align: center;
+            font-size: 14px;
+            color: white;
+        }
+
+        #parent-profile-div #accountinfo, #personalinfo {
+            background-color: red;
+            border-radius: 20px;
+            background-color: #04AA6D;
+            width: 10%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+    #parent-profile-div-content {
+        width: 40%;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 40px;
+        border-radius: 20px;
+        background-color: white;
+        box-shadow: 0 0 5px #808080;
+    }
+
+    #parent-profile-div #underline {
+        text-align: center;
+        color: #04AA6D;
+        padding-bottom: 30px;
+        text-decoration-style: double;
+    }
+
+    #parent-profile-div-content #info {
+        display: inline-block;
+        font-size: 13px;
+    }
+
+    #parent-profile-div-content h2 {
+        text-align: center;
+    }
+
+    #parent-profile-div-content div {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+</style>
+
+<div id="parent-profile-div" dir="rtl" lang="ar">
+
+    <!--الاسم-->
+    <div style="text-align:center;">
+        <img src="~/Content/images/user2.png" style="height: 120px;width:120px;" />
+    </div>
+    <br />
+    <div>
+        <div id="accountinfo"><h2>معلومات الحساب</h2></div>
+        <div id="parent-profile-div-content">
+
+            <div><div id="info"><h3>اسم المستخدم: </h3></div><div id="info"><p>@Html.DisplayFor(x => x.username)</p></div></div>
+            <div><div id="info"><h3>كلمة المرور: </h3></div><div id="info"><p>@Html.DisplayFor(x => x.password)</p></div></div>
+            <div><div id="info"><h3>البريد الالكتروني: </h3></div><div id="info"><p>@Html.DisplayFor(x => x.email)</p></div></div>
+            <div><div id="info"><h3>رقم الجوال: </h3></div><div id="info"><p>@Html.DisplayFor(x => x.phone)</p></div></div>
+
+        </div>
+    </div>
+    <br />
+    <div>
+        <div id="personalinfo"><h2>المعلومات الشخصية</h2></div>
+        <div id="parent-profile-div-content">
+
+            <div><div id="info"><h3>الاسم: </h3></div><div id="info"><p>@Html.DisplayFor(x => x.fullName)</p></div></div>
+            <div><div id="info"><h3>رقم الهوية: </h3></div><div id="info"><p>@Html.DisplayFor(x => x.national_id)</p></div></div>
+            <div><div id="info"><h3>تاريخ الميلاد: </h3></div><div id="info"><p>@Html.DisplayFor(x => x.DOB)</p></div></div>
+
+        </div>
+    </div>
+</div>

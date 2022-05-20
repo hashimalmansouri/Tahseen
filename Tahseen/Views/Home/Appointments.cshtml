@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewBag.Title = "المواعيد";
+}
+
+<main style="padding:30px 20px;">
+    <section class="serv" style="height:auto">
+        <h1>@ViewBag.Title</h1>
+        <hr />
+        <div class="row text-center" style="margin:0">
+            <div class="col-md-2"></div>
+            <div class="col-md-5">
+                <div class="div2">
+                    <br />
+                    <a href="@Url.Action("Index", "Appointments")">
+                        <br />
+                        <img src="~/Content/images/appointment-4.png" width="70" height="70" />
+                        <h3>إدارة مواعيدي </h3>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="div3">
+                    <br />
+                    <a href="@Url.Action("Create", "Appointments")">
+                        <br />
+                        <img src="~/Content/images/appointment-date.jpg" width="70" height="70" />
+                        <h3>حجز موعد جديد </h3>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

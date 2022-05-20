@@ -1,0 +1,104 @@
+﻿@model Tahseen.Models.ViewModels.PractitionerDetailsViewModel
+
+@{ ViewBag.Title = Model.Title; }
+
+<link href="~/Content/jquery-ui-1.12.1/jquery-ui.css" rel="stylesheet" />
+
+<main class="doctor-details">
+    <div class="container">
+
+
+        <div class="doctor_id">
+            <h2>@ViewBag.Title</h2>
+            <div>
+                @Html.LabelFor(model => model.NationalID)
+                @Html.EditorFor(model => model.NationalID, new { id = "NationalID" })
+            </div>
+        </div>
+        <div class="info">
+            <section>
+                <div>
+                    @Html.LabelFor(model => model.FullName)
+                    <br>
+                    @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @readonly = "true", @style = "text-align: center;" } })
+                </div>
+            </section>
+            <section class="details">
+                <div>
+                    @Html.LabelFor(model => model.Gender)
+                    @Html.EditorFor(model => model.Gender, new { htmlAttributes = new { @readonly = "true" } })
+                </div>
+                <div>
+                    @Html.LabelFor(model => model.Major)
+                    @Html.EditorFor(model => model.Major, new { htmlAttributes = new { @readonly = "true" } })
+                </div>
+                <div>
+                    @Html.LabelFor(model => model.Email)
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @readonly = "true" } })
+                </div>
+
+                <div>
+                    @Html.LabelFor(model => model.PhoneNumber)
+                    @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @readonly = "true" } })
+                </div>
+                <div>
+                    @Html.LabelFor(model => model.DOB)
+                    @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @readonly = "true" } })
+                </div>
+            </section>
+        </div>
+    </div>
+</main>
+
+@section Scripts {
+    @*@Scripts.Render("~/bundles/jqueryval")*@
+    <script src="~/Content/jquery-ui-1.12.1/external/jquery/jquery.js"></script>
+    <script src="~/Content/jquery-ui-1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#NationalID").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/Home/AutoComplete",
+                        type: "POST",
+                        dataType: "json",
+                        data: { prefix: request.term },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return item;
+                            }));
+                        }
+                    });
+                },
+                select: function (e, ui) {
+                    $(this).val(ui.item.lable);
+                    getDoctor(ui.item.val);
+                },
+                messages: {
+                    noResults: "", results: ""
+                }
+            });
+
+            function getDoctor(id) {
+                $.ajax({
+                    url: "/Home/GetPractitioner",
+                    type: "POST",
+                    dataType: "json",
+                    data: { id: id },
+                    success: function (doctor) {
+                        if (doctor != null) {
+                            $("#FullName").val(doctor.FullName);
+                            $("#Gender").val(doctor.Gender);
+                            $("#Major").val(doctor.Major);
+                            $("#Email").val(doctor.Email);
+                            $("#DOB").val(doctor.DOB);
+                            $("#PhoneNumber").val(doctor.PhoneNumber);
+                        } else {
+
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+}

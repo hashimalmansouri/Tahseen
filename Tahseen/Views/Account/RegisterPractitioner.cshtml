@@ -1,0 +1,87 @@
+﻿@model Tahseen.Models.RegisterPractitionerViewModel
+
+@{
+    ViewBag.Title = "تسجيل ممارس صحي";
+}
+
+<main class="form">
+    <h3 class="title_h3">@ViewBag.Title</h3>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div>
+                @Html.LabelFor(model => model.FName)<br />
+                @Html.EditorFor(model => model.FName)<br />
+                @Html.ValidationMessageFor(model => model.FName, "", new { @class = "text-danger" })
+            </div>
+
+            <div>
+                @Html.LabelFor(model => model.LName)<br />
+                @Html.EditorFor(model => model.LName)<br />
+                @Html.ValidationMessageFor(model => model.LName, "", new { @class = "text-danger" })
+            </div>
+
+            <div>
+                @Html.LabelFor(model => model.NationalID)<br />
+                @Html.EditorFor(model => model.NationalID)<br />
+                @Html.ValidationMessageFor(model => model.NationalID, "", new { @class = "text-danger" })
+            </div>
+
+            <div>
+                @Html.LabelFor(model => model.PhoneNumber)<br />
+                @Html.EditorFor(model => model.PhoneNumber)<br />
+                @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Role)<br />
+                @Html.DropDownListFor(m => m.Role, (IEnumerable<SelectListItem>)ViewBag.Role, "اختر المهنة")<br />
+                @Html.ValidationMessageFor(model => model.Role, "", new { @class = "text-danger" })
+            </div>
+
+            <div>
+                @Html.LabelFor(model => model.Gender)<br />
+                @Html.EnumDropDownListFor(model => model.Gender)<br />
+                @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+            </div>
+
+            <div>
+                @Html.LabelFor(model => model.DOB)<br />
+                @Html.EditorFor(model => model.DOB)<br />
+                @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
+            </div>
+
+            <div>
+                @Html.LabelFor(model => model.Email)<br />
+                @Html.EditorFor(model => model.Email)<br />
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+
+            <div>
+                @Html.LabelFor(model => model.Username)<br />
+                @Html.EditorFor(model => model.Username)<br />
+                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+            </div>
+
+            <div>
+                @Html.LabelFor(model => model.Password)<br />
+                @Html.EditorFor(model => model.Password)<br />
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+
+            <div>
+                @Html.LabelFor(model => model.ConfirmPassword)<br />
+                @Html.EditorFor(model => model.ConfirmPassword)<br />
+                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group"><button type="submit" class="btn btn-lg btn-success">تسجيل</button></div>
+
+        </div>
+    }
+</main>
+

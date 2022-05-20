@@ -1,0 +1,43 @@
+﻿@model Tahseen.Models.ViewModels.ContactDoctorViewModel
+@{
+    ViewBag.Title = "التواصل مع الطبيب";
+}
+
+<main style="padding: 30px 20px">
+    <h2>@ViewBag.Title</h2>
+    <hr />
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">
+            <h5>@ViewBag.Error</h5>
+        </div>
+    }
+    @if (ViewBag.Success != null)
+    {
+        <div class="alert alert-success">
+            <h5>@ViewBag.Success</h5>
+        </div>
+    }
+    <div class="row text-center" style="margin:0">
+        <div class="col-md-4">
+            <img src="~/Content/images/doctor.png" alt="" height="250" width="250" style="background-color:white" />
+        </div>
+        <div class="col-md-8" style="text-align:right">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DoctorEmail, "اختر اسم الطبيب")
+                    @Html.DropDownList("DoctorEmail", null, "اختر اسم الطبيب", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DoctorEmail, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Message, "اكتب رسالتك هنا وسيتم التواصل معك في اقرب وقت ممكن")
+                    <textarea name="Message" class="form-control" rows="5">@Model.Message</textarea>
+                    @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
+                </div>
+                <input type="submit" value="إرسال" class="btn btn-lg btn-success">
+            }
+        </div>
+    </div>
+</main>

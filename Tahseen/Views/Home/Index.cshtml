@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "الخدمات";
+}
+
+<main class="">
+    <section class="text">
+        <h1>خدمات مركز التحصين</h1>
+        <p>في مركز التحصين نقدم الخدمات قبل وبعد التطعيم والعناية بالطفل بعد التطعيم</p>
+    </section>
+    <section class="more-info">
+        <a href="@Url.Action("Instructions", "Home", new { })">
+            <figure>
+                <img src="~/content/images/img_0.png" alt="img_0" />
+                <figcaption>العناية بعد التطعيم</figcaption>
+            </figure>
+        </a>
+        <a href="@Url.Action("Create", "Vaccinations", new { })">
+            <figure>
+                <img src="~/content/images/img_1.png" alt="img_1" />
+                <figcaption>تسجيل التطعيم</figcaption>
+            </figure>
+        </a>
+    </section>
+</main>

@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "الخدمات";
+}
+
+<main class="serv" style="padding:30px 20px">
+    <h1>@ViewBag.Title</h1>
+    <hr />
+    <div class="row text-center" style="margin:0">
+        <div class="col-md-2"></div>
+        <div class="col-md-3">
+            <div class="div2">
+                <br />
+                <a href="@Url.Action("Dependents", "Parents")">
+                    <br />
+                    <img src="~/Content/images/family-png-icon.jpg" width="70" height="70" />
+                    <h3>التابعين</h3>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="div3">
+                <br />
+                <a href="@Url.Action("ContactDoctor", "Parents")">
+                    <br />
+                    <br />
+                    <img src="~/Content/images/doctor-call-hospital.png" width="70" height="70" />
+                    <h3>التواصل مع الطبيب</h3>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="div4">
+                <br />
+                <a href="@Url.Action("Index", "Appointments")">
+                    <br />
+                    <img src="~/Content/images/appointment.png" width="70" height="70" />
+                    <h3>المواعيد</h3>
+                </a>
+            </div>
+        </div>
+    </div>
+</main>

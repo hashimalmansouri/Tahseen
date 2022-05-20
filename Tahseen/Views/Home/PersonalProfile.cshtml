@@ -1,0 +1,32 @@
+﻿@model Tahseen.Models.ViewModels.ProfileViewModel
+
+@{
+    ViewBag.Title = "الملف الشخصي";
+}
+
+<div id="parent-profile-div" dir="rtl" lang="ar">
+
+    <!--الاسم-->
+    <div style="text-align:center;">
+        <img src="~/Content/images/user2.png" style="height: 120px;width:120px;" />
+    </div>
+    <br />
+    <div>
+        <div id="accountinfo"><h2>معلومات الحساب</h2></div>
+        <div id="parent-profile-div-content">
+            <div><div id="info"><h3>اسم المستخدم: </h3></div><div id="info"><p>@Html.DisplayFor(x => x.Username)</p></div></div>
+            <div><div id="info"><h3>البريد الالكتروني: </h3></div><div id="info"><p>@Html.DisplayFor(x => x.Email)</p></div></div>
+            <div><div id="info"><h3>رقم الجوال: </h3></div><div id="info"><p>@Html.DisplayFor(x => x.PhoneNumber)</p></div></div>
+        </div>
+    </div>
+    <br />
+    <div>
+        <div id="personalinfo"><h2>المعلومات الشخصية</h2></div>
+        <div id="parent-profile-div-content">
+
+            <div><div id="info"><h3>الاسم: </h3></div><div id="info"><p>@Html.DisplayFor(x => x.FullName)</p></div></div>
+            <div><div id="info"><h3>رقم الهوية: </h3></div><div id="info"><p>@Html.DisplayFor(x => x.NationalID)</p></div></div>
+            <div><div id="info"><h3>تاريخ الميلاد: </h3></div><div id="info"><p>@Html.DisplayFor(x => x.DOB)</p></div></div>
+        </div>
+    </div>
+</div>

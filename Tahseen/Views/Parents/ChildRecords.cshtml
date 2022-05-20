@@ -1,0 +1,68 @@
+﻿@model Tahseen.Models.Child
+@using Tahseen.Models.Enums
+@{
+    ViewBag.Title = "سجل تطعيم الطفل";
+    int counter = 0;
+    var vaccines = ViewBag.Vaccines as IEnumerable<Tahseen.Models.Vaccine>;
+}
+
+<style>
+    tbody > tr > th,
+    tbody > tr > td {
+        background-color: #ffffff
+    }
+</style>
+
+<main style="padding:30px 20px;">
+    <h2>@ViewBag.Title</h2>
+    <hr />
+    <div class="table-responsive">
+        <table class="table text-center table-bordered">
+            <tr>
+                <th class="text-center">@Html.DisplayNameFor(m => m.FullName)</th>
+                <td>@Html.DisplayFor(m => m.FullName)</td>
+                <th class="text-center">@Html.DisplayNameFor(m => m.ChildID)</th>
+                <td>@Html.DisplayFor(m => m.ChildID)</td>
+            </tr>
+            <tr>
+                <th class="text-center">@Html.DisplayNameFor(m => m.Gender)</th>
+                <td>@Model.Gender.GetDisplayName()</td>
+                <th class="text-center">@Html.DisplayNameFor(m => m.DOB)</th>
+                <td>@Model.DOB.ToString("yyyy-MM-dd")</td>
+            </tr>
+            <tr>
+                <th class="text-center">@Html.DisplayNameFor(m => m.Address)</th>
+                <td>@Html.DisplayFor(m => m.Address)</td>
+                <th></th><td></td>
+            </tr>
+        </table>
+
+        <table class="table table-bordered table-hover text-center">
+            <tr>
+                <th class="text-center">م</th>
+                <th class="text-center">
+                    @Html.DisplayNameFor(m => Model.Immunizations.First().VaccineId)
+                </th>
+                <th class="text-center">
+                    @Html.DisplayNameFor(m => Model.Immunizations.First().VaccinationDate)
+                </th>
+                <th class="text-center">
+                    @Html.DisplayNameFor(m => Model.Immunizations.First().DoseNo)
+                </th>
+                <th class="text-center">
+                    @Html.DisplayNameFor(m => Model.Immunizations.First().DateOfNextDose)
+                </th>
+            </tr>
+            @foreach (var item in Model.Immunizations)
+            {
+                <tr>
+                    <td>@{counter++;} @counter</td>
+                    <td>@vaccines.First(v => v.Id == item.VaccineId).Name</td>
+                    <td>@item.VaccinationDate.ToString("yyyy-MM-dd")</td>
+                    <td>@item.DoseNo</td>
+                    <td>@item.DateOfNextDose.ToString("yyyy-MM-dd")</td>
+                </tr>
+            }
+        </table>
+    </div>
+</main>
