@@ -2,7 +2,7 @@
 @if (Request.IsAuthenticated)
 {
     <li id="login">
-        @Html.ActionLink("الملف الشخصي", "Manage", routeValues: null, htmlAttributes: new { title = "الملف الشخصي" })
+        @Html.ActionLink("الملف الشخصي", "PersonalProfile", "Home", routeValues: null, htmlAttributes: new { title = "الملف الشخصي" })
     </li>
     <li> | </li>
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))

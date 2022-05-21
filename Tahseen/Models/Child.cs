@@ -21,7 +21,7 @@ namespace Tahseen.Models
         [Display(Name = "الاسم الاخير")]
         public string LName { get; set; }
         [Required(ErrorMessage = "{0} حقل مطلوب.")]
-        [Display(Name = "اسم الأم")]
+        [Display(Name = "الاسم الأوسط")]
         public string MName { get; set; }
         [Required(ErrorMessage = "{0} حقل مطلوب.")]
         [Display(Name = "الجنس")]
@@ -62,7 +62,7 @@ namespace Tahseen.Models
         {
             get
             {
-                return $"{FName} {LName}";
+                return $"{FName} {MName} {LName}";
             }
         }
     }

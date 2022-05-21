@@ -4,52 +4,230 @@
     ViewBag.Title = "تسجيل الدخول";
 }
 
-<h2>@ViewBag.Title.</h2>
-<div class="row">
-    <div class="col-md-8">
-        <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="تسجيل دخول" class="btn btn-default" style="margin:0" />
-                    </div>
-                </div>
-                <p>
-                    @Html.ActionLink("Register as a new user", "Register")
-                </p>
-                @* Enable this once you have account confirmation enabled for password reset functionality
-                    <p>
-                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                    </p>*@
+<style>
+
+    /* login page */
+
+    .log {
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        background-color: #D9F5D9;
+        padding-top: 3%;
+        padding-bottom: 5%;
+    }
+
+
+        .log h1 {
+            font-family: 'Droid Arabic Kufi', sans-serif;
+            font-size: 30px;
+            color: #696969;
+        }
+
+        .log h2 {
+            font-family: 'Droid Arabic Kufi', sans-serif;
+            color: #696969;
+        }
+
+
+    .container2 {
+        position: relative;
+        bottom: 0px;
+        max-width: 600px;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    form input[type="text"],
+    form input[type="password"],
+    form button[type="submit"] {
+        font: 400 12px/16px "Droid Arabic Kufi", sans-serif;
+        border-radius: 25px;
+    }
+
+    form {
+        background: #F9F9F9;
+        padding: 25px;
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+        height: 100%;
+        border-radius: 25px;
+    }
+
+
+        form fieldset {
+            position: relative;
+            border: medium none !important;
+            margin: 0 0 10px;
+            min-width: 100%;
+            padding: 0;
+            width: 100%;
+        }
+
+        form input[type="text"],
+        form input[type="password"] {
+            width: 300px;
+            border: 1px solid #ccc;
+            background: #FFF;
+            margin: 0 0 5px;
+            padding: 10px;
+        }
+
+
+
+            form input[type="text"]:hover,
+            form input[type="password"]:hover {
+                -webkit-transition: border-color 0.3s ease-in-out;
+                -moz-transition: border-color 0.3s ease-in-out;
+                transition: border-color 0.3s ease-in-out;
+                border: 1px solid #aaa;
             }
-        </section>
+
+
+        form button[type="submit"] {
+            cursor: pointer;
+            width: 200px;
+            height: 50px;
+            border: none;
+            background: #5B9969;
+            color: #FFF;
+            margin: 0 0 5px;
+            padding: 10px;
+            font-size: 15px;
+        }
+
+            form button[type="submit"]:hover {
+                background: #43A047;
+                -webkit-transition: background 0.3s ease-in-out;
+                -moz-transition: background 0.3s ease-in-out;
+            }
+
+
+
+            form button[type="submit"]:active {
+                box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+            }
+
+
+
+
+
+        form input:focus {
+            outline: 0;
+            border: 1px solid #aaa;
+        }
+
+        form label {
+            font-size: 15px;
+            font-family: 'Droid Arabic Kufi', sans-serif;
+        }
+
+        form a {
+            font-size: 15px;
+            font-family: 'Droid Arabic Kufi', sans-serif;
+        }
+
+            form a:link {
+                text-decoration: none;
+                color: blue;
+            }
+
+            form a:visited {
+                text-decoration: none;
+                color: blue;
+            }
+
+        form #message {
+            color: red;
+            font-family: 'Droid Arabic Kufi', sans-serif;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+    .alert-false {
+        padding: 20px;
+        padding-top: 5px;
+        padding-bottom: 15px;
+        background-color: #bd362f;
+        color: white;
+    }
+
+    .alert-true {
+        padding: 20px;
+        padding-top: 5px;
+        padding-bottom: 15px;
+        background-color: #51a351;
+        color: white;
+    }
+
+    .closebtn {
+        margin-right: 15px;
+        margin-top: 20px;
+        color: white;
+        font-weight: bold;
+        float: left;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+        .closebtn:hover {
+            color: black;
+        }
+</style>
+
+
+<section class="log" dir="rtl" lang="ar">
+    <br />
+
+    <div class="container2">
+
+        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl },
+            FormMethod.Post, new { role = "form", @class = "login" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <h1>@ViewBag.Title</h1>
+            <br />
+            <fieldset>
+                @Html.LabelFor(m => m.Username) <br /><br />
+                <div id="username">
+                    @Html.TextBoxFor(m => m.Username)
+                </div>
+                <div id="message">
+                    @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
+                </div>
+            </fieldset>
+            <br />
+            <fieldset>
+                @Html.LabelFor(m => m.Password) <br /><br />
+                <div id="pass">
+                    @Html.PasswordFor(m => m.Password)
+                </div>
+                <div id="message">
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+            </fieldset>
+            <fieldset>
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.RememberMe)
+                    @Html.LabelFor(m => m.RememberMe, new { @style = "margin-right:20px" })
+                </div>
+            </fieldset>
+            <fieldset>
+                <button name="submit" type="submit" id="submit">تسجيل دخول</button>
+            </fieldset>
+            <br />
+            <p>
+                @Html.ActionLink("نسيت كلمة المرور ؟", "ForgotPassword")
+            </p>
+            <p>
+                @Html.ActionLink("إنشاء حساب جديد", "Register")
+            </p>
+        }
     </div>
-</div>
+
+</section>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

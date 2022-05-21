@@ -50,10 +50,14 @@ namespace Tahseen.Models
 
     public class LoginViewModel
     {
+        //[Required(ErrorMessage = "{0} حقل مطلوب.")]
+        //[EmailAddress]
+        //[Display(Name = "البريد الإلكتروني")]
+        //public string Email { get; set; }
+
         [Required(ErrorMessage = "{0} حقل مطلوب.")]
-        [EmailAddress]
-        [Display(Name = "البريد الإلكتروني")]
-        public string Email { get; set; }
+        [Display(Name = "اسم المستخدم")]
+        public string Username { get; set; }
 
         [Required(ErrorMessage = "{0} حقل مطلوب.")]
         [StringLength(100, ErrorMessage = "{0} يجب أن تكون على الأقل من {2} حرف أو رمز.", MinimumLength = 3)]
