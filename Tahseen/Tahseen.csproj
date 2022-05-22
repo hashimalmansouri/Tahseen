@@ -173,7 +173,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ParentsController.cs" />
-    <Compile Include="Controllers\VaccinationsController.cs" />
+    <Compile Include="Controllers\VaccinatorsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -268,6 +268,7 @@
     <Content Include="Content\images\slideshow.png" />
     <Content Include="Content\images\tahseen.ico" />
     <Content Include="Content\images\telephone.png" />
+    <Content Include="Content\images\tick.png" />
     <Content Include="Content\images\twitter.png" />
     <Content Include="Content\images\user2.png" />
     <Content Include="Content\images\vital.png" />
@@ -429,7 +430,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout - Copy.cshtml" />
-    <Content Include="Views\Vaccinations\Create.cshtml" />
+    <Content Include="Views\Vaccinators\Create.cshtml" />
     <Content Include="Views\Home\Instructions.cshtml" />
     <Content Include="Views\Account\RegisterPractitioner.cshtml" />
     <Content Include="Views\Home\PractitionerDetails.cshtml" />

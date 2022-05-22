@@ -14,11 +14,12 @@ using Tahseen.Models;
 
 namespace Tahseen.Controllers
 {
-    public class VaccinationsController : Controller
+    public class VaccinatorsController : Controller
     {
         private TahseenContext db = new TahseenContext();
 
-        // GET: Vaccinations/Create
+
+
         public ActionResult Create()
         {
             ViewBag.VaccineId = db.Vaccines.ToList();
@@ -29,7 +30,6 @@ namespace Tahseen.Controllers
             });
         }
 
-        // POST: Vaccinations/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "Id,NationalID,VaccineId,VaccinationDate,DoseNo,DateOfNextDose,VaccinatorId")] Immunization immunization)
