@@ -11,20 +11,60 @@ using System.Web;
 using System.Web.Mvc;
 using Tahseen.Helpers;
 using Tahseen.Models;
+using Tahseen.Models.Enums;
 
 namespace Tahseen.Controllers
 {
+    [Authorize(Roles = RolesConstant.Vaccinator)]
     public class VaccinatorsController : Controller
     {
         private TahseenContext db = new TahseenContext();
 
+        public ActionResult Index() => View();
 
-
-        public ActionResult Create()
+        public ActionResult Approval()
         {
-            ViewBag.VaccineId = db.Vaccines.ToList();
+            return View(db.Approvals.Include(a => a.Child)
+                .Where(a => a.Status == ApprovalStatus.Accept).ToList());
+        }
+
+        public ActionResult ApprovalDetails(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var approvedChild = db.Approvals.Include(a => a.Child)
+                .Where(a => a.ApprovalId == id).SingleOrDefault();
+            if (approvedChild == null)
+            {
+                return HttpNotFound();
+            }
+            return View(approvedChild);
+        }
+
+        public ActionResult RegisterVaccination(string childId, int? approvalId)
+        {
+            if (childId == null || approvalId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var child = db.Children.Find(childId);
+            if (child == null)
+            {
+                return HttpNotFound();
+            }
+            var approval = db.Approvals.Find(approvalId);
+            if (approval == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.ChildName = child.FullName;
+            ViewBag.ApprovalId = approvalId;
+            ViewBag.VaccineId = db.Vaccines.Where(v => v.Age == approval.VaccineType).ToList();
             return View(new Immunization() 
             { 
+                NationalID = child.ChildID,
                 VaccinationDate = DateTime.Today,
                 DateOfNextDose = DateTime.Today 
             });
@@ -32,10 +72,23 @@ namespace Tahseen.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,NationalID,VaccineId,VaccinationDate,DoseNo,DateOfNextDose,VaccinatorId")] Immunization immunization)
+        public async Task<ActionResult> RegisterVaccination(Immunization immunization, int? approvalId)
         {
-            ViewBag.VaccineId = db.Vaccines.ToList();
-            if (ModelState.IsValid)
+            var child = db.Children.Find(immunization.NationalID);
+            if (child == null)
+            {
+                ViewBag.Error = "هذا الطفل غير موجود.";
+                return View(immunization);
+            }
+            var approval = db.Approvals.Find(approvalId);
+            if (approval == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.ChildName = child.FullName;
+            ViewBag.ApprovalId = approvalId;
+            ViewBag.VaccineId = db.Vaccines.Where(v => v.Age == approval.VaccineType).ToList();
+            //if (ModelState.IsValid)
             {
                 if (!db.Children.Any(c => c.ChildID.Equals(immunization.NationalID)))
                 {
@@ -50,14 +103,14 @@ namespace Tahseen.Controllers
                 var userId = User.Identity.GetUserId();
                 immunization.VaccinatorId = userId;
                 db.Immunizations.Add(immunization);
+
+                approval.Status = ApprovalStatus.Immunized;
+                db.Entry(approval).State = EntityState.Modified;
+
                 db.SaveChanges();
+
                 ViewBag.Success = "تم تسجيل التطعيم بنجاح.";
-                var child = await db.Children.FindAsync(immunization.NationalID);
-                if (child == null)
-                {
-                    ViewBag.Error = "هذا الطفل غير موجود.";
-                    return View(immunization);
-                }
+                
                 var parent = await db.Users.FirstOrDefaultAsync(u => u.NationalID.Equals(child.ParentNationalId));
                 if (parent == null)
                 {
@@ -65,7 +118,7 @@ namespace Tahseen.Controllers
                     return View(immunization);
                 }
                 string body;
-                using (var sr = new StreamReader(Server.MapPath("~/App_Data/Templates/instructions.html")))
+                using (var sr = new StreamReader(Server.MapPath("~/App_Data/Templates/Instructions.html")))
                 {
                     body = sr.ReadToEnd();
                 }
@@ -74,8 +127,8 @@ namespace Tahseen.Controllers
                     var message = new IdentityMessage
                     {
                         Subject = "ارشادات الرعاية بعد التطعيم",
-                        //Destination = parent.Email,
-                        Destination = "raghadlu999@gmail.com",
+                        Destination = parent.Email,
+                        //Destination = "raghadlu999@gmail.com",
                         Body = body
                     };
                     MailSender.SendMail(message);
@@ -87,15 +140,6 @@ namespace Tahseen.Controllers
                 }
             }
             return View(immunization);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

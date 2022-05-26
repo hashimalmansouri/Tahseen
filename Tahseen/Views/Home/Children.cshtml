@@ -143,7 +143,7 @@
         <ul id="myUL" style="width: 100%;">
             @foreach (var item in Model)
             {
-                <li><a href="@Url.Action("ChildProfile", "Clinics", new { id = item.ChildID })">@Html.DisplayFor(modelItem => item.FullName) <div style="display:none;">@Html.DisplayFor(modelItem => item.ChildID)</div></a></li>
+                <li><a href="@Url.Action("ChildProfile", "Home", new { id = item.ChildID })">@Html.DisplayFor(modelItem => item.FullName) <div style="display:none;">@Html.DisplayFor(modelItem => item.ChildID)</div></a></li>
             }
         </ul>
     </div>

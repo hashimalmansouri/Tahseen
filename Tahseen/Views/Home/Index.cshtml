@@ -1,18 +1,292 @@
-﻿@{
-    ViewBag.Title = "الخدمات";
+﻿
+@{
+    ViewBag.Title = "منصة تحصين";
 }
 
+<!--......Created by: Abeer......-->
+<!--الصفـــحة الرئيسيـــة للزوار-->
 
-<div class="hspserv" dir="rtl" lang="ar">
-    <h1>@ViewBag.Title</h1>
-    <div>
-        <div id="div1">
-            <a href="@Url.Action("Create", "Vaccinators")">
+<style>
+    .social {
+        position: fixed;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+    }
+
+        .social ul {
+            margin: 0;
+            padding: 0;
+        }
+
+            .social ul li {
+                list-style: none;
+                margin: 5px 0;
+            }
+
+                .social ul li div {
+                    width: 50px;
+                    height: 50px;
+                    line-height: 50px;
+                    font-size: 25px;
+                    color: #fff;
+                    background: #04AA6D;
+                    display: block;
+                    text-align: center;
+                    position: relative;
+                }
+
+                    .social ul li div span {
+                        position: absolute;
+                        top: 0;
+                        left: -120;
+                        width: 200px;
+                        height: 50px;
+                        background: white;
+                        font-size: 15px;
+                        z-index: -1;
+                        font-family: Arial;
+                        opacity: 0;
+                        color: #025738;
+                        box-shadow: 5px 10px 8px #ddd;
+                        backface-visibility: hidden;
+                        transition: 0.5s;
+                    }
+
+                .social ul li:hover span {
+                    opacity: 1;
+                    backface-visibility: visible;
+                    left: 50px;
+                }
+
+
+
+    .mySlides {
+        display: none;
+    }
+
+    img {
+        vertical-align: middle;
+    }
+
+    /* Slideshow container */
+    .slideshow-container {
+        max-width: 1000px;
+        position: relative;
+        margin: auto;
+        box-sizing: border-box;
+    }
+
+    /* Caption text */
+    .text {
+        color: black;
+        font-size: 35px;
+        padding: 230px 12px;
+        position: absolute;
+        bottom: 8px;
+        width: 100%;
+        font-family: 'Droid Arabic Kufi', sans-serif;
+        text-align: center;
+    }
+
+    /* The dots/bullets/indicators */
+    .dot {
+        height: 15px;
+        width: 15px;
+        margin: 0 2px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 0.6s ease;
+    }
+
+    .active {
+        background-color: #717171;
+    }
+
+    /* Fading animation */
+    .fade {
+        animation-name: fade;
+        animation-duration: 1.5s;
+    }
+
+    .details {
+        color: black;
+        font-size: 25px;
+        padding: 170px 12px;
+        position: absolute;
+        bottom: 8px;
+        width: 100%;
+        font-family: 'Droid Arabic Kufi', sans-serif;
+        text-align: center;
+    }
+
+    @@keyframes fade {
+        from {
+            opacity: .4
+        }
+
+        to {
+            opacity: 1
+        }
+    }
+
+    /* On smaller screens, decrease text size */
+    @@media only screen and (max-width: 300px) {
+        .text {
+            font-size: 11px
+        }
+    }
+</style>
+
+
+<!--لتجربة الدخول إلى البريد الإلكتروني والبحث عن الرسائل الورادة استخدم كلمة المرور التالية-->
+<!--tah-helpdisk150952-->
+
+<div class="social">
+    <ul>
+        <li><a href="https://twitter.com/tahseen_sa" target="_blank"><div><i class="fa fa-twitter"></i><span>&#64;Tahseen_sa</span></div></a></li>
+        <li>
+            <a href="mailto:ta-helpdesk@outlook.sa">
                 <div>
-                    <img src="~/content/images/tick.png" width="70" height="70" />
-                    <h2>طلبات التطعيم</h2>
+                    <img id="mail" src="~/Content/images/111.png" width="25" height="25" /><span>
+                        ta-helpdesk&#64;outlook.sa
+                    </span>
                 </div>
             </a>
+        </li>
+    </ul>
+</div>
+
+
+
+<!--لتنسيق الانيميشن الخاص بالصفحة الرئيسية-->
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+<img src="~/Content/images/wavybanner.png" style="width:100%; margin:0; padding:0; background-color:none;" />
+<!--القسم الأول من المحتوى-->
+<section dir="rtl" lang="ar" style="text-align: center;margin-bottom: 100px;padding-top: 0px;">
+
+
+    <div class="slideshow-container" dir="rtl" lang="ar">
+
+        <div class="mySlides fade">
+            <img src="~/Content/images/slideshow.png" style="width:70%" />
+            <div class="text">مرحبًا بك في منصة تحصين!</div>
+            <div class="details">منصة وطنية موحدة لمتابعة سجلات تحصين الأطفال و تسجيل بيانات التحصين.</div>
+
+        </div>
+
+        <div class="mySlides fade">
+            <img src="~/Content/images/slideshow.png" style="width:70%" />
+            <div class="text">تابع سجل التطعيمات</div>
+            <div class="details">احتفظ بأحدث سجلات التطعيم لأطفالك، يمكنك الوصول رقميًا لكافة خدمات ماقبل وبعد التحصين.</div>
+
+        </div>
+
+        <div class="mySlides fade">
+            <img src="~/Content/images/slideshow.png" style="width:70%" />
+            <div class="text">احجز موعد للتطعيم</div>
+            <div class="details">لاتدع مواعيد التطعيم تفوتك، يمكن حجز المواعيد بكل يسر وسهولة.</div>
+
+        </div>
+
+        <div class="mySlides fade">
+            <img src="~/Content/images/slideshow.png" style="width:70%" />
+            <div class="text">شهادة التطعيم الرقمية</div>
+            <div class="details">لمستقبل رقمي واعد، احصل الآن على شهادة التطعيم الرقمية.</div>
+
+        </div>
+
+    </div>
+    <br>
+
+    <div style="text-align:center">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+
+    </div>
+
+
+</section>
+
+<p id="line">_____________________________________________________________________________________________________________</p>
+
+<!--القسم الثاني من المحتوى-->
+<section class="index-sections">
+
+    <div class="index-sections-div">
+        <div id="sec3">
+            <img src="~/Content/images/slider5.jpg" width="750" height="480" style="  display: block;
+  margin-left: auto;
+  margin-right: auto; border-radius: 70px;" />
+        </div>
+
+        <div id="sec4">
+            <div style="background-color: #b84260;font-family: 'Droid Arabic Kufi', sans-serif;
+                        width: 400px;margin-top:50px; margin-bottom:0; padding:0;font-size:45px;
+                        border-radius: 50px; box-sizing: border-box; margin-left: auto; margin-right: auto;
+                        color:white;">طبيبك معاك</div>
+            <br />
+            <h2 data-aos="fade-down" data-aos-duration="1500">
+                تواصل مع أطباء الأطفال
+                عبر خدمة الاستشارات الطبية
+            </h2>
+        </div>
+
+    </div>
+
+</section>
+
+<p id="line">_____________________________________________________________________________________________________________</p>
+
+
+<!--القسم الثالث من المحتوى-->
+<section class="index-sections">
+    <div class="index-sections-div">
+        <div class="row">
+                <div id="sec5">
+                    <h2 class="index-sections-div-h2" data-aos="fade-up" data-aos-duration="1500"> التطعيمات الأساسية</h2>
+                    <div data-aos="fade-up" data-aos-duration="2000" style="margin:0; padding:0;">
+                        <article dir="rtl" lang="ar">
+                            تهدف التطعيمات الأساسية المحددة في شهادة التطعيمات، منذ الولادة وحتى دخول
+                            الصف الأول الإبتدائي إلى حماية الأطفال بالمملكة وفئات المجتمع من الأمراض المستهدفة بالتحصين.
+                        </article>
+                        <a href="@Url.Action("BasicVaccinations")" target="_blank"><div id="readmore">اقرأ المزيد</div></a>
+                    </div>
+                </div>
+                <div id="sec6">
+                    <img src="~/Content/images/00.jpg" width="470" height="500" />
+                </div>
         </div>
     </div>
-</div>
+</section>
+
+<!--خاص بالأنيميشن لهذه الصفحة-->
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
+<script>
+    let slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+        let i;
+        let slides = document.getElementsByClassName("mySlides");
+        let dots = document.getElementsByClassName("dot");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) { slideIndex = 1 }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+        setTimeout(showSlides, 4000); // Change image every 2 seconds
+    }
+</script>

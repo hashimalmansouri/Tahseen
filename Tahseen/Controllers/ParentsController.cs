@@ -18,6 +18,7 @@ using Tahseen.Models.ViewModels;
 
 namespace Tahseen.Controllers
 {
+    [Authorize(Roles = RolesConstant.Parent)]
     public class ParentsController : Controller
     {
         private TahseenContext db = new TahseenContext();
@@ -67,7 +68,7 @@ namespace Tahseen.Controllers
                     return HttpNotFound();
                 }
                 string body;
-                using (var sr = new StreamReader(Server.MapPath("~/App_Data/Templates/contact.html")))
+                using (var sr = new StreamReader(Server.MapPath("~/App_Data/Templates/ContactDoctor.html")))
                 {
                     body = sr.ReadToEnd();
                 }

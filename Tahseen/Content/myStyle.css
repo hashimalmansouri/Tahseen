@@ -1,6 +1,6 @@
 ﻿@font-face {
     font-family: 'Droid Arabic Kufi';
-    src: url('../fonts/DroidKufi-Regular.ttf') .format('truetype');
+    src: url('../fonts/DroidKufi-Regular.ttf').format('truetype');
 }
 
 * {
@@ -353,3 +353,302 @@ table {
 }
 
 /* Child Profile */
+
+
+/* HOME */
+
+
+/******************************************************************************************************************************/
+
+/*تنسيق الصفحة الرئيسية*/
+
+
+.index-sections div {
+    margin-bottom: 100px;
+    text-align: center;
+    padding-top: 100px;
+}
+
+
+#sec1, #sec2, #sec3, #sec4, #sec5, #sec6 {
+    display: inline;
+}
+
+#sec1 {
+    width: 100%;
+    height: 500px;
+}
+
+#sec2 {
+    width: 100%;
+    height: 500px;
+}
+
+
+#sec1 h1 {
+    text-align: center;
+    color: #54d7dc;
+    font-family: 'Droid Arabic Kufi', sans-serif;
+    font-size: 50px;
+    display: inline-block;
+}
+
+.index-sections-div-h1 {
+    padding-top: 0px;
+}
+
+
+#sec3 {
+    width: 100%;
+    height: 500px;
+}
+
+#sec4 {
+    width: 100%;
+    height: 500px;
+}
+
+    #sec4 h1 {
+        text-align: center;
+        font-family: 'Droid Arabic Kufi', sans-serif;
+        font-size: 50px;
+        display: inline-block;
+        color: #9e5271;
+    }
+
+    #sec4 h2 {
+        text-align: center;
+        color: #523708;
+        font-family: 'Droid Arabic Kufi', sans-serif;
+        font-size: 45px;
+        display: inline-block;
+        margin: 0;
+    }
+
+
+#sec5 {
+    float: left;
+    width: 50%;
+    height: 500px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#sec6 {
+    float: right;
+    width: 50%;
+    height: 500px;
+}
+
+    #sec6 img {
+        width: 70%;
+        height: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 50px;
+    }
+
+
+#sec5 h2 {
+    text-align: center;
+    color: #42b871;
+    font-size: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    font-family: 'Droid Arabic Kufi', sans-serif;
+    padding-top: 0px;
+}
+
+#sec5 article {
+    text-align: center;
+    margin-left: auto;
+    font-size: 20px;
+    margin-right: auto;
+    width: 80%;
+    font-family: 'Droid Arabic Kufi', sans-serif;
+    text-align: justify;
+}
+
+.index-sections-div-h2 {
+    padding-top: 100px;
+}
+
+
+#readmore {
+    border-radius: 20px;
+    background-color: #b8ad48;
+    border: 1.5px solid black;
+    display: inline-block;
+    margin: 40px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    text-decoration: none;
+    color: white;
+    width: 120px;
+    transition: ease-in 0.2s;
+    font-family: 'Droid Arabic Kufi', sans-serif;
+}
+
+    #readmore a {
+        text-decoration: none;
+        color: white;
+        font-family: 'Droid Arabic Kufi', sans-serif;
+    }
+
+    #readmore:hover {
+        color: black;
+        background-color: #dbde78;
+    }
+
+#line {
+    color: #ddd;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    opacity: 0.4;
+}
+
+
+/*******************************************************************************************************************************/
+
+
+
+/*تنسيق صفحة التطعيمات الأساسية*/
+
+
+/*تنسيق كامل المحتوى*/
+#basic-vaccinations-div {
+    padding-bottom: 10%;
+    padding-top: 5%;
+}
+
+    #basic-vaccinations-div div h1 {
+        text-align: center;
+        font-family: 'Droid Arabic Kufi', sans-serif;
+    }
+
+    #basic-vaccinations-div article {
+        text-align: right;
+        padding-left: 10%;
+        padding-right: 10%;
+        padding-top: 20px;
+        padding-bottom: 40px;
+        font-size: 18px;
+        font-family: 'Droid Arabic Kufi', sans-serif;
+        font-weight: bold;
+    }
+
+/*تنسيق الجدول*/
+#basic-vaccinations-table {
+    border-collapse: collapse;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: right;
+    font-family: 'Droid Arabic Kufi', sans-serif;
+}
+
+    #basic-vaccinations-table td, #basic-vaccinations-table th {
+        border: 1px solid #ddd;
+        padding: 8px;
+        font-weight: bold;
+    }
+
+    #basic-vaccinations-table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    #basic-vaccinations-table tr:hover {
+        background-color: #ddd;
+    }
+
+    #basic-vaccinations-table th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        background-color: #04AA6D;
+        color: white;
+    }
+/*****************************************************************************************************/
+
+
+
+/* HOME */
+
+/* PARENT */
+
+
+/*تنسيق صفحة خدمات ولي الأمر (التنسيق الجديد)*/
+
+/*تنسيق المحتوى كاملا*/
+.hspserv {
+    width: 100%;
+    background-color: #D9F5D9;
+    text-align: center;
+    padding-top: 5%;
+    padding-bottom: 8%;
+}
+
+    /*تنسيق العنوان*/
+    .hspserv h1 {
+        font-family: 'Droid Arabic Kufi', sans-serif;
+        font-size: 40px;
+        color: #696969;
+    }
+
+h2 {
+    font-size: 23px;
+}
+
+/*تنسيق الروابط داخل مربعات الخدمات*/
+.hspserv a {
+    text-decoration: none;
+    color: black;
+}
+
+/*تنسيق مربعات الخدمات*/
+.hspserv #div1, #div2, #div3, #div4 {
+    display: inline-block;
+    background: white;
+    width: 200px;
+    height: 200px;
+    border-radius: 25px;
+    font-family: 'Droid Arabic Kufi', sans-serif;
+    color: #696969;
+    margin: 40px;
+    transition: 1s;
+}
+
+    .hspserv #div1 div, #div2 div, #div3 div, #div4 div {
+        padding-top: 40px;
+    }
+
+    .hspserv #div1:hover, #div2:hover, #div3:hover, #div4:hover {
+        transform: scale(1.2);
+        transition: 0.5s;
+        box-shadow: 0 0 3px #000000;
+    }
+
+
+/* PARENT */
+
+.update {
+    background-color: white;
+    border-radius: 20px;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Noto Kufi Arabic', sans-serif;
+    font-weight: bolder;
+    font-size: 17px;
+    color: #ffac00;
+    border: 1px solid #ffac00;
+    text-align: center;
+}
+
+    .update:hover {
+        background-color: #ffac00;
+        color: white;
+        border: 1px solid white;
+    }

@@ -6,10 +6,14 @@
     <title>@ViewBag.Title - تحصين</title>
     <!-- ملف به تنسيقات  css لجميع الصفحات-->
     @Styles.Render("~/Content/css")
-    <link href="~/Content/myStyle.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/6f6e6998c6.js" crossorigin="anonymous"></script>
     <!--مكتبة لاضافة ايقون-->
     @Styles.Render("~/Content/boxicons/css/boxicons.css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/myStyle.css" rel="stylesheet" />
 </head>
 <body dir="rtl">
     <header class="">
@@ -26,10 +30,33 @@
                     <ul class="nav">
                         <li class="nav-link">
                             <ul>
-                                <li><a href="">الرئيسية</a></li>
-                                <li><a href="">تحصين</a></li>
-                                <li><a href="">الخدمات</a></li>
-                                <li><a href="">مركز المساعدة</a></li>
+                                <li><a href="@Url.Action("Index", "Home", new { Area = "" })">الرئيسية</a></li>
+                                <li><a href="@Url.Action("About", "Home", new { Area = "" })">تحصين</a></li>
+                                <li>
+                                    @{ string servicesLink = Url.Action("SignIn", "Account"); }
+                                    @if (User.IsInRole(RolesConstant.Clinic))
+                                    {
+                                        servicesLink = Url.Action("Index", "Clinics");
+                                    }
+                                    else if (User.IsInRole(RolesConstant.Doctor))
+                                    {
+                                        servicesLink = Url.Action("Index", "Doctors");
+                                    }
+                                    else if (User.IsInRole(RolesConstant.HSP))
+                                    {
+                                        servicesLink = Url.Action("Index", "HSPs");
+                                    }
+                                    else if (User.IsInRole(RolesConstant.Parent))
+                                    {
+                                        servicesLink = Url.Action("Index", "Parents");
+                                    }
+                                    else if (User.IsInRole(RolesConstant.Vaccinator))
+                                    {
+                                        servicesLink = Url.Action("Index", "Vaccinators");
+                                    }
+                                    <a href="@servicesLink">الخدمات</a>
+                                </li>
+                                <li><a href="#">مركز المساعدة</a></li>
                             </ul>
                         </li>
                         <!--خيارات الدخول-->
@@ -50,7 +77,7 @@
         <footer class="footer" colspan="2" style="border-top: 1px solid #ddd; padding-top:20px">
             <div id="footerpotions">
                 <ul>
-                    <li><a href="~/Home/TermsandConditions" target="_blank">الشروط والأحكام</a></li>
+                    <li><a href="@Url.Action("TermsandConditions", "Home")" target="_blank">الشروط والأحكام</a></li>
                     <li> | </li>
                     <li><a href="#">دليل الإستخدام</a></li>
                 </ul>

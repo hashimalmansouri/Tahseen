@@ -11,6 +11,7 @@ using Tahseen.Models.Enums;
 
 namespace Tahseen.Controllers
 {
+    [Authorize]
     public class AppointmentsController : Controller
     {
         private TahseenContext db = new TahseenContext();

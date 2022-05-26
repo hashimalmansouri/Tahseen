@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNet.Identity;
-using System.Linq;
+﻿using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 using Tahseen.Models;
 using Tahseen.Models.Enums;
 using Tahseen.Models.ViewModels;
+using System.Data.Entity;
 
 namespace Tahseen.Controllers
 {
@@ -14,8 +15,11 @@ namespace Tahseen.Controllers
 
         public ActionResult About() => View();
 
+        public ActionResult BasicVaccinations() => View();
+
         public ActionResult Instructions() => View();
 
+        [Authorize]
         public ActionResult PractitionerDetails(string title)
         {
             return View(new PractitionerDetailsViewModel() { Title = title });
@@ -48,28 +52,33 @@ namespace Tahseen.Controllers
             });
         }
 
-        public ActionResult Contact() => View();
-
+        [Authorize]
         public ActionResult Appointments() => View();
 
+        public ActionResult TermsAndConditions() => View();
+
         [Authorize]
-        public ActionResult PersonalProfile()
+        public ActionResult Children()
         {
-            var userId = User.Identity.GetUserId();
-            var user = _db.Users.Find(userId);
-            if (user == null)
+            return View(_db.Children.ToList());
+        }
+
+        [Authorize]
+        public ActionResult ChildProfile(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var child = _db.Children.Include(c => c.Immunizations)
+                .Include(c => c.Clinic).Include(c => c.ChildHealths)
+                .SingleOrDefault(c => c.ChildID == id);
+            if (child == null)
             {
                 return HttpNotFound();
             }
-            return View(new ProfileViewModel 
-            {
-                Username = user.UserName,
-                Email = user.Email,
-                PhoneNumber = user.PhoneNumber,
-                FullName = user.FullName,
-                NationalID = user.NationalID,
-                DOB = user.DOB.Value.ToString("yyyy-MM-dd")
-            });
+            ViewBag.Vaccines = _db.Vaccines.ToList();
+            return View(child);
         }
 
     }

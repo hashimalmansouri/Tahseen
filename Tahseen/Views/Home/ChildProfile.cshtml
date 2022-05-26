@@ -28,10 +28,44 @@
     <div>
         <div id="personalinfo"><h2>العلامات الحيوية</h2></div>
         <div id="hsp-childprofile-div-content">
-            <div><div id="info"><h3>الطول: </h3></div><div id="info"><h4>@Html.DisplayFor(x => x.Height)</h4></div></div>
-            <div><div id="info"><h3>الوزن: </h3></div><div id="info"><h4>@Html.DisplayFor(x => x.Weight)</h4></div></div>
-            <div><div id="info"><h3>محيط الرأس: </h3></div><div id="info"><h4>@Html.DisplayFor(x => x.HeadCirumference)</h4></div></div>
-            <div><div id="info"><h3>درجة الحرارة: </h3></div><div id="info"><h4>@Html.DisplayFor(x => x.Temperature)</h4></div></div>
+            @if (User.IsInRole(RolesConstant.Doctor))
+            {
+                <div class="text-center">
+                    <div class="update"><a href="@Url.Action("UpdateHealth", "Doctors", new { id = Model.ChildID })">تحديث</a></div>
+                </div> <br />
+            }
+            <table class="table table-bordered table-hover text-center">
+                <tr>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(m => Model.ChildHealths.First().Height)
+                    </th>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(m => Model.ChildHealths.First().Weight)
+                    </th>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(m => Model.ChildHealths.First().HeadCirumference)
+                    </th>
+                    <th class="text-center">
+                        @Html.DisplayNameFor(m => Model.ChildHealths.First().Temperature)
+                    </th>
+                </tr>
+                @if (Model.ChildHealths.Any())
+                {
+                    foreach (var item in Model.ChildHealths)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(m => item.Height)</td>
+                            <td>@Html.DisplayFor(m => item.Weight)</td>
+                            <td>@Html.DisplayFor(m => item.HeadCirumference)</td>
+                            <td>@Html.DisplayFor(m => item.Temperature)</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr><td colspan="4">لاتوجد بيانات</td></tr>
+                }
+            </table>
         </div>
     </div>
     <br />
@@ -40,7 +74,6 @@
         <div id="hsp-childprofile-div-content">
             <table class="table table-bordered table-hover text-center">
                 <tr>
-                    @*<th class="text-center">م</th>*@
                     <th class="text-center">الزيارة</th>
                     <th class="text-center">
                         @Html.DisplayNameFor(m => Model.Immunizations.First().VaccineId)
@@ -52,16 +85,22 @@
                         @Html.DisplayNameFor(m => Model.Immunizations.First().DateOfNextDose)
                     </th>
                 </tr>
-                @foreach (var item in Model.Immunizations)
+                @if (Model.Immunizations.Any())
                 {
-                    var vaccine = vaccines.First(v => v.Id == item.VaccineId);
-                    <tr>
-                        @*<td>@{counter++;} @counter</td>*@
-                        <td>@vaccine.Age.GetDisplayName()</td>
-                        <td>@vaccine.Name</td>
-                        <td>@item.VaccinationDate.ToString("yyyy-MM-dd")</td>
-                        <td>@item.DateOfNextDose.ToString("yyyy-MM-dd")</td>
-                    </tr>
+                    foreach (var item in Model.Immunizations)
+                    {
+                        var vaccine = vaccines.First(v => v.Id == item.VaccineId);
+                        <tr>
+                            <td>@vaccine.Age.GetDisplayName()</td>
+                            <td>@vaccine.Name</td>
+                            <td>@item.VaccinationDate.ToString("yyyy-MM-dd")</td>
+                            <td>@item.DateOfNextDose.ToString("yyyy-MM-dd")</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr><td colspan="4">لاتوجد بيانات</td></tr>
                 }
             </table>
         </div>

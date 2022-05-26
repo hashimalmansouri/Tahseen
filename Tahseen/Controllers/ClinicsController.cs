@@ -1,22 +1,14 @@
-﻿using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using System;
 using System.Data.Entity;
-using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.Mail;
-using System.Net.Mime;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 using Tahseen.Models;
-using Tahseen.Models.ViewModels;
 
 namespace Tahseen.Controllers
 {
+    [Authorize(Roles = RolesConstant.Clinic)]
     public class ClinicsController : Controller
     {
         private TahseenContext db = new TahseenContext();
@@ -24,29 +16,7 @@ namespace Tahseen.Controllers
         public ActionResult Index()
         {
             return View();
-        }       
-
-        public ActionResult Children()
-        {
-            return View(db.Children.ToList());
-        }
-
-        public ActionResult ChildProfile(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var child = db.Children.Include(c => c.Immunizations).Include(c => c.Clinic)
-                .SingleOrDefault(c => c.ChildID == id);
-            if (child == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.Vaccines = db.Vaccines.ToList();
-            return View(child);
-            //return View(db.Children.Include(c => c.Clinic).First());
-        }
+        }              
 
         public ActionResult NewChild()
         {
@@ -123,6 +93,6 @@ namespace Tahseen.Controllers
             return View(clinicAppointment);
         }
 
-
+        
     }
 }

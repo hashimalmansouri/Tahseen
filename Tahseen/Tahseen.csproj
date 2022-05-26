@@ -55,6 +55,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -170,8 +171,9 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AppointmentsController.cs" />
     <Compile Include="Controllers\ClinicsController.cs" />
+    <Compile Include="Controllers\DoctorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\HSPsController.cs" />
     <Compile Include="Controllers\ParentsController.cs" />
     <Compile Include="Controllers\VaccinatorsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -183,14 +185,36 @@
     <Compile Include="Migrations\202205200631407_CreateTables.Designer.cs">
       <DependentUpon>202205200631407_CreateTables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202205241432246_AddHSP.cs" />
+    <Compile Include="Migrations\202205241432246_AddHSP.Designer.cs">
+      <DependentUpon>202205241432246_AddHSP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205251919223_NewTBs.cs" />
+    <Compile Include="Migrations\202205251919223_NewTBs.Designer.cs">
+      <DependentUpon>202205251919223_NewTBs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205251923235_DbSet.cs" />
+    <Compile Include="Migrations\202205251923235_DbSet.Designer.cs">
+      <DependentUpon>202205251923235_DbSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205251949427_VaccineType.cs" />
+    <Compile Include="Migrations\202205251949427_VaccineType.Designer.cs">
+      <DependentUpon>202205251949427_VaccineType.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Appointment.cs" />
+    <Compile Include="Models\Approval.cs" />
+    <Compile Include="Models\ChildDevelopment.cs" />
+    <Compile Include="Models\ChildHealth.cs" />
     <Compile Include="Models\Clinic.cs" />
     <Compile Include="Models\ClinicAppointment.cs" />
+    <Compile Include="Models\Enums\ApprovalStatus.cs" />
+    <Compile Include="Models\Enums\AdivceAge.cs" />
     <Compile Include="Models\Enums\Age.cs" />
     <Compile Include="Models\Enums\AppointmentPlace.cs" />
     <Compile Include="Models\Enums\EnumExtensions.cs" />
     <Compile Include="Models\Enums\Gender.cs" />
+    <Compile Include="Models\HSP.cs" />
     <Compile Include="Models\Vaccine.cs" />
     <Compile Include="Models\ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\Child.cs" />
@@ -199,6 +223,7 @@
     <Compile Include="Models\ViewModels\HomeViewModel.cs" />
     <Compile Include="Models\ViewModels\ManageViewModels.cs" />
     <Compile Include="Models\ViewModels\ParentViewModel.cs" />
+    <Compile Include="Models\ViewModels\StatisticsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RolesConstant.cs" />
     <Compile Include="Startup.cs" />
@@ -246,6 +271,8 @@
     <Content Include="Content\images\appointment-date.jpg" />
     <Content Include="Content\images\appointment.png" />
     <Content Include="Content\images\bar-chart.png" />
+    <Content Include="Content\images\child.png" />
+    <Content Include="Content\images\childrenrecords.png" />
     <Content Include="Content\images\date.png" />
     <Content Include="Content\images\doctor-call-hospital.png" />
     <Content Include="Content\images\doctor-icon.jpg" />
@@ -256,6 +283,7 @@
     <Content Include="Content\images\img_0.png" />
     <Content Include="Content\images\img_1.png" />
     <Content Include="Content\images\info.png" />
+    <Content Include="Content\images\injection.png" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\new.png" />
     <Content Include="Content\images\padlock.png" />
@@ -296,7 +324,6 @@
     <Content Include="Content\jquery-ui-1.12.1\LICENSE.txt" />
     <Content Include="Content\myStyle.css" />
     <Content Include="Content\site.css" />
-    <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.js" />
@@ -336,6 +363,8 @@
     <Content Include="Content\boxicons\fonts\boxicons.woff" />
     <Content Include="Content\boxicons\fonts\boxicons.woff2" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\Chart.js" />
+    <Content Include="Scripts\Chart.min.js" />
     <Content Include="Scripts\i18n\jquery-ui-timepicker-addon-i18n.js" />
     <Content Include="Scripts\i18n\jquery-ui-timepicker-addon-i18n.min.js" />
     <Content Include="Scripts\i18n\jquery-ui-timepicker-af.js" />
@@ -382,11 +411,6 @@
     <Content Include="Scripts\i18n\jquery-ui-timepicker-vi.js" />
     <Content Include="Scripts\i18n\jquery-ui-timepicker-zh-CN.js" />
     <Content Include="Scripts\i18n\jquery-ui-timepicker-zh-TW.js" />
-    <Content Include="Scripts\jquery-ui-1.8.11.js" />
-    <Content Include="Scripts\jquery-ui-1.8.11.min.js" />
-    <Content Include="Scripts\jquery-ui-sliderAccess.js" />
-    <Content Include="Scripts\jquery-ui-timepicker-addon.js" />
-    <Content Include="Scripts\jquery-ui-timepicker-addon.min.js" />
     <Content Include="Scripts\site.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -398,6 +422,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="favicon.ico" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -410,17 +435,11 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\SignIn.cshtml" />
+    <Content Include="Views\Account\SignUp.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
-    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\SendCode.cshtml" />
-    <Content Include="Views\Account\VerifyCode.cshtml" />
     <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
     <Content Include="Views\Manage\ChangePassword.cshtml" />
     <Content Include="Views\Manage\Index.cshtml" />
@@ -429,8 +448,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Shared\_Layout - Copy.cshtml" />
-    <Content Include="Views\Vaccinators\Create.cshtml" />
+    <Content Include="Views\Vaccinators\RegisterVaccination.cshtml" />
     <Content Include="Views\Home\Instructions.cshtml" />
     <Content Include="Views\Account\RegisterPractitioner.cshtml" />
     <Content Include="Views\Home\PractitionerDetails.cshtml" />
@@ -441,19 +459,30 @@
     <Content Include="Views\Clinics\Medical.cshtml" />
     <Content Include="Views\Parents\ChildRecords.cshtml" />
     <Content Include="Views\Parents\ContactDoctor.cshtml" />
-    <Content Include="Views\Account\profile.cshtml" />
     <Content Include="Views\Parents\Dependents.cshtml" />
     <Content Include="Views\Shared\_PageLayout.cshtml" />
     <Content Include="Views\Parents\Index.cshtml" />
     <Content Include="Views\Home\Appointments.cshtml" />
     <Content Include="Views\Clinics\Index.cshtml" />
-    <Content Include="Views\Clinics\Children.cshtml" />
-    <Content Include="Views\Clinics\ChildProfile.cshtml" />
+    <Content Include="Views\Home\Children.cshtml" />
+    <Content Include="Views\Home\ChildProfile.cshtml" />
     <Content Include="Views\Clinics\NewChild.cshtml" />
-    <Content Include="Views\Home\PersonalProfile.cshtml" />
+    <Content Include="Views\Account\PersonalProfile.cshtml" />
     <Content Include="Views\Clinics\Appointments.cshtml" />
     <Content Include="Views\Clinics\NewAppointment.cshtml" />
     <Content Include="Views\Clinics\EditAppointment.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\BasicVaccinations.cshtml" />
+    <Content Include="Views\HSPs\Index.cshtml" />
+    <Content Include="Views\HSPs\Statistics.cshtml" />
+    <Content Include="Views\Doctors\Index.cshtml" />
+    <Content Include="Views\Doctors\ChildDevelopment.cshtml" />
+    <Content Include="Views\Doctors\Approval.cshtml" />
+    <Content Include="Views\Vaccinators\Index.cshtml" />
+    <Content Include="Views\Vaccinators\Approval.cshtml" />
+    <Content Include="Views\Vaccinators\ApprovalDetails.cshtml" />
+    <Content Include="Views\Account\UpdateProfile.cshtml" />
+    <Content Include="Views\Doctors\UpdateHealth.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -468,7 +497,20 @@
     <EmbeddedResource Include="Migrations\202205200631407_CreateTables.resx">
       <DependentUpon>202205200631407_CreateTables.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205241432246_AddHSP.resx">
+      <DependentUpon>202205241432246_AddHSP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205251919223_NewTBs.resx">
+      <DependentUpon>202205251919223_NewTBs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205251923235_DbSet.resx">
+      <DependentUpon>202205251923235_DbSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205251949427_VaccineType.resx">
+      <DependentUpon>202205251949427_VaccineType.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

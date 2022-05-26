@@ -182,7 +182,7 @@
 
     <div class="container2">
 
-        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl },
+        @using (Html.BeginForm("SignIn", "Account", new { ReturnUrl = ViewBag.ReturnUrl },
             FormMethod.Post, new { role = "form", @class = "login" }))
         {
             @Html.AntiForgeryToken()
@@ -222,7 +222,7 @@
                 @Html.ActionLink("نسيت كلمة المرور ؟", "ForgotPassword")
             </p>
             <p>
-                @Html.ActionLink("إنشاء حساب جديد", "Register")
+                @Html.ActionLink("إنشاء حساب جديد", "SignUp")
             </p>
         }
     </div>

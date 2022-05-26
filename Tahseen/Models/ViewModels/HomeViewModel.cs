@@ -32,19 +32,5 @@ namespace Tahseen.Models.ViewModels
         public string DOB { get; set; }
     }
 
-    public class ProfileViewModel
-    {
-        [Display(Name = "اسم المستخدم")]
-        public string Username { get; set; }
-        [Display(Name = "البريد الإلكتروني")]
-        public string Email { get; set; }
-        [Display(Name = "رقم الجوال")]
-        public string PhoneNumber { get; set; }
-        [Display(Name = "الاسم")]
-        public string FullName { get; set; }
-        [Display(Name = "رقم الهوية / الإقامة")]
-        public string NationalID { get; set; }
-        [Display(Name = "تاريخ الميلاد")]
-        public string DOB { get; set; }
-    }
+    
 }

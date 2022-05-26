@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -9,7 +10,10 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using Tahseen.Helpers;
 using Tahseen.Models;
+using Tahseen.Models.Enums;
+using Tahseen.Models.ViewModels;
 
 namespace Tahseen.Controllers
 {
@@ -41,9 +45,9 @@ namespace Tahseen.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -71,36 +75,50 @@ namespace Tahseen.Controllers
             }
         }
 
-        //
-        // GET: /Account/Login
+        
         [AllowAnonymous]
-        public ActionResult Login(string returnUrl)
+        public ActionResult SignIn(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
-        //
-        // POST: /Account/Login
+        
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public async Task<ActionResult> SignIn(LoginViewModel model, string returnUrl)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            //var user = await UserManager.FindByEmailAsync(model.Email);
-            //if (user == null)
-            //{
-            //    ModelState.AddModelError("", "محاولة تسجيل دخول خاطئة.");
-            //    return View(model);
-            //}
             var result = await SignInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
+                    var user = await UserManager.FindAsync(model.Username, model.Password);
+                    var roles = await UserManager.GetRolesAsync(user.Id);
+                    if (roles.Contains(RolesConstant.Clinic))
+                    {
+                        return RedirectToAction("Index", "Clinics");
+                    }
+                    else if (roles.Contains(RolesConstant.Doctor))
+                    {
+                        return RedirectToAction("Index", "Doctors");
+                    }
+                    else if (roles.Contains(RolesConstant.HSP))
+                    {
+                        return RedirectToAction("Index", "HSPs");
+                    }
+                    else if (roles.Contains(RolesConstant.Parent))
+                    {
+                        return RedirectToAction("Index", "Parents");
+                    }
+                    else if (roles.Contains(RolesConstant.Vaccinator))
+                    {
+                        return RedirectToAction("Index", "Vaccinators");
+                    }
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -113,80 +131,46 @@ namespace Tahseen.Controllers
             }
         }
 
-        //
-        // GET: /Account/VerifyCode
+        
         [AllowAnonymous]
-        public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
-        {
-            // Require that the user has already logged in via username/password or external login
-            if (!await SignInManager.HasBeenVerifiedAsync())
-            {
-                return View("Error");
-            }
-            return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe });
-        }
-
-        //
-        // POST: /Account/VerifyCode
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> VerifyCode(VerifyCodeViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            // The following code protects for brute force attacks against the two factor codes. 
-            // If a user enters incorrect codes for a specified amount of time then the user account 
-            // will be locked out for a specified amount of time. 
-            // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
-            switch (result)
-            {
-                case SignInStatus.Success:
-                    return RedirectToLocal(model.ReturnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid code.");
-                    return View(model);
-            }
-        }
-
-        //
-        // GET: /Account/Register
-        [AllowAnonymous]
-        public ActionResult Register()
+        public ActionResult SignUp()
         {
             ViewBag.Role = new SelectList(_db.Roles.ToList(), "Name", "Name");
             return View();
         }
 
-        //
-        // POST: /Account/Register
+        
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> SignUp(RegisterViewModel model)
         {
             ViewBag.Role = new SelectList(_db.Roles.ToList(), "Name", "Name");
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Role = model.Role, EmailConfirmed = true };
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    Role = RolesConstant.Parent,
+                    EmailConfirmed = true,
+                    PhoneNumber = model.PhoneNumber,
+                    FName = model.FName,
+                    LName = model.LName,
+                    DOB = model.DOB,
+                    NationalID = model.NationalID,
+                    Gender = model.Gender,
+                };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    result = await UserManager.AddToRoleAsync(user.Id, model.Role);
+                    result = await UserManager.AddToRoleAsync(user.Id, RolesConstant.Parent);
                     if (result.Succeeded)
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                         return RedirectToAction("Index", "Home");
                     }
                 }
-                AddErrors(result);
             }
             return View(model);
         }
@@ -206,8 +190,8 @@ namespace Tahseen.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser 
-                { 
+                var user = new ApplicationUser
+                {
                     UserName = model.Username,
                     Email = model.Email,
                     FName = model.FName,
@@ -222,7 +206,7 @@ namespace Tahseen.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    if(model.Role != null)
+                    if (model.Role != null)
                     {
                         result = await UserManager.AddToRoleAsync(user.Id, model.Role);
                         if (!result.Succeeded)
@@ -234,36 +218,20 @@ namespace Tahseen.Controllers
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                     return RedirectToAction("Index", "Home");
                 }
-                AddErrors(result);
             }
             ViewBag.Role = new SelectList(await _db.Roles.Where(x => x.Name.Equals(RolesConstant.Doctor) ||
             x.Name.Equals(RolesConstant.Vaccinator)).ToListAsync(), "Name", "Name");
             return View(model);
         }
 
-        //
-        // GET: /Account/ConfirmEmail
-        [AllowAnonymous]
-        public async Task<ActionResult> ConfirmEmail(string userId, string code)
-        {
-            if (userId == null || code == null)
-            {
-                return View("Error");
-            }
-            var result = await UserManager.ConfirmEmailAsync(userId, code);
-            return View(result.Succeeded ? "ConfirmEmail" : "Error");
-        }
-
-        //
-        // GET: /Account/ForgotPassword
+        
         [AllowAnonymous]
         public ActionResult ForgotPassword()
         {
             return View();
         }
 
-        //
-        // POST: /Account/ForgotPassword
+        
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -271,43 +239,59 @@ namespace Tahseen.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                var user = await UserManager.FindByEmailAsync(model.Email);
+                if (user == null)
                 {
-                    // Don't reveal that the user does not exist or is not confirmed
-                    return View("ForgotPasswordConfirmation");
+                    ViewBag.Error = "البريد الإلكتروني غير موجود.";
+                    return View(model);
                 }
-
-                // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                // خدعة لتوليد كود مكون من 6 أرقام، وذلك من أجل التحقق منه لاحقا
+                // لأنه لابد نجعل لكل كود مدة زمنية مالم يصبح منتهي
+                string code = await UserManager.GenerateChangePhoneNumberTokenAsync(user.Id, user.PhoneNumber);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                string body;
+                using (var sr = new StreamReader(Server.MapPath("~/App_Data/Templates/ForgotPassword.html")))
+                {
+                    body = sr.ReadToEnd();
+                }
+                var messageBody = string.Format(body, user.UserName, callbackUrl, code);
+                try
+                {
+                    var message = new IdentityMessage
+                    {
+                        Subject = "استرجاع كلمة المرور",
+                        Destination = model.Email,
+                        Body = messageBody
+                    };
+                    MailSender.SendMail(message);
+                    ViewBag.Success = "تم إرسال رمز استرجاع كلمة المرور بنجاح.";
+                }
+                catch
+                {
+                    ViewBag.Error = "حدث خطأ أثناء إلإرسال، الرجاء المحاولة مرة أخرى.";
+                    return View(model);
+                }
+                ViewBag.Link = callbackUrl;
+                return View("ForgotPasswordConfirmation", model);
             }
-
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
 
-        //
-        // GET: /Account/ForgotPasswordConfirmation
+        
         [AllowAnonymous]
         public ActionResult ForgotPasswordConfirmation()
         {
             return View();
         }
 
-        //
-        // GET: /Account/ResetPassword
+        
         [AllowAnonymous]
         public ActionResult ResetPassword(string code)
         {
             return code == null ? View("Error") : View();
         }
 
-        //
-        // POST: /Account/ResetPassword
+        
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -320,69 +304,97 @@ namespace Tahseen.Controllers
             var user = await UserManager.FindByNameAsync(model.Email);
             if (user == null)
             {
-                // Don't reveal that the user does not exist
+                TempData["Error"] = "هذا المستخدم غير موجود.";
                 return RedirectToAction("ResetPasswordConfirmation", "Account");
             }
-            var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
+            // خدعة من أجل التحقق أن الكود لم تنتهي مدته
+            if (!await UserManager.VerifyChangePhoneNumberTokenAsync(user.Id, model.Code, user.PhoneNumber))
+            {
+                ViewBag.Error = "رمز غير صحيح، يرجى إعادة إرسال الرمز مرة أخرى.";
+                return View(model);
+            }
+            var result = await UserManager.RemovePasswordAsync(user.Id);
             if (result.Succeeded)
             {
-                return RedirectToAction("ResetPasswordConfirmation", "Account");
+                result = await UserManager.AddPasswordAsync(user.Id, model.Password);
+                if (result.Succeeded)
+                {
+                    ViewBag.Success = "تم تغيير كلمة المرور بنجاح.";
+                    return View();
+                }
             }
-            AddErrors(result);
+            ViewBag.Error = "حدث خطأ، يرجى المحاولة مرة أخرى.";
             return View();
         }
 
-        //
-        // GET: /Account/ResetPasswordConfirmation
-        [AllowAnonymous]
-        public ActionResult ResetPasswordConfirmation()
-        {
-            return View();
-        }
-
-        //
-        // GET: /Account/SendCode
-        [AllowAnonymous]
-        public async Task<ActionResult> SendCode(string returnUrl, bool rememberMe)
-        {
-            var userId = await SignInManager.GetVerifiedUserIdAsync();
-            if (userId == null)
-            {
-                return View("Error");
-            }
-            var userFactors = await UserManager.GetValidTwoFactorProvidersAsync(userId);
-            var factorOptions = userFactors.Select(purpose => new SelectListItem { Text = purpose, Value = purpose }).ToList();
-            return View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
-        }
-
-        //
-        // POST: /Account/SendCode
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> SendCode(SendCodeViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
-
-            // Generate the token and send it
-            if (!await SignInManager.SendTwoFactorCodeAsync(model.SelectedProvider))
-            {
-                return View("Error");
-            }
-            return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });
-        }
-
-        //
-        // POST: /Account/LogOff
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
+        }
+
+        [Authorize]
+        public async Task<ActionResult> PersonalProfile()
+        {
+            var userId = User.Identity.GetUserId();
+            var user = await _db.Users.Include(u => u.HSP).Include(u => u.Clinic).SingleOrDefaultAsync(u => u.Id == userId);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(new ProfileViewModel
+            {
+                Username = user.UserName,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+                FullName = user.FullName,
+                NationalID = user.NationalID,
+                DOB = user.DOB.Value.ToString("yyyy-MM-dd"),
+                Gender = user.Gender.GetDisplayName(),
+                Major = user.Major,
+                HSPName = User.IsInRole(RolesConstant.HSP) ? user.HSP.Name : string.Empty,
+                ClinicName = User.IsInRole(RolesConstant.Clinic) ? user.Clinic.Name : string.Empty
+            });
+        }
+
+        [Authorize]
+        public async Task<ActionResult> UpdateProfile()
+        {
+            var userId = User.Identity.GetUserId();
+            var user = await UserManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(new UpdateProfileViewModel { PhoneNumber = user.PhoneNumber, Email = user.Email });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> UpdateProfile(UpdateProfileViewModel model)
+        {
+            var userId = User.Identity.GetUserId();
+            var user = await UserManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            user.Email = model.Email;
+            user.PhoneNumber = model.PhoneNumber;
+            await UserManager.UpdateAsync(user);
+            if (!string.IsNullOrEmpty(model.OldPassword) && !string.IsNullOrEmpty(model.NewPassword) && !string.IsNullOrEmpty(model.ConfirmPassword))
+            {
+                var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
+                if (result.Succeeded)
+                {
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                }
+            }
+            ViewBag.Success = "تم تحديث بيانات الملف الشخصي بنجاح.";
+            return View(model);
         }
 
         protected override void Dispose(bool disposing)
@@ -405,23 +417,11 @@ namespace Tahseen.Controllers
             base.Dispose(disposing);
         }
 
-        #region Helpers
-        // Used for XSRF protection when adding external logins
-        private const string XsrfKey = "XsrfId";
-
         private IAuthenticationManager AuthenticationManager
         {
             get
             {
                 return HttpContext.GetOwinContext().Authentication;
-            }
-        }
-
-        private void AddErrors(IdentityResult result)
-        {
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError("", error);
             }
         }
 
@@ -434,34 +434,5 @@ namespace Tahseen.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        internal class ChallengeResult : HttpUnauthorizedResult
-        {
-            public ChallengeResult(string provider, string redirectUri)
-                : this(provider, redirectUri, null)
-            {
-            }
-
-            public ChallengeResult(string provider, string redirectUri, string userId)
-            {
-                LoginProvider = provider;
-                RedirectUri = redirectUri;
-                UserId = userId;
-            }
-
-            public string LoginProvider { get; set; }
-            public string RedirectUri { get; set; }
-            public string UserId { get; set; }
-
-            public override void ExecuteResult(ControllerContext context)
-            {
-                var properties = new AuthenticationProperties { RedirectUri = RedirectUri };
-                if (UserId != null)
-                {
-                    properties.Dictionary[XsrfKey] = UserId;
-                }
-                context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
-            }
-        }
-        #endregion
     }
 }

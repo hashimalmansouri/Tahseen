@@ -22,10 +22,13 @@ namespace Tahseen.Models
         public DateTime? DOB { get; set; }
         public string Role { get; set; }
         public int? ClinicId { get; set; }
+        public int? HSPId { get; set; }
         public virtual ICollection<Immunization> Immunizations { get; set; }
         //public virtual ICollection<Child> ChildParents { get; set; }
         [ForeignKey("ClinicId")]
         public virtual Clinic Clinic { get; set; }
+        [ForeignKey("HSPId")]
+        public virtual HSP HSP { get; set; }
         public string FullName
         {
             get
@@ -72,5 +75,9 @@ namespace Tahseen.Models
         public DbSet<Vaccine> Vaccines { get; set; }
         public DbSet<Clinic> Clinics { get; set; }
         public DbSet<ClinicAppointment> ClinicAppointments { get; set; }
+        public DbSet<HSP> HSPs { get; set; }
+        public DbSet<ChildDevelopment> ChildDevelopments { get; set; }
+        public DbSet<ChildHealth> ChildHealths { get; set; }
+        public DbSet<Approval> Approvals { get; set; }
     }
 }

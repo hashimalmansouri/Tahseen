@@ -1,0 +1,267 @@
+﻿@model Tahseen.Models.UpdateProfileViewModel
+
+@{
+    ViewBag.Title = "تحديث الملف الشخصي";
+}
+
+<!--......Created by: Abeer......-->
+<!--صفحة تحديث الملف الشخصي-->
+
+<style>
+    * {
+        font-family: 'Droid Arabic Kufi', sans-serif;
+    }
+
+    #hsp-profile-div {
+        padding-bottom: 10%;
+        padding-top: 5%;
+        box-sizing: border-box;
+        background-color: #D9F5D9;
+    }
+
+        #hsp-profile-div div h1 {
+            text-align: center;
+            padding-bottom: 0px;
+            font-size: 25px;
+        }
+
+        #hsp-profile-div h2 {
+            text-align: center;
+            font-size: 14px;
+            color: white;
+        }
+
+        #hsp-profile-div #accountinfo, #personalinfo {
+            background-color: red;
+            border-radius: 20px;
+            background-color: #04AA6D;
+            max-width: 150px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+    #hsp-profile-div-content {
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 40px;
+        border-radius: 20px;
+        background-color: white;
+        box-shadow: 0 0 5px #808080;
+    }
+
+    #hsp-profile-div #underline {
+        text-align: center;
+        color: #04AA6D;
+        padding-bottom: 30px;
+        text-decoration-style: double;
+    }
+
+    #hsp-profile-div-content #info {
+        display: inline-block;
+        font-size: 13px;
+    }
+
+    #hsp-profile-div-content h2 {
+        text-align: center;
+    }
+
+    #hsp-profile-div-content div {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .update {
+        background-color: white;
+        border-radius: 20px;
+        display: inline-block;
+        margin-left: auto;
+        margin-right: auto;
+        float: left;
+        font-family: 'Droid Arabic Kufi', sans-serif;
+        font-size: 5px;
+        font-weight: bolder;
+        font-size: 5px;
+        color: #ffac00;
+        border: 1px solid #ffac00;
+        text-align: center;
+    }
+
+        .update:hover {
+            background-color: #ffac00;
+            color: white;
+            border: 1px solid white;
+        }
+
+
+
+    input[type="submit"] {
+        background-color: #ffac00;
+        border-radius: 20px;
+        display: inline-block;
+        margin-left: auto;
+        margin-right: auto;
+        float: none;
+        font-family: 'Droid Arabic Kufi', sans-serif;
+        font-size: 5px;
+        font-weight: bolder;
+        font-size: 5px;
+        color: white;
+        width: 80px;
+        border: 1px solid white;
+        text-align: center;
+    }
+
+        input[type="submit"]:hover {
+            background-color: white;
+            color: #ffac00;
+            border: 1px solid #ffac00;
+        }
+
+
+
+        input[type="submit"]:active {
+            background-color: #ffac00;
+            color: white;
+            border: 1px solid white;
+        }
+
+    #update-btn {
+        display: inline-block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        text-align: center;
+    }
+
+    /*input[type="text"] {
+        border-radius: 20px;
+        border: 1px solid #ccc;
+        background: #FFF;
+        margin: 0 0 5px;
+        padding: 5px;
+        font-size: 12px;
+    }
+
+        input[type="text"]:hover {
+            -webkit-transition: border-color 0.3s ease-in-out;
+            -moz-transition: border-color 0.3s ease-in-out;
+            transition: border-color 0.3s ease-in-out;
+            border: 1px solid #aaa;
+            background-color: #eee;
+        }
+
+        input[type="text"]:focus {
+            outline: 0;
+            border: 1px solid #aaa;
+            background-color: #eee;
+        }*/
+
+    #message {
+        color: red;
+        font-family: 'Droid Arabic Kufi', sans-serif;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+
+
+    .alert-false {
+        padding: 20px;
+        padding-top: 5px;
+        padding-bottom: 15px;
+        background-color: #bd362f;
+        color: white;
+    }
+
+    .alert-true {
+        padding: 20px;
+        padding-top: 5px;
+        padding-bottom: 15px;
+        background-color: #51a351;
+        color: white;
+    }
+
+    .closebtn {
+        margin-right: 15px;
+        margin-top: 20px;
+        color: white;
+        font-weight: bold;
+        float: left;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+        .closebtn:hover {
+            color: black;
+        }
+</style>
+
+@{
+    if (ViewBag.Success != null)
+    {
+        <div class="alert alert-success">
+            <h5><strong>@ViewBag.Success</strong></h5>
+        </div>
+    }
+    if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">
+            <h5><strong>@ViewBag.Error</strong></h5>
+        </div>
+    }
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div id="hsp-profile-div" dir="rtl" lang="ar">
+        <!--الاسم-->
+        <div style="text-align:center;">
+            <img src="~/Content/images/user2.png" style="height: 120px;width:120px;" />
+        </div>
+        <br />
+        <div>
+            <div id="accountinfo"><h2>معلومات الحساب</h2></div>
+            <div id="hsp-profile-div-content">
+                <div>
+                    <div id="info"><h3>@Html.DisplayNameFor(m => m.OldPassword): </h3></div><div id="info">
+                        <p>@Html.EditorFor(model => model.OldPassword, new { htmlAttributes = new { @class = "form-control" } })</p>
+                    </div>
+                    <div id="message">@Html.ValidationMessageFor(model => model.OldPassword, "", new { @class = "text-danger" })</div>
+                </div>
+                <div>
+                    <div id="info"><h3>@Html.DisplayNameFor(m => m.NewPassword): </h3></div><div id="info">
+                        <p>@Html.EditorFor(model => model.NewPassword, new { htmlAttributes = new { @class = "form-control" } })</p>
+                    </div>
+                    <div id="message">@Html.ValidationMessageFor(model => model.NewPassword, "", new { @class = "text-danger" })</div>
+                </div>
+                <div>
+                    <div id="info"><h3>@Html.DisplayNameFor(m => m.ConfirmPassword): </h3></div><div id="info">
+                        <p>@Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })</p>
+                    </div>
+                    <div id="message">@Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })</div>
+                </div>
+                <div>
+                    <div id="info"><h3>@Html.DisplayNameFor(m => m.Email): </h3></div><div id="info">
+                        <p>@Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })</p>
+                    </div>
+                    <div id="message">@Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })</div>
+                </div>
+                <div>
+                    <div id="info"><h3>@Html.DisplayNameFor(m => m.PhoneNumber): </h3></div><div id="info">
+                        <p>@Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })</p>
+                    </div>
+                    <div id="message">@Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })</div>
+                </div>
+                <div id="update-btn"><input type="submit" value="تحديث" class="btn btn-default" /></div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

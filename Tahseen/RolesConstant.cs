@@ -7,10 +7,10 @@ namespace Tahseen
 {
     public static class RolesConstant
     {
-        public static string Doctor { get; set; } = "طبيب";
-        public static string Vaccinator { get; set; } = "ممرض";
-        public static string Parent { get; set; } = "الوالدان";
-        public static string Clinic { get; set; } = "العيادة";
-        public static string HSP { get; set; } = "HSP";
+        public const string Doctor = "طبيب";
+        public const string Vaccinator = "ممرض";
+        public const string Parent = "الوالدان";
+        public const string Clinic = "العيادة";
+        public const string HSP = "HSP";
     }
 }

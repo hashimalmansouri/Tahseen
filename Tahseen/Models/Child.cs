@@ -42,14 +42,7 @@ namespace Tahseen.Models
         [Required(ErrorMessage = "{0} حقل مطلوب.")]
         [Display(Name = "رقم هوية / إقامة الأب")]
         public string ParentNationalId { get; set; }
-        [Display(Name = "الطول")]
-        public float Height { get; set; }
-        [Display(Name = "الوزن")]
-        public float Weight { get; set; }
-        [Display(Name = "درجة الحرارة")]
-        public float Temperature { get; set; }
-        [Display(Name = "محيط الرأس")]
-        public float HeadCirumference { get; set; }
+        
         //[ForeignKey("ParentId")]
         //public virtual ApplicationUser Parent { get; set; }
         public int ClinicId { get; set; }
@@ -57,6 +50,10 @@ namespace Tahseen.Models
         public Clinic Clinic { get; set; }
         public virtual ICollection<Immunization> Immunizations { get; set; }
         public virtual ICollection<Appointment> Appointments { get; set; }
+        public virtual ICollection<ChildDevelopment> ChildDevelopments { get; set; }
+        public virtual ICollection<ChildHealth> ChildHealths { get; set; }
+        public virtual ICollection<Approval> Approvals { get; set; }
+
         [Display(Name = "اسم الطفل")]
         public string FullName
         {

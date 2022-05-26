@@ -2,7 +2,7 @@
 @if (Request.IsAuthenticated)
 {
     <li id="login">
-        @Html.ActionLink("الملف الشخصي", "PersonalProfile", "Home", routeValues: null, htmlAttributes: new { title = "الملف الشخصي" })
+        @Html.ActionLink("الملف الشخصي", "PersonalProfile", "Account", routeValues: null, htmlAttributes: new { title = "الملف الشخصي" })
     </li>
     <li> | </li>
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
@@ -14,10 +14,10 @@
 else
 {
     <li id="login">
-        @Html.ActionLink("تسجيل الدخول", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+        @Html.ActionLink("تسجيل الدخول", "SignIn", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
     </li>
     <li> | </li>
     <li id="signup">
-        @Html.ActionLink("تسجيل جديد", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
+        @Html.ActionLink("تسجيل جديد", "SignUp", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
     </li>
 }

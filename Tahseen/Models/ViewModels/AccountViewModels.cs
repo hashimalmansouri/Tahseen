@@ -5,53 +5,59 @@ using Tahseen.Models.Enums;
 
 namespace Tahseen.Models
 {
-    public class ExternalLoginConfirmationViewModel
+    public class ProfileViewModel
     {
-        [Required]
-        [Display(Name = "Email")]
+        [Display(Name = "اسم المستخدم")]
+        public string Username { get; set; }
+        [Display(Name = "البريد الإلكتروني")]
+        public string Email { get; set; }
+        [Display(Name = "رقم الجوال")]
+        public string PhoneNumber { get; set; }
+        [Display(Name = "الاسم")]
+        public string FullName { get; set; }
+        [Display(Name = "رقم الهوية / الإقامة")]
+        public string NationalID { get; set; }
+        [Display(Name = "تاريخ الميلاد")]
+        public string DOB { get; set; }
+        [Display(Name = "الجنس")]
+        public string Gender { get; set; }
+        [Display(Name = "المهنة")]
+        public string Major { get; set; }
+        [Display(Name = "اسم مزود الخدمة الصحية (المركز الصحي)")]
+        public string HSPName { get; set; }
+        [Display(Name = "اسم العيادة")]
+        public string ClinicName { get; set; }
+        [Display(Name = "العنوان")]
+        public string Address { get; set; }
+    }
+
+    public class UpdateProfileViewModel
+    {
+        [DataType(DataType.Password)]
+        [Display(Name = "كلمة المرور القديمة")]
+        public string OldPassword { get; set; }
+
+        [StringLength(100, ErrorMessage = "{0} يجب أن تكون على الأقل من {2} حرف أو رمز.", MinimumLength = 3)]
+        [DataType(DataType.Password)]
+        [Display(Name = "كلمة المرور الجديدة")]
+        public string NewPassword { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "تأكيد كلمة المرور")]
+        [Compare("NewPassword", ErrorMessage = "كلمة المرور وتأكيد كلمة المرور غير متطابقتان")]
+        public string ConfirmPassword { get; set; }
+
+        [Display(Name = "رقم الجوال")]
+        public string PhoneNumber { get; set; }
+
+        [EmailAddress(ErrorMessage = "صيغة البريد الإلكتروني غير صالحة، يجب أن تكون مثل abc@xyz.com")]
+        [Display(Name = "البريد الإلكتروني")]
         public string Email { get; set; }
     }
-
-    public class ExternalLoginListViewModel
-    {
-        public string ReturnUrl { get; set; }
-    }
-
-    public class SendCodeViewModel
-    {
-        public string SelectedProvider { get; set; }
-        public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
-        public string ReturnUrl { get; set; }
-        public bool RememberMe { get; set; }
-    }
-
-    public class VerifyCodeViewModel
-    {
-        [Required]
-        public string Provider { get; set; }
-
-        [Required]
-        [Display(Name = "Code")]
-        public string Code { get; set; }
-        public string ReturnUrl { get; set; }
-
-        [Display(Name = "Remember this browser?")]
-        public bool RememberBrowser { get; set; }
-
-        public bool RememberMe { get; set; }
-    }
-
-    public class ForgotViewModel
-    {
-        [Required]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
-    }
-
     public class LoginViewModel
     {
         //[Required(ErrorMessage = "{0} حقل مطلوب.")]
-        //[EmailAddress]
+        //[EmailAddress(ErrorMessage = "صيغة البريد الإلكتروني غير صالحة، يجب أن تكون مثل abc@xyz.com")]
         //[Display(Name = "البريد الإلكتروني")]
         //public string Email { get; set; }
 
@@ -72,7 +78,11 @@ namespace Tahseen.Models
     public class RegisterViewModel
     {
         [Required(ErrorMessage = "{0} حقل مطلوب.")]
-        [EmailAddress]
+        [Display(Name = "اسم المستخدم")]
+        public string Username { get; set; }
+
+        [Required(ErrorMessage = "{0} حقل مطلوب.")]
+        [EmailAddress(ErrorMessage = "صيغة البريد الإلكتروني غير صالحة، يجب أن تكون مثل abc@xyz.com")]
         [Display(Name = "البريد الإلكتروني")]
         public string Email { get; set; }
 
@@ -86,9 +96,32 @@ namespace Tahseen.Models
         [Display(Name = "تأكيد كلمة المرور")]
         [Compare("Password", ErrorMessage = "كلمة المرور وتأكيد كلمة المرور غير متطابقتان")]
         public string ConfirmPassword { get; set; }
+
         [Required(ErrorMessage = "{0} حقل مطلوب.")]
-        [Display(Name = "الصلاحية")]
-        public string Role { get; set; }
+        [Display(Name = "رقم الجوال")]
+        public string PhoneNumber { get; set; }
+
+        [Required(ErrorMessage = "{0} حقل مطلوب.")]
+        [Display(Name = "الاسم الأول")]
+        public string FName { get; set; }
+
+        [Required(ErrorMessage = "{0} حقل مطلوب.")]
+        [Display(Name = "الاسم الأخير")]
+        public string LName { get; set; }
+
+        [Required(ErrorMessage = "{0} حقل مطلوب.")]
+        [Display(Name = "رقم الهوية / الإقامة")]
+        public string NationalID { get; set; }
+
+        [Required(ErrorMessage = "{0} حقل مطلوب.")]
+        [Display(Name = "الجنس")]
+        public Gender Gender { get; set; }
+
+        [Required(ErrorMessage = "{0} حقل مطلوب.")]
+        [Display(Name = "تاريخ الميلاد")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime DOB { get; set; }
     }
 
     public class RegisterPractitionerViewModel
@@ -98,7 +131,7 @@ namespace Tahseen.Models
         public string Username { get; set; }
 
         [Required(ErrorMessage = "{0} حقل مطلوب.")]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "صيغة البريد الإلكتروني غير صالحة، يجب أن تكون مثل abc@xyz.com")]
         [Display(Name = "البريد الإلكتروني")]
         public string Email { get; set; }
 
@@ -146,30 +179,32 @@ namespace Tahseen.Models
 
     public class ResetPasswordViewModel
     {
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
+        [Required(ErrorMessage = "{0} حقل مطلوب.")]
+        [EmailAddress(ErrorMessage = "صيغة البريد الإلكتروني غير صالحة، يجب أن تكون مثل abc@xyz.com")]
+        [Display(Name = "البريد الإلكتروني")]
         public string Email { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Required(ErrorMessage = "{0} حقل مطلوب.")]
+        [StringLength(100, ErrorMessage = "{0} يجب أن تكون على الأقل من {2} حرف أو رمز.", MinimumLength = 3)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "كلمة المرور")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "تأكيد كلمة المرور")]
+        [Compare("Password", ErrorMessage = "كلمة المرور وتأكيد كلمة المرور غير متطابقتان")]
         public string ConfirmPassword { get; set; }
-
+        [Display(Name = "رمز التفعيل")]
         public string Code { get; set; }
     }
 
     public class ForgotPasswordViewModel
     {
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
+        [Required(ErrorMessage = "{0} حقل مطلوب.")]
+        [EmailAddress(ErrorMessage = "صيغة البريد الإلكتروني غير صالحة، يجب أن تكون مثل abc@xyz.com")]
+        [Display(Name = "البريد الإلكتروني")]
         public string Email { get; set; }
+        [Display(Name = "رمز التفعيل")]
+        public string Code { get; set; }
     }
 }

@@ -1,0 +1,170 @@
+﻿@model IEnumerable<Tahseen.Models.Approval>
+
+@{
+    ViewBag.Title = "الموافقات";
+}
+
+<style>
+
+    /*********************************************************************************************/
+
+    /*تنسيق صفحة الخدمات للمركز الصحي وصفحة الاحصائيات*/
+
+    /*تنسيق المحتوى كاملا*/
+    .hspserv {
+        width: 100%;
+        background-color: white;
+        text-align: center;
+        padding-top: 5%;
+        padding-bottom: 8%;
+    }
+
+        /*تنسيق العنوان*/
+        .hspserv h1 {
+            font-family: 'Droid Arabic Kufi', sans-serif;
+            font-size: 25px;
+        }
+
+
+        /*تنسيق الروابط داخل مربعات الخدمات*/
+        .hspserv a {
+            text-decoration: none;
+            color: black;
+        }
+
+        /*تنسيق مربعات الخدمات*/
+        .hspserv #div1, #div2 {
+            display: inline-block;
+            background: white;
+            width: 200px;
+            height: 200px;
+            border-radius: 25px;
+            font-family: 'Droid Arabic Kufi', sans-serif;
+            font-size: 12px;
+            margin: 40px;
+            transition: 1s;
+        }
+
+            .hspserv #div1 div, #div2 div {
+                padding-top: 40px;
+            }
+
+            .hspserv #div1:hover, #div2:hover {
+                transform: scale(1.2);
+                transition: 0.5s;
+                box-shadow: 0 0 3px #000000;
+            }
+
+    /*********************************************************************************************************/
+
+    /*تنسيق صفحة سجلات الأطفال*/
+
+    #myInput {
+        background-color: white;
+        background-image: url('../../imgs/aa.png');
+        background-position: 10px 15px;
+        background-repeat: no-repeat;
+        width: 100%;
+        font-size: 14px;
+        font-family: 'Droid Arabic Kufi', sans-serif;
+        padding: 12px 10px 12px 40px;
+        border: 1px solid #ddd;
+        border-radius: 20px;
+        margin-bottom: 12px;
+        box-sizing: border-box;
+    }
+
+    #myUL {
+        font-family: 'Droid Arabic Kufi', sans-serif;
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+    }
+
+        #myUL li a {
+            border: 1px solid #ddd;
+            margin-top: -1px; /* Prevent double borders */
+            background-color: #fcfcfc;
+            padding: 12px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            color: #1f1f1f;
+            display: block;
+        }
+
+            #myUL li a:hover:not(.header) {
+                background-color: #eee;
+            }
+
+    #hsp-childrenrecords-div {
+        padding-bottom: 10%;
+        padding-top: 5%;
+        box-sizing: border-box;
+        background-color: #D9F5D9;
+    }
+
+        #hsp-childrenrecords-div div h1 {
+            text-align: center;
+            font-family: 'Droid Arabic Kufi', sans-serif;
+            padding-bottom: 50px;
+        }
+
+
+    #hsp-childrenrecords-div-content {
+        width: 40%;
+        margin-left: auto;
+        margin-right: auto;
+        background: #F9F9F9;
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+        padding: 40px;
+        /* background-color: #ffffff; */
+        border-radius: 25px;
+    }
+
+    #myUL {
+        display: inline-block;
+    }
+
+
+    /*****************************************************************************************/
+
+    /*تنسيق صفحة الملف الشخصي للاطفال*/
+
+</style>
+
+
+<div id="hsp-childrenrecords-div" dir="rtl" lang="ar">
+    <div>
+        <h1>@ViewBag.Title</h1>
+    </div>
+    <div id="hsp-childrenrecords-div-content">
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="البحث بالاسم، أو رقم الهوية..." title="type in a name">
+        <ul id="myUL" style="width: 100%;">
+            @foreach (var item in Model)
+            {
+                <li><a href="@Url.Action("ApprovalDetails", "Vaccinators", new { id = item.ApprovalId })">@Html.DisplayFor(modelItem => item.Child.FullName) <div style="display:none;">@Html.DisplayFor(modelItem => item.ChildNationalID)</div></a></li>
+            }
+        </ul>
+    </div>
+</div>
+
+<script charset="utf-8" type="text/javascript">
+    function myFunction() {
+        var input, filter, ul, li, a, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("myUL");
+        li = ul.getElementsByTagName("li");
+        for (i = 0; i < li.length; i++) {
+            a = li[i].getElementsByTagName("a")[0];
+            txtValue = a.textContent || a.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+            } else {
+                li[i].style.display = "none";
+            }
+        }
+    }
+</script>
