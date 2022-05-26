@@ -29,8 +29,8 @@
             font-size: 16px;
         }
 
-    form input[type="number"],
-    form input[type="text"] {
+    .form-approval input[type="number"],
+    .form-approval input[type="text"] {
         width: 150px;
     }
 
@@ -42,17 +42,17 @@
         position: relative;
     }
 
-    form input[type="text"],
-    form input[type="password"],
-    form input[type="number"],
+    .form-approval input[type="text"],
+    .form-approval input[type="password"],
+    .form-approval input[type="number"],
     input[type="date" i],
-    form button[type="submit"] {
+    .form-approval button[type="submit"] {
         font-size: 14px;
         border-radius: 25px;
         text-align: center;
     }
 
-    form {
+    .form-approval {
         background: #F9F9F9;
         box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
         height: 100%;
@@ -63,7 +63,7 @@
     }
 
 
-        form fieldset {
+        .form-approval fieldset {
             position: relative;
             border: medium none !important;
             margin: 0 0 10px;
@@ -82,7 +82,7 @@
         border: 1px solid #aaa;
     }
 
-    form button[type="submit"] {
+    .form-approval button[type="submit"] {
         cursor: pointer;
         width: 150px;
         height: 40px;
@@ -95,7 +95,7 @@
         position: relative;
     }
 
-        form button[type="submit"]:hover {
+        .form-approval button[type="submit"]:hover {
             background: #43A047;
             -webkit-transition: background 0.3s ease-in-out;
             -moz-transition: background 0.3s ease-in-out;
@@ -103,34 +103,34 @@
 
 
 
-        form button[type="submit"]:active {
+        .form-approval button[type="submit"]:active {
             box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
         }
 
-    form input:focus {
+    .form-approval input:focus {
         outline: 0;
         border: 1px solid #aaa;
     }
 
-    form label {
+    .form-approval label {
         font-size: 12px;
         font-family: 'Droid Arabic Kufi', sans-serif;
     }
 
-    form a {
+    .form-approval a {
         font-size: 15px;
         font-family: 'Droid Arabic Kufi', sans-serif;
     }
 
-        form a:link {
+        .form-approval a:link {
             text-decoration: none;
         }
 
-        form a:visited {
+        .form-approval a:visited {
             text-decoration: none;
         }
 
-    form #message {
+    .form-approval #message {
         color: red;
         font-size: 12px;
         font-weight: bold;
@@ -141,7 +141,7 @@
 
 
 
-    form label a {
+    .form-approval label a {
         color: red;
     }
 
@@ -234,41 +234,39 @@
 <section class="log" dir="rtl" lang="ar">
     <br />
     <div class="container2">
-        @using (Html.BeginForm("Approval", "Doctors", FormMethod.Post))
+        @using (Html.BeginForm("Approval", "Doctors", FormMethod.Post, new { id = "login", @class = "form-approval" }))
         {
             @Html.AntiForgeryToken()
-            <form id="login">
-                <h1>@ViewBag.Title</h1>
-                <br />
-                <br />
-                <br />
-                <div>
-                    <div class="inline"><h2>رقم الهوية / الإقامة:</h2></div>
-                    <div class="inline">
-                        <div id="pass">
-                            @Html.EditorFor(model => model.ChildNationalID, new { htmlAttributes = new { @class = "form-control" } })
-                        </div>
-                        <div id="message">
-                            @Html.ValidationMessageFor(model => model.ChildNationalID, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="inline"><h2>نوع التطعيم   :</h2></div>
-                    <div class="inline" id="pass" style="max-width: 150px;">
-                        @Html.EnumDropDownListFor(model => model.VaccineType, "اختر نوع التطعيم", new { @id = "vaccineType" })
+            <h1>@ViewBag.Title</h1>
+            <br />
+            <br />
+            <br />
+            <div>
+                <div class="inline"><h2>رقم الهوية / الإقامة:</h2></div>
+                <div class="inline">
+                    <div id="pass">
+                        @Html.EditorFor(model => model.ChildNationalID, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                     <div id="message">
-                        @Html.ValidationMessageFor(model => model.VaccineType, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.ChildNationalID, "", new { @class = "text-danger" })
                     </div>
                 </div>
-                <br />
-                <br />
-                <button name="submit" type="submit" id="submit">إرسال</button>
-                <br />
-                <br />
-                <br />
-            </form>
+            </div>
+            <div>
+                <div class="inline"><h2>نوع التطعيم   :</h2></div>
+                <div class="inline" id="pass" style="max-width: 150px;">
+                    @Html.EnumDropDownListFor(model => model.VaccineType, "اختر نوع التطعيم", new { @id = "vaccineType" })
+                </div>
+                <div id="message">
+                    @Html.ValidationMessageFor(model => model.VaccineType, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+            <br />
+            <button name="submit" type="submit" id="submit">إرسال</button>
+            <br />
+            <br />
+            <br />
         }
     </div>
 </section>

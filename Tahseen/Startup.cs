@@ -39,7 +39,7 @@ namespace Tahseen
                 ApplicationUser user = new ApplicationUser
                 {
                     Email = "Admin@example.com",
-                    UserName = "HSP",
+                    UserName = "HSP1",
                     Role = RolesConstant.HSP,
                     EmailConfirmed = true,
                     FName = "رغد",
@@ -47,13 +47,13 @@ namespace Tahseen
                     PhoneNumber = "0556114239",
                     DOB = DateTime.Today.AddYears(-30),
                     Gender = Gender.Female,
-                    NationalID = "884410",
+                    NationalID = "8888844444",
                     Major = "HSP"
                 };
                 var check = userManager.Create(user, "Tahseen@123");
                 if (check.Succeeded)
                 {
-                    userManager.AddToRole(user.Id, role1.Name);
+                    userManager.AddToRole(user.Id, RolesConstant.HSP);
                 }
             }
 
@@ -64,15 +64,15 @@ namespace Tahseen
                 ApplicationUser user = new ApplicationUser
                 {
                     Email = "raghadlu999@gmail.com",
-                    UserName = "Raghad9",
+                    UserName = "Parent1",
                     Role = RolesConstant.Parent,
                     EmailConfirmed = true,
-                    FName = "والد",
+                    FName = "محمد",
                     LName = "العمري",
                     PhoneNumber = "0556114239",
                     DOB = DateTime.Today.AddYears(-30),
                     Gender = Gender.Female,
-                    NationalID = "884411",
+                    NationalID = "8888855555",
                     Major = "الوالدين"
                 };
                 var check = userManager.Create(user, "Tahseen@123");
@@ -89,7 +89,7 @@ namespace Tahseen
                 ApplicationUser user = new ApplicationUser
                 {
                     Email = "raghadlu555@gmail.com",
-                    UserName = "Doaa9",
+                    UserName = "Doctor1",
                     Role = RolesConstant.Doctor,
                     EmailConfirmed = true,
                     FName = "دعاء",
@@ -97,7 +97,7 @@ namespace Tahseen
                     PhoneNumber = "0547809100",
                     DOB = DateTime.Today.AddYears(-30),
                     Gender = Gender.Female,
-                    NationalID = "884411",
+                    NationalID = "8888866666",
                     Major = "دكتور"
                 };
                 var check = userManager.Create(user, "Tahseen@123");
@@ -114,7 +114,7 @@ namespace Tahseen
                 ApplicationUser user = new ApplicationUser
                 {
                     Email = "raghadlu333@gmail.com",
-                    UserName = "Maryam9",
+                    UserName = "Vaccinator1",
                     Role = RolesConstant.Vaccinator,
                     EmailConfirmed = true,
                     FName = "مريم",
@@ -122,7 +122,7 @@ namespace Tahseen
                     PhoneNumber = "0569743550",
                     DOB = DateTime.Today.AddYears(-30),
                     Gender = Gender.Female,
-                    NationalID = "884412",
+                    NationalID = "8888877777",
                     Major = "ممرض"
                 };
                 var check = userManager.Create(user, "Tahseen@123");
@@ -139,22 +139,22 @@ namespace Tahseen
                 ApplicationUser user = new ApplicationUser
                 {
                     Email = "TahseenFYP@gmail.com",
-                    UserName = "Raghad9997",
-                    Role = RolesConstant.Vaccinator,
+                    UserName = "Clinic1",
+                    Role = RolesConstant.Clinic,
                     EmailConfirmed = true,
                     FName = "رغد",
                     LName = "العمري",
                     PhoneNumber = "0556114239",
                     DOB = DateTime.Today.AddYears(-30),
                     Gender = Gender.Female,
-                    NationalID = "884413",
+                    NationalID = "8888899999",
                     Major = "العيادة",
                     ClinicId = db.Clinics.First().ClinicId
                 };
                 var check = userManager.Create(user, "Tahseen@123");
                 if (check.Succeeded)
                 {
-                    userManager.AddToRole(user.Id, RolesConstant.Vaccinator);
+                    userManager.AddToRole(user.Id, RolesConstant.Clinic);
                 }
             }
         }
