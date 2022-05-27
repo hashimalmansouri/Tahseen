@@ -211,12 +211,11 @@ namespace Tahseen.Controllers
                         result = await UserManager.AddToRoleAsync(user.Id, model.Role);
                         if (!result.Succeeded)
                         {
-                            ModelState.AddModelError("", result.Errors.First());
+                            ViewBag.Error = "خطأ، يرجى التأكد من البيانات المدخلة.";
                             return View();
                         }
                     }
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                    return RedirectToAction("Index", "Home");
+                    ViewBag.Success =  "تم تسجيل الحساب بنجاح.";
                 }
             }
             ViewBag.Role = new SelectList(await _db.Roles.Where(x => x.Name.Equals(RolesConstant.Doctor) ||

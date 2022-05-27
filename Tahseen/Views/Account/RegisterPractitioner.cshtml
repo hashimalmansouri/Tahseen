@@ -4,6 +4,21 @@
     ViewBag.Title = "تسجيل ممارس صحي";
 }
 
+@{
+    if (ViewBag.Success != null)
+    {
+        <div class="alert alert-success">
+            <h5><strong>@ViewBag.Success</strong></h5>
+        </div>
+    }
+    if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">
+            <h5><strong>@ViewBag.Error</strong></h5>
+        </div>
+    }
+}
+
 <main class="form">
     <h3 class="title_h3">@ViewBag.Title</h3>
     @using (Html.BeginForm())
