@@ -37,6 +37,7 @@
                         <div class="update"><a href="@Url.Action("UpdateHealth", "Doctors", new { id = Model.ChildID })">تحديث</a></div>
                     </div> <br />
                 }
+            <div class="table-responsive">
                 <table class="table table-bordered table-hover text-center">
                     <tr>
                         <th class="text-center">
@@ -70,43 +71,46 @@
                     }
                 </table>
             </div>
+            </div>
         </div>
     }
     <br />
     <div>
         <div id="personalinfo"><h2>شهادة التطعيم</h2></div>
         <div id="hsp-childprofile-div-content">
-            <table class="table table-bordered table-hover text-center">
-                <tr>
-                    <th class="text-center">الزيارة</th>
-                    <th class="text-center">
-                        @Html.DisplayNameFor(m => Model.Immunizations.First().VaccineId)
-                    </th>
-                    <th class="text-center">
-                        @Html.DisplayNameFor(m => Model.Immunizations.First().VaccinationDate)
-                    </th>
-                    <th class="text-center">
-                        @Html.DisplayNameFor(m => Model.Immunizations.First().DateOfNextDose)
-                    </th>
-                </tr>
-                @if (Model.Immunizations.Any())
-                {
-                    foreach (var item in Model.Immunizations)
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover text-center">
+                    <tr>
+                        <th class="text-center">الزيارة</th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(m => Model.Immunizations.First().VaccineId)
+                        </th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(m => Model.Immunizations.First().VaccinationDate)
+                        </th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(m => Model.Immunizations.First().DateOfNextDose)
+                        </th>
+                    </tr>
+                    @if (Model.Immunizations.Any())
                     {
-                        var vaccine = vaccines.First(v => v.Id == item.VaccineId);
-                        <tr>
-                            <td>@vaccine.Age.GetDisplayName()</td>
-                            <td>@vaccine.Name</td>
-                            <td>@item.VaccinationDate.ToString("yyyy-MM-dd")</td>
-                            <td>@item.DateOfNextDose.ToString("yyyy-MM-dd")</td>
-                        </tr>
+                        foreach (var item in Model.Immunizations)
+                        {
+                            var vaccine = vaccines.First(v => v.Id == item.VaccineId);
+                            <tr>
+                                <td>@vaccine.Age.GetDisplayName()</td>
+                                <td>@vaccine.Name</td>
+                                <td>@item.VaccinationDate.ToString("yyyy-MM-dd")</td>
+                                <td>@item.DateOfNextDose.ToString("yyyy-MM-dd")</td>
+                            </tr>
+                        }
                     }
-                }
-                else
-                {
-                    <tr><td colspan="4">لاتوجد بيانات</td></tr>
-                }
-            </table>
+                    else
+                    {
+                        <tr><td colspan="4">لاتوجد بيانات</td></tr>
+                    }
+                </table>
+            </div>
         </div>
     </div>
 </div>

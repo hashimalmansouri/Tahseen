@@ -65,8 +65,22 @@
         display: none;
     }
 
-    img {
-        vertical-align: middle;
+    
+
+    @@media screen and (max-width: 500px) {
+        img {
+            vertical-align: middle;
+            width:400px;
+            height:300px;
+        }
+    }
+
+    @@media screen and (min-width: 500px) {
+        img {
+            vertical-align: middle;
+            width: 700px;
+            height: 480px;
+        }
     }
 
     /* Slideshow container */
@@ -219,7 +233,7 @@
 
     <div class="index-sections-div">
         <div id="sec3">
-            <img src="~/Content/images/slider5.jpg" width="750" height="480" style="  display: block;
+            <img src="~/Content/images/slider5.jpg" style="  display: block;
   margin-left: auto;
   margin-right: auto; border-radius: 70px;" />
         </div>
