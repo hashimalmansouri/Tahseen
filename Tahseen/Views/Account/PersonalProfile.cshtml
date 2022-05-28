@@ -21,27 +21,30 @@
         </div>
     </div>
     <br />
-    <div>
-        <div id="personalinfo"><h2>المعلومات الشخصية</h2></div>
-        <div id="parent-profile-div-content">
-            <div><div id="info"><h3>الاسم: </h3></div><div id="info"><p>@Html.DisplayFor(x => x.FullName)</p></div></div>
-            <div><div id="info"><h3>رقم الهوية: </h3></div><div id="info"><p>@Html.DisplayFor(x => x.NationalID)</p></div></div>
-            <div><div id="info"><h3>تاريخ الميلاد: </h3></div><div id="info"><p>@Html.DisplayFor(x => x.DOB)</p></div></div>
-            <div><div id="info"><h3>الجنس: </h3></div><div id="info"><p>@Model.Gender</p></div></div>
-            @if (User.IsInRole(RolesConstant.Doctor) || User.IsInRole(RolesConstant.Vaccinator))
-            {
-                <div><div id="info"><h3>@Html.DisplayNameFor(m => m.Major): </h3></div><div id="info"><p>@Model.Major</p></div></div>
-            }
-            else if (User.IsInRole(RolesConstant.HSP))
-            {
-                <div><div id="info"><h3>@Html.DisplayNameFor(m => m.HSPName): </h3></div><div id="info"><p>@Model.HSPName</p></div></div>
-            }
-            else if (User.IsInRole(RolesConstant.Clinic))
-            {
-                <div><div id="info"><h3>@Html.DisplayNameFor(m => m.ClinicName): </h3></div><div id="info"><p>@Model.ClinicName</p></div></div>
-            }
+    @if (!User.IsInRole(RolesConstant.Clinic))
+    {
+        <div>
+            <div id="personalinfo"><h2>المعلومات الشخصية</h2></div>
+            <div id="parent-profile-div-content">
+                <div><div id="info"><h3>الاسم: </h3></div><div id="info"><p>@Html.DisplayFor(x => x.FullName)</p></div></div>
+                <div><div id="info"><h3>رقم الهوية: </h3></div><div id="info"><p>@Html.DisplayFor(x => x.NationalID)</p></div></div>
+                <div><div id="info"><h3>تاريخ الميلاد: </h3></div><div id="info"><p>@Html.DisplayFor(x => x.DOB)</p></div></div>
+                <div><div id="info"><h3>الجنس: </h3></div><div id="info"><p>@Model.Gender</p></div></div>
+                @if (User.IsInRole(RolesConstant.Doctor) || User.IsInRole(RolesConstant.Vaccinator))
+                {
+                    <div><div id="info"><h3>@Html.DisplayNameFor(m => m.Major): </h3></div><div id="info"><p>@Model.Major</p></div></div>
+                }
+                else if (User.IsInRole(RolesConstant.HSP))
+                {
+                    <div><div id="info"><h3>@Html.DisplayNameFor(m => m.HSPName): </h3></div><div id="info"><p>@Model.HSPName</p></div></div>
+                }
+                else if (User.IsInRole(RolesConstant.Clinic))
+                {
+                    <div><div id="info"><h3>@Html.DisplayNameFor(m => m.ClinicName): </h3></div><div id="info"><p>@Model.ClinicName</p></div></div>
+                }
+            </div>
         </div>
-    </div>
+    }
     <br /><br />
     <div class="text-center"><a class="btn btn-lg btn-primary" href="@Url.Action("UpdateProfile", "Account")">تحديث المعلومات</a></div>
 </div>

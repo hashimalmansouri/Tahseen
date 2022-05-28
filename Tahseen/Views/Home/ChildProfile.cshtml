@@ -3,7 +3,7 @@
 @using Tahseen.Helpers
 @{
     ViewBag.Title = "الملف الشخصي";
-    int counter = 0;
+    //int counter = 0;
     var vaccines = ViewBag.Vaccines as IEnumerable<Tahseen.Models.Vaccine>;
 }
 
@@ -19,55 +19,59 @@
             <div><div id="info"><h3>رقم الهوية: </h3></div><div id="info"><h4>@Html.DisplayFor(x => x.ChildID)</h4></div></div>
             <div><div id="info"><h3>العيادة: </h3></div><div id="info"><h4>@Html.DisplayFor(x => x.Clinic.Name)</h4></div></div>
             <div><div id="info"><h3>الجنس: </h3></div><div id="info"><h4>@Model.Gender.GetDisplayName()</h4></div></div>
-            <div><div id="info"><h3>العمر: </h3></div><div id="info"><h5>@AgeCalculator.Calculate(Model.DOB)</h5></div></div>
+            @*<div><div id="info"><h3>العمر: </h3></div><div id="info"><h5>@AgeCalculator.Calculate(Model.DOB)</h5></div></div>*@
+            <div><div id="info"><h3>العمر: </h3></div><div id="info"><h5>@Model.Age</h5></div></div>
             <div><div id="info"><h3>تاريخ الميلاد: </h3></div><div id="info"><h4>@Model.DOB.ToString("yyyy-MM-dd")</h4></div></div>
             <div><div id="info"><h3>العنوان: </h3></div><div id="info"><h4>@Html.DisplayFor(x => x.Address)</h4></div></div>
         </div>
     </div>
     <br />
-    <div>
-        <div id="personalinfo"><h2>العلامات الحيوية</h2></div>
-        <div id="hsp-childprofile-div-content">
-            @if (User.IsInRole(RolesConstant.Doctor))
-            {
-                <div class="text-center">
-                    <div class="update"><a href="@Url.Action("UpdateHealth", "Doctors", new { id = Model.ChildID })">تحديث</a></div>
-                </div> <br />
-            }
-            <table class="table table-bordered table-hover text-center">
-                <tr>
-                    <th class="text-center">
-                        @Html.DisplayNameFor(m => Model.ChildHealths.First().Height)
-                    </th>
-                    <th class="text-center">
-                        @Html.DisplayNameFor(m => Model.ChildHealths.First().Weight)
-                    </th>
-                    <th class="text-center">
-                        @Html.DisplayNameFor(m => Model.ChildHealths.First().HeadCirumference)
-                    </th>
-                    <th class="text-center">
-                        @Html.DisplayNameFor(m => Model.ChildHealths.First().Temperature)
-                    </th>
-                </tr>
-                @if (Model.ChildHealths.Any())
+    @if (!User.IsInRole(RolesConstant.Clinic))
+    {
+        <div>
+            <div id="personalinfo"><h2>العلامات الحيوية</h2></div>
+            <div id="hsp-childprofile-div-content">
+                @if (User.IsInRole(RolesConstant.Doctor))
                 {
-                    foreach (var item in Model.ChildHealths)
+                    <div class="text-center">
+                        <div class="update"><a href="@Url.Action("UpdateHealth", "Doctors", new { id = Model.ChildID })">تحديث</a></div>
+                    </div> <br />
+                }
+                <table class="table table-bordered table-hover text-center">
+                    <tr>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(m => Model.ChildHealths.First().Height)
+                        </th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(m => Model.ChildHealths.First().Weight)
+                        </th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(m => Model.ChildHealths.First().HeadCirumference)
+                        </th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(m => Model.ChildHealths.First().Temperature)
+                        </th>
+                    </tr>
+                    @if (Model.ChildHealths.Any())
                     {
-                        <tr>
-                            <td>@Html.DisplayFor(m => item.Height)</td>
-                            <td>@Html.DisplayFor(m => item.Weight)</td>
-                            <td>@Html.DisplayFor(m => item.HeadCirumference)</td>
-                            <td>@Html.DisplayFor(m => item.Temperature)</td>
-                        </tr>
+                        foreach (var item in Model.ChildHealths)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(m => item.Height)</td>
+                                <td>@Html.DisplayFor(m => item.Weight)</td>
+                                <td>@Html.DisplayFor(m => item.HeadCirumference)</td>
+                                <td>@Html.DisplayFor(m => item.Temperature)</td>
+                            </tr>
+                        }
                     }
-                }
-                else
-                {
-                    <tr><td colspan="4">لاتوجد بيانات</td></tr>
-                }
-            </table>
+                    else
+                    {
+                        <tr><td colspan="4">لاتوجد بيانات</td></tr>
+                    }
+                </table>
+            </div>
         </div>
-    </div>
+    }
     <br />
     <div>
         <div id="personalinfo"><h2>شهادة التطعيم</h2></div>

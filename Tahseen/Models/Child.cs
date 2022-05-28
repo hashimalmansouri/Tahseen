@@ -10,7 +10,6 @@ namespace Tahseen.Models
 {
     public class Child
     {
-        //[Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Display(Name = "رقم الهوية / إقامة الطفل")]
         public string ChildID { get; set; }
@@ -34,17 +33,9 @@ namespace Tahseen.Models
         [Required(ErrorMessage = "{0} حقل مطلوب.")]
         [Display(Name = "العنوان")]
         public string Address { get; set; }
-        //[Required(ErrorMessage = "{0} حقل مطلوب.")]
-        //[Display(Name = "رقم الجوال الأول")]
-        //public string PhoneOne { get; set; }
-        //[Display(Name = "رقم الجوال الثاني")]
-        //public string PhoneTwo { get; set; }
         [Required(ErrorMessage = "{0} حقل مطلوب.")]
         [Display(Name = "رقم هوية / إقامة الأب")]
         public string ParentNationalId { get; set; }
-        
-        //[ForeignKey("ParentId")]
-        //public virtual ApplicationUser Parent { get; set; }
         public int ClinicId { get; set; }
         [ForeignKey("ClinicId")]
         public Clinic Clinic { get; set; }
@@ -60,6 +51,78 @@ namespace Tahseen.Models
             get
             {
                 return $"{FName} {MName} {LName}";
+            }
+        }
+
+        [NotMapped]
+        public string Age
+        {
+            get
+            {
+                DateTime today = DateTime.Now;
+                TimeSpan span = today - DOB;
+                DateTime age = DateTime.MinValue + span;
+
+                // Make adjustment due to MinValue equalling 1/1/1
+                int years = age.Year - 1;
+                int months = age.Month - 1;
+                int days = age.Day - 1;
+
+                string result = null;
+
+                if (years == 1)
+                {
+                    result = "سنة";
+
+                }
+                else if (years == 2)
+                {
+                    result = "سنتان";
+
+                }
+                else if (years >= 3)
+                {
+                    result = years.ToString() + " سنوات";
+                }
+                else if (years < 1)
+                {
+                    if (months < 1)
+                    {
+                        if (days == 1)
+                        {
+                            result = "يوم";
+                        }
+                        else if (days == 2)
+                        {
+                            result = "يومان";
+                        }
+                        else if (3 <= days && days <= 10)
+                        {
+                            result = days.ToString() + " أيام";
+                        }
+                        else
+                        {
+                            result = days.ToString() + " يوم";
+                        }
+                    }
+                    else if (months == 1)
+                    {
+                        result = "شهر";
+                    }
+                    else if (months == 2)
+                    {
+                        result = "شهرين";
+                    }
+                    else if (3 <= months && months <= 10)
+                    {
+                        result = months.ToString() + " أشهر";
+                    }
+                    else
+                    {
+                        result = months.ToString() + " شهر";
+                    }
+                }
+                return result;
             }
         }
     }
