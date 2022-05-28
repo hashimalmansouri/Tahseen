@@ -61,12 +61,13 @@ namespace Tahseen.Controllers
             }
             ViewBag.ChildName = child.FullName;
             ViewBag.ApprovalId = approvalId;
-            ViewBag.VaccineId = db.Vaccines.Where(v => v.Age == approval.VaccineType).ToList();
+            var vaccine = db.Vaccines.FirstOrDefault(v => v.Age == approval.VaccineType);
+            ViewBag.Age = vaccine.Age.GetDisplayName();
             return View(new Immunization() 
             { 
                 NationalID = child.ChildID,
                 VaccinationDate = DateTime.Today,
-                DateOfNextDose = DateTime.Today 
+                DateOfNextDose = DateTime.Today,
             });
         }
 
@@ -87,7 +88,9 @@ namespace Tahseen.Controllers
             }
             ViewBag.ChildName = child.FullName;
             ViewBag.ApprovalId = approvalId;
-            ViewBag.VaccineId = db.Vaccines.Where(v => v.Age == approval.VaccineType).ToList();
+            var vaccine = db.Vaccines.FirstOrDefault(v => v.Age == approval.VaccineType);
+            ViewBag.Age = vaccine.Age.GetDisplayName();
+            var vaccinesList = db.Vaccines.Where(v => v.Age == approval.VaccineType).ToList();
             //if (ModelState.IsValid)
             {
                 if (!db.Children.Any(c => c.ChildID.Equals(immunization.NationalID)))
@@ -101,8 +104,22 @@ namespace Tahseen.Controllers
                     return View(immunization);
                 }
                 var userId = User.Identity.GetUserId();
-                immunization.VaccinatorId = userId;
-                db.Immunizations.Add(immunization);
+
+                var immunizationList = new List<Immunization>();
+                foreach (var item in vaccinesList)
+                {
+                    var obj = new Immunization
+                    {
+                        NationalID = immunization.NationalID,
+                        VaccinationDate = immunization.VaccinationDate,
+                        DateOfNextDose = immunization.DateOfNextDose,
+                        DoseNo = immunization.DoseNo,
+                        VaccinatorId = userId,
+                        VaccineId = item.Id
+                    };
+                    immunizationList.Add(obj);
+                }
+                db.Immunizations.AddRange(immunizationList);
 
                 approval.Status = ApprovalStatus.Immunized;
                 db.Entry(approval).State = EntityState.Modified;

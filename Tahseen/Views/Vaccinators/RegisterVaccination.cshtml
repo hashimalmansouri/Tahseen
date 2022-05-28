@@ -37,12 +37,9 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.VaccineId, htmlAttributes: new { @class = "control-label" })
-            <select name="VaccineId" class="form-control" style="height:auto">
-                @foreach (var vaccine in (IEnumerable<Tahseen.Models.Vaccine>)ViewBag.VaccineId)
-                {
-                    <option value="@vaccine.Id" selected="@vaccine.Id.Equals(Model.VaccineId)">@vaccine.Age.GetDisplayName() - @vaccine.Name</option>
-                }
-            </select><br />
+            <br />
+            <input type="text" value="@ViewBag.Age" readonly />
+            <br />
             @Html.ValidationMessageFor(model => model.VaccineId, "", new { @class = "text-danger" })
         </div>
 

@@ -15,7 +15,7 @@ namespace Tahseen.Models
         [Display(Name = "رقم الهوية / إقامة الطفل")]
         public string NationalID { get; set; }
         [Required(ErrorMessage = "{0} حقل مطلوب.")]
-        [Display(Name = "اسم اللقاح")]
+        [Display(Name = "التطعيم")]
         public int VaccineId { get; set; }
         [Required(ErrorMessage = "{0} حقل مطلوب.")]
         [Display(Name = "تاريخ التطعيم")]
