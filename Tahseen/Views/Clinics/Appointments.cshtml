@@ -10,6 +10,7 @@
     tbody > tr > td {
         background-color: #ffffff
     }
+
     .table-bordered > tbody > tr > td,
     .table-bordered > tbody > tr > th,
     .table-bordered > tfoot > tr > td,
@@ -19,6 +20,19 @@
         border: 1px solid #03ca8b;
     }
 </style>
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        <h5>@ViewBag.Error</h5>
+    </div>
+}
+@if (ViewBag.Success != null)
+{
+    <div class="alert alert-success">
+        <h5>@ViewBag.Success</h5>
+    </div>
+}
 
 <main style="padding:30px 10px">
     <h3 class="text-center">@ViewBag.Title</h3>
@@ -62,13 +76,21 @@
                         </td>
                         <td>
                             @Html.ActionLink("تعديل", "EditAppointment", new { id = item.Id }, new { @class = "btn btn-warning" })
+                            @using (Html.BeginForm("DeleteAppointment", "Clinics", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="id" value="@item.Id" />
+                                <div class="form-actions no-color">
+                                    <button type="submit" class="btn btn-danger">حذف</button>
+                                </div>
+                            }
                         </td>
                     </tr>
                 }
             }
             else
             {
-                    <tr><td colspan="5">لاتوجد بيانات</td></tr>
+                <tr><td colspan="5">لاتوجد بيانات</td></tr>
             }
 
         </table>

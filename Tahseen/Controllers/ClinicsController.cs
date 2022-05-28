@@ -93,6 +93,22 @@ namespace Tahseen.Controllers
             return View(clinicAppointment);
         }
 
-        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteAppointment(int id)
+        {
+            ClinicAppointment clinicAppointment = db.ClinicAppointments.Find(id);
+            db.ClinicAppointments.Remove(clinicAppointment);
+            try
+            {
+                db.SaveChanges();
+                ViewBag.Success = "تم حذف الموعد بنجاح.";
+            }
+            catch 
+            {
+                ViewBag.Error = "حدث خطأ أثناء حذف الموعد";
+            }
+            return RedirectToAction(nameof(Appointments));
+        }
     }
 }
