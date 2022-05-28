@@ -27,8 +27,6 @@ namespace Tahseen.Controllers
 
         public ActionResult Dependents() 
         {
-            //var parentId = User.Identity.GetUserId();
-            //return View(db.Children.Where(p => p.ParentId == parentId).ToList());
             return View(db.Children.ToList());
         }
 
@@ -38,8 +36,6 @@ namespace Tahseen.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            //var parentId = User.Identity.GetUserId();
-            //var children = db.Children.Include(c => c.Immunizations).SingleOrDefault(p => p.ChildId == id && p.ParentId == parentId);
             var child = db.Children.Include(c => c.Immunizations)
                 .SingleOrDefault(c => c.ChildID == id);
             if (child == null)

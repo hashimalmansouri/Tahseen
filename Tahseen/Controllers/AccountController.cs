@@ -135,7 +135,6 @@ namespace Tahseen.Controllers
         [AllowAnonymous]
         public ActionResult SignUp()
         {
-            ViewBag.Role = new SelectList(_db.Roles.ToList(), "Name", "Name");
             return View();
         }
 
@@ -145,12 +144,11 @@ namespace Tahseen.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> SignUp(RegisterViewModel model)
         {
-            ViewBag.Role = new SelectList(_db.Roles.ToList(), "Name", "Name");
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser
                 {
-                    UserName = model.Email,
+                    UserName = model.Username,
                     Email = model.Email,
                     Role = RolesConstant.Parent,
                     EmailConfirmed = true,
