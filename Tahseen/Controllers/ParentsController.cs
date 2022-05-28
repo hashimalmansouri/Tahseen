@@ -27,7 +27,13 @@ namespace Tahseen.Controllers
 
         public ActionResult Dependents() 
         {
-            return View(db.Children.ToList());
+            var parentId = User.Identity.GetUserId();
+            var parent = db.Users.Find(parentId);
+            if (parent == null)
+            {
+                return HttpNotFound();
+            }
+            return View(db.Children.Where(c => c.ParentNationalId.Equals(parent.NationalID)).ToList());
         }
 
         public ActionResult ChildRecords(string id)
