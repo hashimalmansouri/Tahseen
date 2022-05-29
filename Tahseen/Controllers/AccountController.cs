@@ -173,21 +173,23 @@ namespace Tahseen.Controllers
             return View(model);
         }
 
-        [AllowAnonymous]
+        [Authorize(Roles = RolesConstant.Clinic)]
         public ActionResult RegisterPractitioner()
         {
+            // تمرير دروب داون فيها اسم صلاحية الطبيب والممرضة
             ViewBag.Role = new SelectList(_db.Roles.Where(x => x.Name.Equals(RolesConstant.Doctor) ||
             x.Name.Equals(RolesConstant.Vaccinator)).ToList(), "Name", "Name");
             return View();
         }
 
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RegisterPractitioner(RegisterPractitionerViewModel model)
         {
+            // تحقق اذا المدخلات صحيحة
             if (ModelState.IsValid)
             {
+                // تعبئة كلاس جدول اليوزر من بيانات المودل
                 var user = new ApplicationUser
                 {
                     UserName = model.Username,
@@ -201,18 +203,25 @@ namespace Tahseen.Controllers
                     Role = model.Role,
                     Major = model.Role
                 };
+                // اضافة اليوزر
                 var result = await UserManager.CreateAsync(user, model.Password);
+                // اذا تمت الاضافة
                 if (result.Succeeded)
                 {
+                    // تحقق من ان الصلاحية مش فارغة
                     if (model.Role != null)
                     {
+                        // اضافة اليوزر للصلاحية حقه
                         result = await UserManager.AddToRoleAsync(user.Id, model.Role);
+                        // اذا لم تتم الاضافة
                         if (!result.Succeeded)
                         {
+                            // رسالة خطأ
                             ViewBag.Error = "خطأ، يرجى التأكد من البيانات المدخلة.";
                             return View();
                         }
                     }
+                    // رسالة نجاح
                     ViewBag.Success =  "تم تسجيل الحساب بنجاح.";
                 }
             }

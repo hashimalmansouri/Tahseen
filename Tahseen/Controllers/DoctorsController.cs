@@ -78,16 +78,22 @@ namespace Tahseen.Controllers
 
         public ActionResult UpdateHealth(string id)
         {
+            // التحقق ما اذا كان المفتاح لايحتوي على قيمة
             if (id == null)
             {
+                // ارجاع خطأ أن هذا الطلب غير صالح
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            // استعلام عن الطفل
             var child = db.Children.Find(id);
             if (child == null)
             {
+                // ارجاع خطأ اذا الطفل غير موجود
                 return HttpNotFound();
             }
+            // ارسال اسم الطفل الى الفيو
             ViewBag.ChildName = child.FullName;
+            // تمرير رقم هوية الطفل إلى المودل
             return View(new ChildHealth { ChildNationalID = child.ChildID });
         }
 
@@ -95,20 +101,27 @@ namespace Tahseen.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult UpdateHealth(ChildHealth model)
         {
+            // مشابه للشرح السابق
             var child = db.Children.Find(model.ChildNationalID);
             if (child == null)
             {
                 return HttpNotFound();
             }
             ViewBag.ChildName = child.FullName;
+            // اذا تنفذ الكود كامل لي بداخل التراي لايدخل الى الكاتش
             try
             {
+                // يضيف المودل
                 db.ChildHealths.Add(model);
+                // يحفظ التغييرات في داتابيس
                 db.SaveChanges();
+                // يمرر رسالة نجاح
                 ViewBag.Success = "تم تحديث العلامات الحيوية للطفل بنجاح.";
             }
+            // اذا لم يتنفذ احد اكواد التراي يدخل الى الكاتش
             catch
             {
+                // رسالة خطأ
                 ViewBag.Error = "حدث خطأ، يرجى المحاولة مرة أخرى.";
             }
             return View(model);
