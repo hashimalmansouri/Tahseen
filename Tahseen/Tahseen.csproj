@@ -170,7 +170,6 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AppointmentsController.cs" />
-    <Compile Include="Controllers\CAController.cs" />
     <Compile Include="Controllers\ClinicsController.cs" />
     <Compile Include="Controllers\DoctorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -484,11 +483,6 @@
     <Content Include="Views\Vaccinators\ApprovalDetails.cshtml" />
     <Content Include="Views\Account\UpdateProfile.cshtml" />
     <Content Include="Views\Doctors\UpdateHealth.cshtml" />
-    <Content Include="Views\CA\Create.cshtml" />
-    <Content Include="Views\CA\Delete.cshtml" />
-    <Content Include="Views\CA\Details.cshtml" />
-    <Content Include="Views\CA\Edit.cshtml" />
-    <Content Include="Views\CA\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
