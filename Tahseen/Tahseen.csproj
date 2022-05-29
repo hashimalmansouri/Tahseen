@@ -451,7 +451,7 @@
     <Content Include="Views\Vaccinators\RegisterVaccination.cshtml" />
     <Content Include="Views\Home\Instructions.cshtml" />
     <Content Include="Views\Account\RegisterPractitioner.cshtml" />
-    <Content Include="Views\Home\PractitionerDetails.cshtml" />
+    <Content Include="Views\Clinics\PractitionerDetails.cshtml" />
     <Content Include="Views\Appointments\Create.cshtml" />
     <Content Include="Views\Appointments\Details.cshtml" />
     <Content Include="Views\Appointments\Edit.cshtml" />
@@ -462,7 +462,7 @@
     <Content Include="Views\Parents\Dependents.cshtml" />
     <Content Include="Views\Shared\_PageLayout.cshtml" />
     <Content Include="Views\Parents\Index.cshtml" />
-    <Content Include="Views\Home\Appointments.cshtml" />
+    <Content Include="Views\Parents\Appointments.cshtml" />
     <Content Include="Views\Clinics\Index.cshtml" />
     <Content Include="Views\Home\Children.cshtml" />
     <Content Include="Views\Home\ChildProfile.cshtml" />

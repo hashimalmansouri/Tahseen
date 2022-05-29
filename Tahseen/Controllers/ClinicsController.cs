@@ -5,6 +5,8 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Tahseen.Models;
+using Tahseen.Models.Enums;
+using Tahseen.Models.ViewModels;
 
 namespace Tahseen.Controllers
 {
@@ -109,6 +111,41 @@ namespace Tahseen.Controllers
                 ViewBag.Error = "حدث خطأ أثناء حذف الموعد";
             }
             return RedirectToAction(nameof(Appointments));
+        }
+
+        public ActionResult PractitionerDetails(string title)
+        {
+            return View(new PractitionerDetailsViewModel() { Title = title });
+        }
+
+        [HttpPost]
+        public JsonResult AutoComplete(string prefix)
+        {
+            var names = (from doctor in db.Users
+                         where doctor.NationalID.ToString().StartsWith(prefix)
+                         && doctor.Role.Equals(RolesConstant.Doctor)
+                         || doctor.Role.Equals(RolesConstant.Vaccinator)
+                         select new
+                         {
+                             label = doctor.NationalID.ToString(),
+                             val = doctor.NationalID.ToString()
+                         }).ToList();
+            return Json(names);
+        }
+
+        public JsonResult GetPractitioner(string id)
+        {
+            var practitioner = db.Users.FirstOrDefault(d => d.NationalID.Equals(id));
+            return Json(new PractitionerDetailsViewModel
+            {
+                NationalID = practitioner.NationalID.ToString(),
+                DOB = practitioner.DOB.Value.ToString("yyyy-MM-yy"),
+                FullName = practitioner.FullName,
+                Email = practitioner.Email,
+                Gender = practitioner.Gender.GetDisplayName(),
+                Major = practitioner.Role,
+                PhoneNumber = practitioner.PhoneNumber
+            });
         }
     }
 }

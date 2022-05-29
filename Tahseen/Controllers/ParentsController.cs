@@ -25,6 +25,8 @@ namespace Tahseen.Controllers
 
         public ActionResult Index() => View();
 
+        public ActionResult Appointments() => View();
+
         public ActionResult Dependents() 
         {
             var parentId = User.Identity.GetUserId();
