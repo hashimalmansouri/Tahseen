@@ -6,8 +6,6 @@
 
 <main class="doctor-details">
     <div class="container">
-
-
         <div class="doctor_id">
             <h2>@ViewBag.Title</h2>
             <div>
@@ -15,15 +13,9 @@
                 @Html.EditorFor(model => model.NationalID, new { id = "NationalID" })
             </div>
         </div>
-        <div class="info">
-            <section>
-                <div>
-                    @Html.LabelFor(model => model.FullName)
-                    <br>
-                    @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @readonly = "true", @style = "text-align: center;" } })
-                </div>
-            </section>
-            <section class="details">
+        <hr />
+        <div class="row">
+            <div class="col-sm-4">
                 <div>
                     @Html.LabelFor(model => model.Gender)
                     @Html.EditorFor(model => model.Gender, new { htmlAttributes = new { @readonly = "true" } })
@@ -32,11 +24,8 @@
                     @Html.LabelFor(model => model.Major)
                     @Html.EditorFor(model => model.Major, new { htmlAttributes = new { @readonly = "true" } })
                 </div>
-                <div>
-                    @Html.LabelFor(model => model.Email)
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @readonly = "true" } })
-                </div>
-
+            </div>
+            <div class="col-sm-4">
                 <div>
                     @Html.LabelFor(model => model.PhoneNumber)
                     @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @readonly = "true" } })
@@ -45,7 +34,17 @@
                     @Html.LabelFor(model => model.DOB)
                     @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @readonly = "true" } })
                 </div>
-            </section>
+            </div>
+            <div class="col-sm-4">
+                <div>
+                    @Html.LabelFor(model => model.FullName)
+                    @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @readonly = "true", @style = "text-align: center;" } })
+                </div>
+                <div>
+                    @Html.LabelFor(model => model.Email)
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @readonly = "true" } })
+                </div>
+            </div>
         </div>
     </div>
 </main>
@@ -59,7 +58,7 @@
             $("#NationalID").autocomplete({
                 source: function (request, response) {
                     $.ajax({
-                        url: "/Home/AutoComplete",
+                        url: "/Clinics/AutoComplete",
                         type: "POST",
                         dataType: "json",
                         data: { prefix: request.term },
@@ -81,7 +80,7 @@
 
             function getDoctor(id) {
                 $.ajax({
-                    url: "/Home/GetPractitioner",
+                    url: "/Clinics/GetPractitioner",
                     type: "POST",
                     dataType: "json",
                     data: { id: id },
