@@ -20,7 +20,17 @@ namespace Tahseen.Controllers
         // جميع مواعيد الاب
         public ActionResult Index()
         {
-            var appointments = db.Appointments.Include(a => a.ClinicAppointment)
+            // id for parent
+            var parentId = User.Identity.GetUserId();
+            // جلب الاب
+            var parent = db.Users.Find(parentId);
+            // تحقق اذا الاب ليس فارغ
+            if (parent == null)
+            {
+                return HttpNotFound();
+            }
+            var appointments = db.Appointments.Where(a => a.Child.ParentNationalId.Equals(parent.NationalID))
+                .Include(a => a.ClinicAppointment)
                 .Include(a => a.Child).Include(a => a.Vaccine);
             return View(appointments.ToList());
         }
