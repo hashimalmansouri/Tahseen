@@ -307,11 +307,11 @@ namespace Tahseen.Controllers
             {
                 return View(model);
             }
-            var user = await UserManager.FindByNameAsync(model.Email);
+            var user = await UserManager.FindByEmailAsync(model.Email);
             if (user == null)
             {
                 TempData["Error"] = "هذا المستخدم غير موجود.";
-                return RedirectToAction("ResetPasswordConfirmation", "Account");
+                return RedirectToAction("ForgotPassword", "Account");
             }
             // خدعة من أجل التحقق أن الكود لم تنتهي مدته
             if (!await UserManager.VerifyChangePhoneNumberTokenAsync(user.Id, model.Code, user.PhoneNumber))

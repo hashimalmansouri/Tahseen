@@ -38,10 +38,10 @@
                 {
                     <div><div id="info"><h3>@Html.DisplayNameFor(m => m.HSPName): </h3></div><div id="info"><p>@Model.HSPName</p></div></div>
                 }
-                else if (User.IsInRole(RolesConstant.Clinic))
+                @*else if (User.IsInRole(RolesConstant.Clinic))
                 {
                     <div><div id="info"><h3>@Html.DisplayNameFor(m => m.ClinicName): </h3></div><div id="info"><p>@Model.ClinicName</p></div></div>
-                }
+                }*@
             </div>
         </div>
     }
