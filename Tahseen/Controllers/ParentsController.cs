@@ -32,6 +32,23 @@ namespace Tahseen.Controllers
         {
             return View();
         }
+        // توصيات الطفل
+        public ActionResult ChildDevelopment()
+        {
+            // id for parent
+            var parentId = User.Identity.GetUserId();
+            // جلب الاب
+            var parent = db.Users.Find(parentId);
+            // تحقق اذا الاب ليس فارغ
+            if (parent == null)
+            {
+                return HttpNotFound();
+            }
+            var lastChildDevelopment = db.ChildDevelopments.Include(d => d.Child)
+                .Where(d => d.Child.ParentNationalId.Equals(parent.NationalID))
+                .OrderByDescending(d => d.Id).First();
+            return View(lastChildDevelopment);
+        }
         // التابعين
         public ActionResult Dependents() 
         {

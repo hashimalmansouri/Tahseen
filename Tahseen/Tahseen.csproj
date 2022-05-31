@@ -483,6 +483,7 @@
     <Content Include="Views\Vaccinators\ApprovalDetails.cshtml" />
     <Content Include="Views\Account\UpdateProfile.cshtml" />
     <Content Include="Views\Doctors\UpdateHealth.cshtml" />
+    <Content Include="Views\Parents\ChildDevelopment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

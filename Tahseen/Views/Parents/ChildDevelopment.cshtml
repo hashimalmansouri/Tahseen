@@ -1,0 +1,293 @@
+﻿@model Tahseen.Models.ChildDevelopment
+@using Tahseen.Models.Enums
+@{
+    ViewBag.Title = "توصيات حول الرعاية من أجل تطوّر الطفل";
+}
+
+<!--......Created by: Sara......-->
+<!--صفحة تطور الطفل-->
+
+
+
+<style>
+
+    /* login page */
+
+    .log {
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        background-color: #D9F5D9;
+        padding-top: 5%;
+        padding-bottom: 5.5%;
+    }
+
+
+        .log h1 {
+            font-size: 30px;
+            color: #696969;
+        }
+
+        .log h2 {
+            color: #696969;
+            font-size: 16px;
+        }
+
+    .form-dev input[type="number"],
+    .form-dev input[type="text"] {
+        width: 150px;
+    }
+
+    .container2 {
+        position: relative;
+        bottom: 0px;
+        max-width: 600px;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    .form-dev input[type="text"],
+    .form-dev input[type="password"],
+    .form-dev input[type="number"],
+    input[type="date" i],
+    .form-dev button[type="submit"] {
+        font-size: 14px;
+        border-radius: 25px;
+        text-align: center;
+    }
+
+    .form-dev {
+        background: #F9F9F9;
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+        height: 100%;
+        border-radius: 25px;
+        display: inline-block;
+        width: 100%;
+        position: relative;
+    }
+
+
+        .form-dev fieldset {
+            position: relative;
+            border: medium none !important;
+            margin: 0 0 10px;
+            padding: 0;
+            text-align: center;
+            width: 100%;
+        }
+
+
+
+
+    input:hover {
+        -webkit-transition: border-color 0.3s ease-in-out;
+        -moz-transition: border-color 0.3s ease-in-out;
+        transition: border-color 0.3s ease-in-out;
+        border: 1px solid #aaa;
+    }
+
+    .form-dev button[type="submit"] {
+        cursor: pointer;
+        width: 150px;
+        height: 40px;
+        border: none;
+        background: #5B9969;
+        color: #FFF;
+        margin: 0 0 5px;
+        padding: 10px;
+        font-size: 15px;
+        position: relative;
+    }
+
+        .form-dev button[type="submit"]:hover {
+            background: #43A047;
+            -webkit-transition: background 0.3s ease-in-out;
+            -moz-transition: background 0.3s ease-in-out;
+        }
+
+
+
+        .form-dev button[type="submit"]:active {
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+    .form-dev input:focus {
+        outline: 0;
+        border: 1px solid #aaa;
+    }
+
+    .form-dev label {
+        font-size: 12px;
+        font-family: 'Droid Arabic Kufi', sans-serif;
+    }
+
+    .form-dev a {
+        font-size: 15px;
+        font-family: 'Droid Arabic Kufi', sans-serif;
+    }
+
+        .form-dev a:link {
+            text-decoration: none;
+        }
+
+        .form-dev a:visited {
+            text-decoration: none;
+        }
+
+    .form-dev #message {
+        color: red;
+        font-size: 12px;
+        font-weight: bold;
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+
+
+    .form-dev label a {
+        color: red;
+    }
+
+    .alert-false {
+        padding: 20px;
+        padding-top: 5px;
+        padding-bottom: 15px;
+        background-color: #bd362f;
+        color: white;
+    }
+
+    .alert-true {
+        padding: 20px;
+        padding-top: 5px;
+        padding-bottom: 15px;
+        background-color: #51a351;
+        color: white;
+    }
+
+    .closebtn {
+        margin-right: 15px;
+        margin-top: 20px;
+        color: white;
+        font-weight: bold;
+        float: left;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+        .closebtn:hover {
+            color: black;
+        }
+
+    table td input {
+        width: 120px;
+        border-radius: 25px;
+        border: 1px solid #ccc;
+        background: #FFF;
+        height: 30px;
+    }
+
+    table td label {
+        position: relative;
+    }
+
+    #vaccineType {
+        width: 160%;
+        font: 500 14px/16px "Droid Arabic Kufi", sans-serif;
+        border-radius: 25px;
+        border: 1px solid #ccc;
+        background: #FFF;
+        height: 30px;
+        text-align: center;
+    }
+
+    #addres {
+        width: 180px;
+        height: 50px;
+        border-radius: 25px;
+        border: 1px solid #ccc;
+        background: #FFF;
+        height: 30px;
+    }
+
+    table {
+        width: 100%;
+    }
+
+    .inline {
+        display: inline-block;
+    }
+</style>
+
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        <h5>@ViewBag.Error</h5>
+    </div>
+}
+@if (ViewBag.Success != null)
+{
+    <div class="alert alert-success">
+        <h5>@ViewBag.Success</h5>
+    </div>
+}
+
+<section class="log" dir="rtl" lang="ar">
+    <br />
+    <div class="container2">
+        <h1>@ViewBag.Title</h1>
+        <br />
+        <br />
+        <br />
+        @if (Model != null)
+        {
+            <div>
+                <div class="inline"><h2>رقم الهوية / الإقامة:</h2></div>
+                <div class="inline">
+                    <div id="pass">
+                        <input type="text" class="form-control" readonly value="@Model.ChildNationalID" />
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="inline"><h2>اسم الطفل:</h2></div>
+                <div class="inline">
+                    <div id="pass">
+                        <input type="text" class="form-control" readonly value="@Model.Child.FullName" />
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="inline"><h2>الفئه العمريه   :</h2></div>
+                <div class="inline" id="pass" style="max-width: 150px;">
+                    <input type="text" class="form-control" readonly value="@Model.AdivceAge.GetDisplayName()" />
+                </div>
+                <div>
+                    <div class="inline"><h2>توصيه اللعب مع الطفل :</h2></div>
+                    <div class="inline">
+                        <div id="pass">
+                            <textarea class="form-control" readonly>@Model.AdviceGame</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="inline"><h2>توصيه التواصل مع الطفل :</h2></div>
+                    <div class="inline">
+                        <div id="pass">
+                            <textarea class="form-control" readonly>@Model.AdviceTalk</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-success">
+                <h3>لاتوجد توصيات</h3>
+            </div>
+        }
+    </div>
+</section>
