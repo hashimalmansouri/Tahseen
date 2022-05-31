@@ -12,12 +12,13 @@ namespace Tahseen.Controllers
     public class DoctorsController : Controller
     {
         private TahseenContext db = new TahseenContext();
-        // GET: Doctors
+        // GET: خدمات الدكتور
         public ActionResult Index()
         {
             return View();
         }
 
+        // دليل تطور صحية الطفل
         public ActionResult ChildDevelopment()
         {
             return View();
@@ -27,23 +28,26 @@ namespace Tahseen.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ChildDevelopment(ChildDevelopment model)
         {
+            // تحقق من المدخلات
             if (!ModelState.IsValid)
             {
                 ViewBag.Error = "خطأ، تأكد من البيانات المدخلة.";
                 return View(model);
             }
-
+            // التحقق من رقم الهوية
             if (!db.Children.Any(c => c.ChildID.Equals(model.ChildNationalID)))
             {
                 ViewBag.Error = "رقم الهوية المدخل غير معرّف مسبقًا، تحقق وأعد الإرسال مرة أخرى";
                 return View(model);
             }
+            // اضافة التوصيات
             db.ChildDevelopments.Add(model);
+            // تطبيق التغييرات في قاعدة البيانات
             db.SaveChanges();
             ViewBag.Success = "تم إرسال الموافقة بنجاح.";
             return View();
         }
-
+        // الموافقات
         public ActionResult Approval()
         {
             return View();
@@ -53,24 +57,29 @@ namespace Tahseen.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Approval(Approval model)
         {
+            // تحقق من المدخلات
             if (!ModelState.IsValid)
             {
                 ViewBag.Error = "خطأ، تأكد من البيانات المدخلة.";
                 return View(model);
             }
-
+            // التحقق من رقم الهوية
             if (!db.Children.Any(c => c.ChildID.Equals(model.ChildNationalID)))
             {
                 ViewBag.Error = "رقم الهوية المدخل غير معرّف مسبقًا، تحقق وأعد الإرسال مرة أخرى";
                 return View(model);
             }
+            // تحقق اذا التطعيم موجود من قبل
             if (db.Approvals.Any(c => c.ChildNationalID.Equals(model.ChildNationalID) && c.VaccineType == model.VaccineType))
             {
                 ViewBag.Error = "تمت الموافقة على هذا التطعيم من قبل.";
                 return View(model);
             }
+            // قبول التطعيم
             model.Status = ApprovalStatus.Accept;
+            // اضافة الموافقة
             db.Approvals.Add(model);
+            // حفظ التغييرات
             db.SaveChanges();
             ViewBag.Success = "تم إرسال الموافقة بنجاح.";
             return View();

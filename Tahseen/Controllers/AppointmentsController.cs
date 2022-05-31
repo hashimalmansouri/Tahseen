@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -16,7 +17,7 @@ namespace Tahseen.Controllers
     {
         private TahseenContext db = new TahseenContext();
 
-        // GET: Appointments
+        // جميع مواعيد الاب
         public ActionResult Index()
         {
             var appointments = db.Appointments.Include(a => a.ClinicAppointment)
@@ -24,16 +25,19 @@ namespace Tahseen.Controllers
             return View(appointments.ToList());
         }
 
-        // GET: Appointments/Details/5
+        // تفاصيل الموعد
         public ActionResult Details(int? id)
         {
+            // تحقق اذا المفتاح غير فارغ
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            // جلب الموعد
             Appointment appointment = db.Appointments.Include(a => a.Vaccine)
                 .Include(a => a.ClinicAppointment).Include(a => a.Child)
                 .SingleOrDefault(a => a.AppointmentId == id);
+            // تحقق اذا الموعد ليس فارغ
             if (appointment == null)
             {
                 return HttpNotFound();
@@ -41,37 +45,52 @@ namespace Tahseen.Controllers
             return View(appointment);
         }
 
-        // GET: Appointments/Create
         public ActionResult Create()
         {
+            // جلب مفتاح الاب
+            var parentId = User.Identity.GetUserId();
+            // جلب بيانات الاب
+            var parent = db.Users.Find(parentId);
+            // جلب التطعيمات
             ViewBag.VaccineId = db.Vaccines.ToList();
-            ViewBag.ChildId = new SelectList(db.Children.Select(c => new { ChildID = c.ChildID,
+            // جلب اطفال الاب
+            ViewBag.ChildId = new SelectList(db.Children.Where(c => c.ParentNationalId.Equals(parent.NationalID)).Select(c => new { ChildID = c.ChildID,
                 Name = c.ChildID + " - " + c.FName + " " + c.LName }), "ChildID", "Name");
+            // جلب مواعيد العيادة
             ViewBag.ClinicAppointmentId = db.ClinicAppointments.ToList();
             return View();
         }
 
-        // POST: Appointments/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AppointmentId,ChildId,ClinicAppointmentId,VaccineId,Place")] Appointment appointment)
+        public ActionResult Create(Appointment appointment)
         {
+            // جلب مفتاح الاب
+            var parentId = User.Identity.GetUserId();
+            // جلب بيانات الاب
+            var parent = db.Users.Find(parentId);
+            // جلب التطعيمات
             ViewBag.VaccineId = db.Vaccines.ToList();
-            ViewBag.ChildId = new SelectList(db.Children.Select(c => new {
+            // جلب اطفال الاب
+            ViewBag.ChildId = new SelectList(db.Children.Where(c => c.ParentNationalId.Equals(parent.NationalID)).Select(c => new {
                 ChildID = c.ChildID,
                 Name = c.ChildID + " - " + c.FName + " " + c.LName
             }), "ChildID", "Name", appointment.ChildId);
+            // جلب مواعيد العيادة
             ViewBag.ClinicAppointmentId = db.ClinicAppointments.ToList();
-
+            // تحقق من المدخلات
             if (ModelState.IsValid)
             {
+                // تحقق ما اذا كان الموعد تم حجزه من قبل
                 if (db.Appointments.Any(c => c.ClinicAppointmentId == appointment.ClinicAppointmentId &&
                     c.ChildId == appointment.ChildId && c.VaccineId == appointment.VaccineId))
                 {
                     ViewBag.Error = "لقد تم حجز هذا الموعد من قبل.";
                     return View(appointment);
                 }
+                // اضافة الموعد
                 db.Appointments.Add(appointment);
+                // حفظ التغييرات
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -81,20 +100,30 @@ namespace Tahseen.Controllers
         // GET: Appointments/Edit/5
         public ActionResult Edit(int? id)
         {
+            // التحقق اذا المفتاح فارغ
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            // استعلام عن موعد
             Appointment appointment = db.Appointments.Find(id);
+            // التحقق اذا كان الاستعلام فارغ
             if (appointment == null)
             {
                 return HttpNotFound();
             }
+            // جلب مفتاح الاب
+            var parentId = User.Identity.GetUserId();
+            // جلب بيانات الاب
+            var parent = db.Users.Find(parentId);
+            // جلب التطعيمات
             ViewBag.VaccineId = db.Vaccines.ToList();
-            ViewBag.ChildId = new SelectList(db.Children.Select(c => new {
+            // جلب اطفال الاب
+            ViewBag.ChildId = new SelectList(db.Children.Where(c => c.ParentNationalId.Equals(parent.NationalID)).Select(c => new {
                 ChildID = c.ChildID,
                 Name = c.ChildID + " - " + c.FName + " " + c.LName
             }), "ChildID", "Name", appointment.ChildId);
+            // جلب مواعيد العيادة
             ViewBag.ClinicAppointmentId = db.ClinicAppointments.ToList();
             return View(appointment);
         }
@@ -102,19 +131,29 @@ namespace Tahseen.Controllers
         // POST: Appointments/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AppointmentId,ChildId,ClinicAppointmentId,VaccineId,Place")] Appointment appointment)
+        public ActionResult Edit(Appointment appointment)
         {
+            // تحقق من المدخلات
             if (ModelState.IsValid)
             {
+                // تعديل الموعد
                 db.Entry(appointment).State = EntityState.Modified;
+                // حفظ التغييرات
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            // جلب مفتاح الاب
+            var parentId = User.Identity.GetUserId();
+            // جلب بيانات الاب
+            var parent = db.Users.Find(parentId);
+            // جلب التطعيمات
             ViewBag.VaccineId = db.Vaccines.ToList();
-            ViewBag.ChildId = new SelectList(db.Children.Select(c => new {
+            // جلب اطفال الاب
+            ViewBag.ChildId = new SelectList(db.Children.Where(c => c.ParentNationalId.Equals(parent.NationalID)).Select(c => new {
                 ChildID = c.ChildID,
                 Name = c.ChildID + " - " + c.FName + " " + c.LName
             }), "ChildID", "Name", appointment.ChildId);
+            // جلب مواعيد العيادة
             ViewBag.ClinicAppointmentId = db.ClinicAppointments.ToList();
             return View(appointment);
         }
@@ -122,11 +161,14 @@ namespace Tahseen.Controllers
         // GET: Appointments/Delete/5
         public ActionResult Delete(int? id)
         {
+            // التحقق اذا المفتاح فارغ
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            // استعلام عن موعد
             Appointment appointment = db.Appointments.Find(id);
+            // التحقق اذا كان الاستعلام فارغ
             if (appointment == null)
             {
                 return HttpNotFound();
@@ -139,19 +181,13 @@ namespace Tahseen.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            // جلب موعد
             Appointment appointment = db.Appointments.Find(id);
+            // حذف موعد
             db.Appointments.Remove(appointment);
+            // حفظ التغييرات 
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

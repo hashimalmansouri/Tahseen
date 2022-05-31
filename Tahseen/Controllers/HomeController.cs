@@ -11,19 +11,31 @@ namespace Tahseen.Controllers
     public class HomeController : Controller
     {
         private TahseenContext _db = new TahseenContext();
-        public ActionResult Index() => View();
-
-        public ActionResult About() => View();
-
-        public ActionResult BasicVaccinations() => View();
-
-        public ActionResult Instructions() => View();
-
-        public ActionResult TermsAndConditions() => View();
+        // القائمة الرئيسية
+        public ActionResult Index()
+        {
+            return View();
+        }
+        // رؤية
+        public ActionResult About()
+        {
+            return View();
+        }
+        // التطعيمات الاساسية
+        public ActionResult BasicVaccinations()
+        {
+            return View();
+        }
+        // الشروط والاحكام
+        public ActionResult TermsAndConditions()
+        {
+            return View();
+        }
 
         [Authorize]
         public ActionResult Children()
         {
+            // جلب سجلات الاطفال
             return View(_db.Children.ToList());
         }
 

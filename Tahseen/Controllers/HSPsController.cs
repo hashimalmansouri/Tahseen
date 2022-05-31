@@ -11,12 +11,12 @@ namespace Tahseen.Controllers
     public class HSPsController : Controller
     {
         private TahseenContext db = new TahseenContext();
-        // GET: HSPs
+        // GET: خدمات المركز الصحي
         public ActionResult Index()
         {
             return View();
         }
-
+        // الاحصائيات
         public ActionResult Statistics()
         {
             return View();
@@ -25,6 +25,7 @@ namespace Tahseen.Controllers
         [HttpPost]
         public JsonResult GetStatistics()
         {
+            // جلب احصائيات جميع الاعمار
             var allChildren = db.Children.Count();
             int atBirth = db.Immunizations.Include(c => c.Vaccine).Where(c => c.Vaccine.Age == Age.AtBirth).Distinct().Count();
             int twoMonths = db.Immunizations.Include(c => c.Vaccine).Where(c => c.Vaccine.Age == Age.TwoMonths).Distinct().Count();
@@ -48,6 +49,7 @@ namespace Tahseen.Controllers
                 TwoYears = twoMonths,
                 FourToSixYears = fourToSixYears
             };
+            // ارسال الاحصائيات كملف جيسون
             return Json(model);
         }
     }

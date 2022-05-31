@@ -14,12 +14,12 @@ namespace Tahseen.Controllers
     public class ClinicsController : Controller
     {
         private TahseenContext db = new TahseenContext();
-        // GET: Clinics
+        // الخدمات
         public ActionResult Index()
         {
             return View();
         }              
-
+        // اضافة طفل
         public ActionResult NewChild()
         {
             return View();
@@ -31,37 +31,53 @@ namespace Tahseen.Controllers
         {
             if (ModelState.IsValid)
             {
+                // اسناد العيادة للطفل
                 child.ClinicId = db.Clinics.First().ClinicId;
+                // اضافة الطفل
                 db.Children.Add(child);
+                // تطبيق التغييرات في قاعدة البيانات
                 await db.SaveChangesAsync();
+                // رسالة
                 ViewBag.Success = "تم تسجيل الطفل بنجاح";
                 return View(child);
             }
+            // خطا
             ViewBag.Error = "يوجد خطأ في البيانات المدخلة، تحقق وأعد التسجيل مرة أخرى";
             return View(child);
         }
 
-        public ActionResult Medical() => View();
+        // الكادر الصحي
+        public ActionResult Medical()
+        {
+            return View();
+        }
 
         public ActionResult Appointments()
         {
+            // مواعيد العيادة
             return View(db.ClinicAppointments.ToList());
         }
 
         public ActionResult NewAppointment()
         {
+            // موعد جديد
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult NewAppointment([Bind(Include = "Id,Date,Time,ChildId")] ClinicAppointment clinicAppointment)
+        public ActionResult NewAppointment(ClinicAppointment clinicAppointment)
         {
+            // التحقق من صحة البيانات
             if (ModelState.IsValid)
             {
+                // اسناد العيادة للموعد
                 clinicAppointment.ClinicId = db.Clinics.First().ClinicId;
+                // اضافة الموعد
                 db.ClinicAppointments.Add(clinicAppointment);
+                // تطبيق التغييرات في قاعدة البيانات
                 db.SaveChanges();
+                // التوجيه لصفحة المواعيد
                 return RedirectToAction(nameof(Appointments));
             }
             return View(clinicAppointment);
@@ -69,27 +85,37 @@ namespace Tahseen.Controllers
 
         public ActionResult EditAppointment(int? id)
         {
+            // التحقق اذا المفتاح فارغ
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            // استعلام عن موعد
             ClinicAppointment clinicAppointment = db.ClinicAppointments.Find(id);
+            // التحقق اذا كان الاستعلام فارغ
             if (clinicAppointment == null)
             {
                 return HttpNotFound();
             }
+            // ارسال للفيو
             return View(clinicAppointment);
         }
 
         [HttpPost]
+        // حماية من الهجمات
         [ValidateAntiForgeryToken]
-        public ActionResult EditAppointment([Bind(Include = "Id,Date,Time,ChildId")] ClinicAppointment clinicAppointment)
+        public ActionResult EditAppointment(ClinicAppointment clinicAppointment)
         {
+            // التحقق من صحة المدخلات
             if (ModelState.IsValid)
             {
+                // اسناد العيادة للموعد
                 clinicAppointment.ClinicId = db.Clinics.First().ClinicId;
+                // تعديل الموعد
                 db.Entry(clinicAppointment).State = EntityState.Modified;
+                // تطبيق التغييرات في قاعدة البيانات
                 db.SaveChanges();
+                // التوجيه لصفحة المواعيد
                 return RedirectToAction(nameof(Appointments));
             }
             return View(clinicAppointment);
@@ -99,14 +125,19 @@ namespace Tahseen.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteAppointment(int id)
         {
+            // جلب الموعد
             ClinicAppointment clinicAppointment = db.ClinicAppointments.Find(id);
+            // حذف الموعد
             db.ClinicAppointments.Remove(clinicAppointment);
+            // اذا تنفذ الكود كامل لي بداخل التراي لايدخل الى الكاتش
             try
             {
+                // يحفظ التغييرات في داتابيس
                 db.SaveChanges();
                 ViewBag.Success = "تم حذف الموعد بنجاح.";
             }
-            catch 
+            // اذا لم يتنفذ احد اكواد التراي يدخل الى الكاتش
+            catch
             {
                 ViewBag.Error = "حدث خطأ أثناء حذف الموعد";
             }
@@ -115,12 +146,14 @@ namespace Tahseen.Controllers
 
         public ActionResult PractitionerDetails(string title)
         {
+            // صفحة بيانات الاطباء او الممرضين بحسب العنوان المرر
             return View(new PractitionerDetailsViewModel() { Title = title });
         }
 
         [HttpPost]
         public JsonResult AutoComplete(string prefix)
         {
+            // كود وظيفته اظهار الاقتراحات التي تظهر اثناء كتابة اول الارقام من رقم الهوية للدكتور او الممرض
             var names = (from doctor in db.Users
                          where doctor.NationalID.ToString().StartsWith(prefix)
                          && doctor.Role.Equals(RolesConstant.Doctor)
@@ -135,6 +168,7 @@ namespace Tahseen.Controllers
 
         public JsonResult GetPractitioner(string id)
         {
+            // جلب بيانات الدكتور او الممرض وارسالها ك json
             var practitioner = db.Users.FirstOrDefault(d => d.NationalID.Equals(id));
             return Json(new PractitionerDetailsViewModel
             {
