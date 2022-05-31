@@ -32,6 +32,17 @@ namespace Tahseen
             IdentityRole role4 = new IdentityRole();
             IdentityRole role5 = new IdentityRole();
 
+            if (!db.HSPs.Any())
+            {
+                db.HSPs.Add(new HSP { Name = "المركز" });
+                db.SaveChanges();
+            }
+            if (!db.Clinics.Any())
+            {
+                db.Clinics.Add(new Clinic { Name = "العيادة" });
+                db.SaveChanges();
+            }
+
             if (!roleManager.RoleExists(RolesConstant.HSP))
             {
                 role1.Name = RolesConstant.HSP;
@@ -48,7 +59,8 @@ namespace Tahseen
                     DOB = DateTime.Today.AddYears(-30),
                     Gender = Gender.Female,
                     NationalID = "8888844444",
-                    Major = "HSP"
+                    Major = "HSP",
+                    HSPId = db.HSPs.First().HSPId
                 };
                 var check = userManager.Create(user, "Tahseen@123");
                 if (check.Succeeded)
